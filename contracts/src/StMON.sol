@@ -41,4 +41,26 @@ contract StMON is ERC20, Ownable {
         if (msg.sender != vault) revert NotAuthorized(msg.sender);
         _burn(from, amount);
     }
+
+    /// @dev Compliance gate on every movement. Sole exception to the flagged-
+    /// sender block: transfers to/from the RedemptionQueue, the controlled-exit
+    /// path ("compliance without confiscation"). The queue only ever locks,
+    /// returns to requester, or burns — it never forwards.
+    function _update(address from, address to, uint256 value) internal override {
+        if (from == address(0)) {
+            _requireEligible(to); // mint
+        } else if (to != address(0)) {
+            if (to != redemptionQueue && from != redemptionQueue) {
+                if (identity.isFlagged(from)) revert CredentialRevoked(from);
+                _requireEligible(to);
+            }
+        }
+        // burns (to == address(0)) pass: caller auth already restricted.
+        super._update(from, to, value);
+    }
+
+    function _requireEligible(address account) internal view {
+        if (!identity.isVerified(account)) revert NotVerified(account);
+        if (identity.isFlagged(account)) revert CredentialRevoked(account);
+    }
 }
