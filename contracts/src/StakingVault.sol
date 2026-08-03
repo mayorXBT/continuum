@@ -55,6 +55,15 @@ contract StakingVault is Ownable, Pausable {
         emit Unstaked(msg.sender, assets, shares);
     }
 
+    event RewardsDripped(uint256 amount, uint256 newExchangeRate);
+
+    /// @notice Simulated testnet rewards: deposits raise stMON redemption
+    /// value. Labeled "simulated testnet rewards" in all UI copy.
+    function dripRewards() external payable onlyOwner {
+        totalAssets += msg.value;
+        emit RewardsDripped(msg.value, exchangeRate());
+    }
+
     function exchangeRate() public view returns (uint256) {
         uint256 supply = stMON.totalSupply();
         return supply == 0 ? 1e18 : (totalAssets * 1e18) / supply;
