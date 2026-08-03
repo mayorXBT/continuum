@@ -1,0 +1,9 @@
+# Secrets — never commit
+.env
+.env.local
+
+# Foundry build artifacts
+out/
+cache/
+broadcast/*/*/dry-run/
+docs/
