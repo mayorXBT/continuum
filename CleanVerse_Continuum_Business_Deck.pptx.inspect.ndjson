@@ -1,0 +1,243 @@
+{"kind":"deck","id":"pr/f3b6by","name":"Deck"}
+{"kind":"layout","layoutId":"266d569e-9b1f-486b-a0d3-1d6eb030e6b2","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"cef69958-3a97-44c1-bf93-eaa400f005dd","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/xnxnp1","slide":1,"title":"BUSINESS PLAN / REGISTRATION DECK","textShapes":5}
+{"kind":"shape","id":"sh/ri54nilw","slide":1,"bbox":[760,-100,650,870]}
+{"kind":"shape","id":"sh/s3e5gn2h","slide":1,"bbox":[900,70,430,430]}
+{"kind":"textbox","id":"sh/idc3atkf","slide":1,"text":"BUSINESS PLAN / REGISTRATION DECK","textPreview":"BUSINESS PLAN / REGISTRATION DECK","textChars":33,"textLines":1,"bbox":[72,64,600,26]}
+{"kind":"textbox","id":"sh/jel4jylk","slide":1,"text":"Continuum","textPreview":"Continuum","textChars":9,"textLines":1,"bbox":[72,164,650,80]}
+{"kind":"textbox","id":"sh/kfu5c325","slide":1,"text":"Compliance that travels\nwith the token.","textPreview":"Compliance that travels | with the token.","textChars":39,"textLines":2,"bbox":[72,252,650,150]}
+{"kind":"textbox","id":"sh/5g3ml83q","slide":1,"text":"Permissioned liquid staking on Monad, designed around Cleanverse A-Pass and verified assets.","textPreview":"Permissioned liquid staking on Monad, designed around Cleanverse A-Pass and verified assets.","textChars":92,"textLines":1,"bbox":[72,430,620,86]}
+{"kind":"shape","id":"sh/a9s3mtk3","slide":1,"bbox":[72,572,400,54]}
+{"kind":"textbox","id":"sh/val4fylo","slide":1,"text":"CLEANVERSE REGISTRATION • AUG 2026","textPreview":"CLEANVERSE REGISTRATION • AUG 2026","textChars":34,"textLines":1,"bbox":[96,588,350,24]}
+{"kind":"image","id":"im/sf6do7ih","slide":1,"name":"","alt":"Continuum logo","bbox":[895,100,360,360]}
+{"kind":"notes","id":"nt/xnxnp1","slide":1,"text":"CORE MESSAGE: Continuum makes compliance persistent: identity is checked whenever value moves, not only at onboarding.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/5c2si6","slide":2,"title":"THE PROBLEM","textShapes":16}
+{"kind":"textbox","id":"sh/axcbutsj","slide":2,"text":"THE PROBLEM","textPreview":"THE PROBLEM","textChars":11,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/x03a58bu","slide":2,"text":"Compliance often ends at the front door.","textPreview":"Compliance often ends at the front door.","textChars":40,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/wzutw3a9","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"textbox","id":"sh/j25s7it0","slide":2,"text":"A credential can lapse, be revoked, or become ineligible—while the DeFi position continues circulating.","textPreview":"A credential can lapse, be revoked, or become ineligible—while the DeFi position continues circulating.","textChars":103,"textLines":1,"bbox":[72,172,820,64]}
+{"kind":"shape","id":"sh/i1cbydsf","slide":2,"bbox":[72,274,1136,5]}
+{"kind":"shape","id":"sh/54nu9sb6","slide":2,"bbox":[96,260,30,30]}
+{"kind":"textbox","id":"sh/k3et0nal","slide":2,"text":"ONBOARD","textPreview":"ONBOARD","textChars":7,"textLines":1,"bbox":[86,326,220,26]}
+{"kind":"textbox","id":"sh/7q5cbitw","slide":2,"text":"Identity checked","textPreview":"Identity checked","textChars":16,"textLines":1,"bbox":[86,360,220,52]}
+{"kind":"shape","id":"sh/6pwb2dsb","slide":2,"bbox":[387,260,30,30]}
+{"kind":"textbox","id":"sh/8vmp43yp","slide":2,"text":"STAKE","textPreview":"STAKE","textChars":5,"textLines":1,"bbox":[377,326,220,26]}
+{"kind":"textbox","id":"sh/9wv6x8za","slide":2,"text":"Position issued","textPreview":"Position issued","textChars":15,"textLines":1,"bbox":[377,360,220,52]}
+{"kind":"shape","id":"sh/mt472dgj","slide":2,"bbox":[678,260,30,30]}
+{"kind":"textbox","id":"sh/nudovyh4","slide":2,"text":"TRANSFER","textPreview":"TRANSFER","textChars":8,"textLines":1,"bbox":[668,326,220,26]}
+{"kind":"textbox","id":"sh/wzmp8nyl","slide":2,"text":"Often unchecked","textPreview":"Often unchecked","textChars":15,"textLines":1,"bbox":[668,360,220,52]}
+{"kind":"shape","id":"sh/x0fq1sf6","slide":2,"bbox":[969,260,30,30]}
+{"kind":"textbox","id":"sh/ax476dgv","slide":2,"text":"EXIT","textPreview":"EXIT","textChars":4,"textLines":1,"bbox":[959,326,220,26]}
+{"kind":"textbox","id":"sh/vydozixg","slide":2,"text":"Risk discovered late","textPreview":"Risk discovered late","textChars":20,"textLines":1,"bbox":[959,360,220,52]}
+{"kind":"shape","id":"sh/436pcnyx","slide":2,"bbox":[72,484,1136,128]}
+{"kind":"textbox","id":"sh/54fq5sfi","slide":2,"text":"The gap","textPreview":"The gap","textChars":7,"textLines":1,"bbox":[100,510,160,28]}
+{"kind":"textbox","id":"sh/t8ry983a","slide":2,"text":"Rules that do not travel with the asset create an avoidable control failure.","textPreview":"Rules that do not travel with the asset create an avoidable control failure.","textChars":76,"textLines":1,"bbox":[100,548,960,42]}
+{"kind":"shape","id":"sh/s7ix03mp","slide":2,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/769g7yl4","slide":2,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/650fyt4z","slide":2,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/5c2si6","slide":2,"text":"CORE MESSAGE: The core market gap is not onboarding—it is maintaining eligibility after a position becomes transferable.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/a9ix3s","slide":3,"title":"THE SOLUTION","textShapes":20}
+{"kind":"textbox","id":"sh/xofe9s3y","slide":3,"text":"THE SOLUTION","textPreview":"THE SOLUTION","textChars":12,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/alovydk7","slide":3,"text":"Continuum checks eligibility at every value movement.","textPreview":"Continuum checks eligibility at every value movement.","textChars":53,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/bmxw7ils","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"shape","id":"sh/kb6d4n2p","slide":3,"bbox":[72,198,244,5]}
+{"kind":"textbox","id":"sh/lczeds3u","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,228,70,30]}
+{"kind":"textbox","id":"sh/ypov2xkj","slide":3,"text":"Verify","textPreview":"Verify","textChars":6,"textLines":1,"bbox":[72,272,220,40]}
+{"kind":"textbox","id":"sh/zqxwbil4","slide":3,"text":"A wallet-bound, revocable credential establishes eligibility.","textPreview":"A wallet-bound, revocable credential establishes eligibility.","textChars":61,"textLines":1,"bbox":[72,330,230,104]}
+{"kind":"shape","id":"sh/0vmds325","slide":3,"bbox":[358,198,244,5]}
+{"kind":"textbox","id":"sh/1gvu183q","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[358,228,70,30]}
+{"kind":"textbox","id":"sh/lc3qlonm","slide":3,"text":"Stake","textPreview":"Stake","textChars":5,"textLines":1,"bbox":[358,272,220,40]}
+{"kind":"textbox","id":"sh/0bu9sjmh","slide":3,"text":"Eligible users deposit MON and receive a policy-gated receipt.","textPreview":"Eligible users deposit MON and receive a policy-gated receipt.","textChars":62,"textLines":1,"bbox":[358,330,230,104]}
+{"kind":"shape","id":"sh/za18je5w","slide":3,"bbox":[644,198,244,5]}
+{"kind":"textbox","id":"sh/y9s7q94b","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[644,228,70,30]}
+{"kind":"textbox","id":"sh/903qpony","slide":3,"text":"Move","textPreview":"Move","textChars":4,"textLines":1,"bbox":[644,272,220,40]}
+{"kind":"textbox","id":"sh/8zu9wjmd","slide":3,"text":"Transfers re-check the recipient at the token layer.","textPreview":"Transfers re-check the recipient at the token layer.","textChars":52,"textLines":1,"bbox":[644,330,230,104]}
+{"kind":"shape","id":"sh/nel8ne5s","slide":3,"bbox":[930,198,244,5]}
+{"kind":"textbox","id":"sh/mdcru947","slide":3,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[930,228,70,30]}
+{"kind":"textbox","id":"sh/x4nqt83u","slide":3,"text":"Exit","textPreview":"Exit","textChars":4,"textLines":1,"bbox":[930,272,220,40]}
+{"kind":"textbox","id":"sh/w3e903m9","slide":3,"text":"Revoked holders use a controlled redemption path to an eligible receiver.","textPreview":"Revoked holders use a controlled redemption path to an eligible receiver.","textChars":73,"textLines":1,"bbox":[930,330,230,104]}
+{"kind":"shape","id":"sh/gj61cryx","slide":3,"bbox":[72,492,1136,128]}
+{"kind":"textbox","id":"sh/hkf2lwfi","slide":3,"text":"DESIGN PRINCIPLE","textPreview":"DESIGN PRINCIPLE","textChars":16,"textLines":1,"bbox":[100,520,230,24]}
+{"kind":"textbox","id":"sh/ux4ja1gr","slide":3,"text":"Compliance without confiscation.","textPreview":"Compliance without confiscation.","textChars":32,"textLines":1,"bbox":[100,556,610,44]}
+{"kind":"textbox","id":"sh/fidkj6xc","slide":3,"text":"Freeze circulation. Preserve a fair, reviewable exit.","textPreview":"Freeze circulation. Preserve a fair, reviewable exit.","textChars":53,"textLines":1,"bbox":[736,556,420,42]}
+{"kind":"shape","id":"sh/4n61gbyt","slide":3,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/pof2pgfe","slide":3,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/2loje1g3","slide":3,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/a9ix3s","slide":3,"text":"CORE MESSAGE: Continuum embeds the policy into the asset lifecycle—verification, issuance, transfer, and controlled exit.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/hghspa","slide":4,"title":"PRODUCT EXPERIENCE","textShapes":22}
+{"kind":"textbox","id":"sh/b254ny1w","slide":4,"text":"PRODUCT EXPERIENCE","textPreview":"PRODUCT EXPERIENCE","textChars":18,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/c3elgjih","slide":4,"text":"A simple user flow hides a rigorous policy engine.","textPreview":"A simple user flow hides a rigorous policy engine.","textChars":50,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/d4nmpoj2","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"shape","id":"sh/y5w3it0n","slide":4,"bbox":[72,210,244,270]}
+{"kind":"textbox","id":"sh/z654ry18","slide":4,"text":"A-PASS","textPreview":"A-PASS","textChars":6,"textLines":1,"bbox":[96,236,194,22]}
+{"kind":"textbox","id":"sh/07ylk3it","slide":4,"text":"Verified","textPreview":"Verified","textChars":8,"textLines":1,"bbox":[96,284,194,64]}
+{"kind":"textbox","id":"sh/l87mt8je","slide":4,"text":"Wallet reads eligible","textPreview":"Wallet reads eligible","textChars":21,"textLines":1,"bbox":[96,382,194,52]}
+{"kind":"textbox","id":"sh/m9g3md0z","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[320,306,34,36]}
+{"kind":"shape","id":"sh/nap4vi14","slide":4,"bbox":[358,210,244,270]}
+{"kind":"textbox","id":"sh/zqhozex0","slide":4,"text":"VAULT","textPreview":"VAULT","textChars":5,"textLines":1,"bbox":[382,236,194,22]}
+{"kind":"textbox","id":"sh/ep87q9gv","slide":4,"text":"Stake MON","textPreview":"Stake MON","textChars":9,"textLines":1,"bbox":[382,284,194,64]}
+{"kind":"textbox","id":"sh/1sj61of6","slide":4,"text":"Mint stMON receipt","textPreview":"Mint stMON receipt","textChars":18,"textLines":1,"bbox":[382,382,194,52]}
+{"kind":"textbox","id":"sh/0rqpsjyl","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[606,306,34,36]}
+{"kind":"shape","id":"sh/rmhovex4","slide":4,"bbox":[644,210,244,270]}
+{"kind":"textbox","id":"sh/ql8nm9gj","slide":4,"text":"TOKEN","textPreview":"TOKEN","textChars":5,"textLines":1,"bbox":[668,236,194,22]}
+{"kind":"textbox","id":"sh/doz6x4fa","slide":4,"text":"Transfer","textPreview":"Transfer","textChars":8,"textLines":1,"bbox":[668,284,194,64]}
+{"kind":"textbox","id":"sh/cnq5ozyp","slide":4,"text":"Recipient re-checked","textPreview":"Recipient re-checked","textChars":20,"textLines":1,"bbox":[668,382,194,52]}
+{"kind":"textbox","id":"sh/bi1o7yx8","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[892,306,34,36]}
+{"kind":"shape","id":"sh/ahs7ytgn","slide":4,"bbox":[930,210,244,270]}
+{"kind":"textbox","id":"sh/6pgjm147","slide":4,"text":"QUEUE","textPreview":"QUEUE","textChars":5,"textLines":1,"bbox":[954,236,194,22]}
+{"kind":"textbox","id":"sh/7qp0f6ls","slide":4,"text":"Controlled exit","textPreview":"Controlled exit","textChars":15,"textLines":1,"bbox":[954,284,194,64]}
+{"kind":"textbox","id":"sh/sry1ormd","slide":4,"text":"Officer review + settlement","textPreview":"Officer review + settlement","textChars":27,"textLines":1,"bbox":[954,382,194,52]}
+{"kind":"textbox","id":"sh/ts7ihw3y","slide":4,"text":"Every decision creates an on-chain event trail with requester and receiver attribution.","textPreview":"Every decision creates an on-chain event trail with requester and receiver attribution.","textChars":87,"textLines":1,"bbox":[72,540,920,58]}
+{"kind":"shape","id":"sh/utgjq14j","slide":4,"bbox":[1032,530,176,68]}
+{"kind":"textbox","id":"sh/fup0j6l4","slide":4,"text":"AUDITABLE","textPreview":"AUDITABLE","textChars":9,"textLines":1,"bbox":[1050,552,140,24]}
+{"kind":"shape","id":"sh/gvy1sbm9","slide":4,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/hwrilg3u","slide":4,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/axwzeh4z","slide":4,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/hghspa","slide":4,"text":"CORE MESSAGE: The user sees four intuitive steps; underneath, each step enforces eligibility and records an auditable event.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/sr80s0","slide":5,"title":"ARCHITECTURE","textShapes":19}
+{"kind":"textbox","id":"sh/8vuxknu5","slide":5,"text":"ARCHITECTURE","textPreview":"ARCHITECTURE","textChars":12,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/7ulgbid0","slide":5,"text":"Four focused contracts keep identity, value, and review separate.","textPreview":"Four focused contracts keep identity, value, and review separate.","textChars":65,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/mtsfidcf","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"shape","id":"sh/lsjy98vu","slide":5,"bbox":[72,208,7,118]}
+{"kind":"textbox","id":"sh/kraxgnu9","slide":5,"text":"A-Pass adapter","textPreview":"A-Pass adapter","textChars":14,"textLines":1,"bbox":[100,210,440,34]}
+{"kind":"textbox","id":"sh/zq1g7ido","slide":5,"text":"Identity status","textPreview":"Identity status","textChars":15,"textLines":1,"bbox":[100,258,440,28]}
+{"kind":"textbox","id":"sh/ypsfedc3","slide":5,"text":"verify • revoke • reinstate","textPreview":"verify • revoke • reinstate","textChars":27,"textLines":1,"bbox":[100,292,470,26]}
+{"kind":"shape","id":"sh/xoje58vi","slide":5,"bbox":[640,208,7,118]}
+{"kind":"textbox","id":"sh/cnaxc3ud","slide":5,"text":"Staking vault","textPreview":"Staking vault","textChars":13,"textLines":1,"bbox":[668,210,440,34]}
+{"kind":"textbox","id":"sh/i5c7mhcn","slide":5,"text":"MON custody + rate","textPreview":"MON custody + rate","textChars":18,"textLines":1,"bbox":[668,258,440,28]}
+{"kind":"textbox","id":"sh/j6l8fmt8","slide":5,"text":"stake • unstake • rewards","textPreview":"stake • unstake • rewards","textChars":25,"textLines":1,"bbox":[668,292,470,26]}
+{"kind":"shape","id":"sh/k7uporut","slide":5,"bbox":[72,382,7,118]}
+{"kind":"textbox","id":"sh/583qhwby","slide":5,"text":"stMON token","textPreview":"stMON token","textChars":11,"textLines":1,"bbox":[100,384,440,34]}
+{"kind":"textbox","id":"sh/a1s7ihcb","slide":5,"text":"Transfer policy","textPreview":"Transfer policy","textChars":15,"textLines":1,"bbox":[100,432,440,28]}
+{"kind":"textbox","id":"sh/v2l8bmtw","slide":5,"text":"mint • burn • gated transfer","textPreview":"mint • burn • gated transfer","textChars":28,"textLines":1,"bbox":[100,466,470,26]}
+{"kind":"shape","id":"sh/w3upk7uh","slide":5,"bbox":[640,382,7,118]}
+{"kind":"textbox","id":"sh/x43qdcb2","slide":5,"text":"Redemption queue","textPreview":"Redemption queue","textChars":16,"textLines":1,"bbox":[668,384,440,34]}
+{"kind":"textbox","id":"sh/mds7excf","slide":5,"text":"Review + settlement","textPreview":"Review + settlement","textChars":19,"textLines":1,"bbox":[668,432,440,28]}
+{"kind":"textbox","id":"sh/ny1o72t0","slide":5,"text":"request • approve • settle","textPreview":"request • approve • settle","textChars":26,"textLines":1,"bbox":[668,466,470,26]}
+{"kind":"shape","id":"sh/bih4fy9s","slide":5,"bbox":[72,548,1136,74]}
+{"kind":"textbox","id":"sh/qhonmts7","slide":5,"text":"Integration posture","textPreview":"Integration posture","textChars":19,"textLines":1,"bbox":[96,570,210,26]}
+{"kind":"textbox","id":"sh/d4zmh8ry","slide":5,"text":"The current testnet uses a mock registry; the production path is an adapter to Cleanverse’s on-chain-readable credential interface.","textPreview":"The current testnet uses a mock registry; the production path is an adapter to Cleanverse’s on-chain-readable credential interface.","textChars":131,"textLines":1,"bbox":[306,565,850,42]}
+{"kind":"shape","id":"sh/cjq5o3ad","slide":5,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/z6h4ji9o","slide":5,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/y58nqds3","slide":5,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/sr80s0","slide":5,"text":"CORE MESSAGE: The modular architecture minimizes trust boundaries and makes the Cleanverse identity integration replaceable without redesigning the financial core.\nBe explicit: the current testnet registry is a mock; native Cleanverse integration is the target integration pending sandbox confirmation.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/a2wxtu","slide":6,"title":"BUSINESS MODEL","textShapes":17}
+{"kind":"textbox","id":"sh/f294fqhk","slide":6,"text":"BUSINESS MODEL","textPreview":"BUSINESS MODEL","textChars":14,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/g3ilovy5","slide":6,"text":"Revenue scales with assets secured and compliance services used.","textPreview":"Revenue scales with assets secured and compliance services used.","textChars":64,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/h4rmhgzq","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"textbox","id":"sh/2503qlgb","slide":6,"text":"Protocol fee","textPreview":"Protocol fee","textChars":12,"textLines":1,"bbox":[72,206,240,36]}
+{"kind":"textbox","id":"sh/3694jqxw","slide":6,"text":"A small share of staking rewards","textPreview":"A small share of staking rewards","textChars":32,"textLines":1,"bbox":[344,206,580,62]}
+{"kind":"textbox","id":"sh/472lsvyh","slide":6,"text":"Recurring • usage-aligned","textPreview":"Recurring • usage-aligned","textChars":25,"textLines":1,"bbox":[960,206,248,32]}
+{"kind":"shape","id":"sh/p8bml0fm","slide":6,"bbox":[72,288,1136,1]}
+{"kind":"textbox","id":"sh/q9knu5g7","slide":6,"text":"Compliance service","textPreview":"Compliance service","textChars":18,"textLines":1,"bbox":[72,322,240,36]}
+{"kind":"textbox","id":"sh/rat4naxs","slide":6,"text":"Institutional policy, reporting, and review tools","textPreview":"Institutional policy, reporting, and review tools","textChars":49,"textLines":1,"bbox":[344,322,580,62]}
+{"kind":"textbox","id":"sh/j2hwfmlg","slide":6,"text":"Subscription • B2B","textPreview":"Subscription • B2B","textChars":18,"textLines":1,"bbox":[960,322,248,32]}
+{"kind":"shape","id":"sh/i1ofmh4v","slide":6,"bbox":[72,404,1136,1]}
+{"kind":"textbox","id":"sh/5ozehc3m","slide":6,"text":"Integration layer","textPreview":"Integration layer","textChars":17,"textLines":1,"bbox":[72,438,240,36]}
+{"kind":"textbox","id":"sh/k3qxorm1","slide":6,"text":"White-label deployment for wallets, custodians, and issuers","textPreview":"White-label deployment for wallets, custodians, and issuers","textChars":59,"textLines":1,"bbox":[344,438,580,62]}
+{"kind":"textbox","id":"sh/vyxwb2lk","slide":6,"text":"Setup + support","textPreview":"Setup + support","textChars":15,"textLines":1,"bbox":[960,438,248,32]}
+{"kind":"shape","id":"sh/axofix4z","slide":6,"bbox":[72,520,1136,1]}
+{"kind":"shape","id":"sh/x0fedc3a","slide":6,"bbox":[72,564,1136,58]}
+{"kind":"textbox","id":"sh/wz6xk7mp","slide":6,"text":"North-star metric","textPreview":"North-star metric","textChars":17,"textLines":1,"bbox":[96,582,200,22]}
+{"kind":"textbox","id":"sh/fu1gn6lo","slide":6,"text":"Verified assets under policy","textPreview":"Verified assets under policy","textChars":28,"textLines":1,"bbox":[340,577,500,30]}
+{"kind":"textbox","id":"sh/ut8fu143","slide":6,"text":"VAUP","textPreview":"VAUP","textChars":4,"textLines":1,"bbox":[1050,580,110,26]}
+{"kind":"shape","id":"sh/qpczm5ob","slide":6,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/rql0va5w","slide":6,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/cruhov6h","slide":6,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/a2wxtu","slide":6,"text":"CORE MESSAGE: Continuum monetizes aligned outcomes: assets kept eligible, institutions served, and integrations deployed.\nBusiness-model figures are directional and should be finalized after Cleanverse sandbox and partner discussions.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/orkx51","slide":7,"title":"GO-TO-MARKET","textShapes":17}
+{"kind":"textbox","id":"sh/u1knapsj","slide":7,"text":"GO-TO-MARKET","textPreview":"GO-TO-MARKET","textChars":12,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/hovm54ru","slide":7,"text":"Start with permissioned staking, then expand the policy rail.","textPreview":"Start with permissioned staking, then expand the policy rail.","textChars":61,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/g325czap","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"shape","id":"sh/3qd47e90","slide":7,"bbox":[72,190,58,58]}
+{"kind":"textbox","id":"sh/ip4ne9sf","slide":7,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[72,202,58,28]}
+{"kind":"textbox","id":"sh/5svm94r6","slide":7,"text":"PROVE","textPreview":"PROVE","textChars":5,"textLines":1,"bbox":[164,192,130,24]}
+{"kind":"textbox","id":"sh/4rm5gjal","slide":7,"text":"Cleanverse registration + Monad testnet","textPreview":"Cleanverse registration + Monad testnet","textChars":39,"textLines":1,"bbox":[164,222,470,38]}
+{"kind":"textbox","id":"sh/ju94va9w","slide":7,"text":"Demonstrate the full verify → stake → transfer → exit loop.","textPreview":"Demonstrate the full verify → stake → transfer → exit loop.","textChars":59,"textLines":1,"bbox":[680,210,528,54]}
+{"kind":"shape","id":"sh/yt0325sb","slide":7,"bbox":[72,322,58,58]}
+{"kind":"textbox","id":"sh/w7qp4fy9","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[72,334,58,28]}
+{"kind":"textbox","id":"sh/h8zqdkfu","slide":7,"text":"PILOT","textPreview":"PILOT","textChars":5,"textLines":1,"bbox":[164,324,130,24]}
+{"kind":"textbox","id":"sh/ul8725g3","slide":7,"text":"Wallets, custodians, and staking operators","textPreview":"Wallets, custodians, and staking operators","textChars":42,"textLines":1,"bbox":[164,354,470,38]}
+{"kind":"textbox","id":"sh/vmh8baxo","slide":7,"text":"Launch a small institutional cohort with shared controls.","textPreview":"Launch a small institutional cohort with shared controls.","textChars":57,"textLines":1,"bbox":[680,342,528,54]}
+{"kind":"shape","id":"sh/4bap8zyl","slide":7,"bbox":[72,454,58,58]}
+{"kind":"textbox","id":"sh/5cjqh4f6","slide":7,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[72,466,58,28]}
+{"kind":"textbox","id":"sh/i9s76pgf","slide":7,"text":"EXPAND","textPreview":"EXPAND","textChars":6,"textLines":1,"bbox":[164,456,130,24]}
+{"kind":"textbox","id":"sh/ja18fux0","slide":7,"text":"More verified assets and venues","textPreview":"More verified assets and venues","textChars":31,"textLines":1,"bbox":[164,486,470,38]}
+{"kind":"textbox","id":"sh/kf6pwvy1","slide":7,"text":"Reuse the policy layer across lending, payments, and treasury.","textPreview":"Reuse the policy layer across lending, payments, and treasury.","textChars":62,"textLines":1,"bbox":[680,474,528,54]}
+{"kind":"shape","id":"sh/lgf650fm","slide":7,"bbox":[72,594,1136,28]}
+{"kind":"shape","id":"sh/10neds3e","slide":7,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/gzedknmt","slide":7,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/fy5wbil8","slide":7,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/orkx51","slide":7,"text":"CORE MESSAGE: The wedge is concrete: prove permissioned staking end to end, earn pilot partners, then reuse the same policy rail across other verified assets.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/umd12g","slide":8,"title":"WHY WE WIN","textShapes":16}
+{"kind":"textbox","id":"sh/0ja94rel","slide":8,"text":"WHY WE WIN","textPreview":"WHY WE WIN","textChars":10,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/fi18vmd0","slide":8,"text":"The moat is policy continuity—not another staking interface.","textPreview":"The moat is policy continuity—not another staking interface.","textChars":60,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/ehsr2hwv","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"textbox","id":"sh/p83q1wvi","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,208,80,54]}
+{"kind":"shape","id":"sh/o7u98bex","slide":8,"bbox":[72,274,320,3]}
+{"kind":"textbox","id":"sh/nm18z6dc","slide":8,"text":"TOKEN-LAYER CONTROL","textPreview":"TOKEN-LAYER CONTROL","textChars":19,"textLines":1,"bbox":[72,308,320,28]}
+{"kind":"textbox","id":"sh/2lsr61wr","slide":8,"text":"Eligibility rules hold wherever the receipt travels.","textPreview":"Eligibility rules hold wherever the receipt travels.","textChars":52,"textLines":1,"bbox":[72,354,320,112]}
+{"kind":"textbox","id":"sh/5czqpcvy","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[450,208,80,54]}
+{"kind":"shape","id":"sh/4bqpw7ed","slide":8,"bbox":[450,274,320,3]}
+{"kind":"textbox","id":"sh/2p8r6loj","slide":8,"text":"REVOCATION-AWARE EXIT","textPreview":"REVOCATION-AWARE EXIT","textChars":21,"textLines":1,"bbox":[450,308,320,28]}
+{"kind":"textbox","id":"sh/3qh8fqpo","slide":8,"text":"A governed exit path resolves the freeze-versus-seizure dilemma.","textPreview":"A governed exit path resolves the freeze-versus-seizure dilemma.","textChars":64,"textLines":1,"bbox":[450,354,320,112]}
+{"kind":"textbox","id":"sh/orq98v69","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[828,208,80,54]}
+{"kind":"shape","id":"sh/pszqhg7u","slide":8,"bbox":[828,274,320,3]}
+{"kind":"textbox","id":"sh/at8ralof","slide":8,"text":"MODULAR IDENTITY","textPreview":"MODULAR IDENTITY","textChars":16,"textLines":1,"bbox":[828,308,320,28]}
+{"kind":"textbox","id":"sh/buh8jqp0","slide":8,"text":"Cleanverse credentials plug into a focused interface.","textPreview":"Cleanverse credentials plug into a focused interface.","textChars":53,"textLines":1,"bbox":[828,354,320,112]}
+{"kind":"shape","id":"sh/cva9cv6l","slide":8,"bbox":[72,522,1136,94]}
+{"kind":"textbox","id":"sh/xgjql076","slide":8,"text":"Strategic position","textPreview":"Strategic position","textChars":18,"textLines":1,"bbox":[98,548,200,24]}
+{"kind":"textbox","id":"sh/yhsre5or","slide":8,"text":"The compliance layer becomes reusable infrastructure for verified on-chain finance.","textPreview":"The compliance layer becomes reusable infrastructure for verified on-chain finance.","textChars":83,"textLines":1,"bbox":[316,542,820,42]}
+{"kind":"shape","id":"sh/zi1snapw","slide":8,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/vml8va54","slide":8,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/uls7254j","slide":8,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/umd12g","slide":8,"text":"CORE MESSAGE: Continuum’s differentiation is continuous policy enforcement plus a fair exit mechanism, packaged as reusable infrastructure.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/sma9nj","slide":9,"title":"EXECUTION","textShapes":18}
+{"kind":"textbox","id":"sh/87m583q1","slide":9,"text":"EXECUTION","textPreview":"EXECUTION","textChars":9,"textLines":1,"bbox":[72,45,740,24]}
+{"kind":"textbox","id":"sh/76d4zy9w","slide":9,"text":"The core system is live; the next milestone is native integration.","textPreview":"The core system is live; the next milestone is native integration.","textChars":66,"textLines":1,"bbox":[72,80,1080,90]}
+{"kind":"textbox","id":"sh/m54n6t8b","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1170,48,38,24]}
+{"kind":"shape","id":"sh/lkvmxorq","slide":9,"bbox":[72,196,496,350]}
+{"kind":"textbox","id":"sh/kj254jq5","slide":9,"text":"PROOF TODAY","textPreview":"PROOF TODAY","textChars":11,"textLines":1,"bbox":[100,226,300,24]}
+{"kind":"shape","id":"sh/zit4ve9k","slide":9,"bbox":[102,286,12,12]}
+{"kind":"textbox","id":"sh/yhk32t8z","slide":9,"text":"4 contracts deployed on Monad testnet","textPreview":"4 contracts deployed on Monad testnet","textChars":37,"textLines":1,"bbox":[130,278,390,42]}
+{"kind":"shape","id":"sh/xgbmtore","slide":9,"bbox":[102,344,12,12]}
+{"kind":"textbox","id":"sh/cf2l0jq9","slide":9,"text":"Verify, stake, transfer, revoke, and exit flows","textPreview":"Verify, stake, transfer, revoke, and exit flows","textChars":47,"textLines":1,"bbox":[130,336,390,42]}
+{"kind":"shape","id":"sh/yd8jm5wz","slide":9,"bbox":[102,402,12,12]}
+{"kind":"textbox","id":"sh/zeh0vax4","slide":9,"text":"On-chain event trail for review decisions","textPreview":"On-chain event trail for review decisions","textChars":41,"textLines":1,"bbox":[130,394,390,42]}
+{"kind":"shape","id":"sh/0fa1ofep","slide":9,"bbox":[102,460,12,12]}
+{"kind":"textbox","id":"sh/lgjixkfa","slide":9,"text":"40 contract tests reported in the demo script","textPreview":"40 contract tests reported in the demo script","textChars":45,"textLines":1,"bbox":[130,452,390,42]}
+{"kind":"textbox","id":"sh/qp8ji5wn","slide":9,"text":"NEXT 90 DAYS","textPreview":"NEXT 90 DAYS","textChars":12,"textLines":1,"bbox":[640,226,300,24]}
+{"kind":"textbox","id":"sh/bqh0rax8","slide":9,"text":"0–30","textPreview":"0–30","textChars":4,"textLines":1,"bbox":[640,282,90,28]}
+{"kind":"textbox","id":"sh/cbq1kfet","slide":9,"text":"Confirm Cleanverse sandbox interfaces and replace the mock registry.","textPreview":"Confirm Cleanverse sandbox interfaces and replace the mock registry.","textChars":68,"textLines":1,"bbox":[738,278,430,62]}
+{"kind":"shape","id":"sh/dczit0fe","slide":9,"bbox":[640,348,528,1]}
+{"kind":"textbox","id":"sh/2lozelwr","slide":9,"text":"31–60","textPreview":"31–60","textChars":5,"textLines":1,"bbox":[640,370,90,28]}
+{"kind":"textbox","id":"sh/3mx0nqxw","slide":9,"text":"Pilot policy and reporting workflow with an institutional partner.","textPreview":"Pilot policy and reporting workflow with an institutional partner.","textChars":66,"textLines":1,"bbox":[738,366,430,62]}
+{"kind":"shape","id":"sh/7etoz29s","slide":9,"bbox":[640,436,528,1]}
+{"kind":"textbox","id":"sh/6dk76x87","slide":9,"text":"61–90","textPreview":"61–90","textChars":5,"textLines":1,"bbox":[640,458,90,28]}
+{"kind":"textbox","id":"sh/tgb61sri","slide":9,"text":"Security review, production controls, and public pilot readiness.","textPreview":"Security review, production controls, and public pilot readiness.","textChars":65,"textLines":1,"bbox":[738,454,430,62]}
+{"kind":"shape","id":"sh/sf2p87qd","slide":9,"bbox":[640,524,528,1]}
+{"kind":"shape","id":"sh/fito329o","slide":9,"bbox":[72,580,1136,42]}
+{"kind":"textbox","id":"sh/uhk7ax83","slide":9,"text":"Claims discipline: testnet rewards are simulated; stMON is currently a policy-gated receipt, not claimed as a Cleanverse verified asset.","textPreview":"Claims discipline: testnet rewards are simulated; stMON is currently a policy-gated receipt, not claimed as a Cleanverse verified asset.","textChars":136,"textLines":1,"bbox":[96,591,1088,22]}
+{"kind":"shape","id":"sh/hkv65cru","slide":9,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/gjmpc7q9","slide":9,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/vm9ori9k","slide":9,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"notes","id":"nt/sma9nj","slide":9,"text":"CORE MESSAGE: Continuum has working on-chain proof; registration unlocks the native Cleanverse integration and institutional pilot phase.\nDo not overclaim: rewards are simulated and stMON is not yet a Cleanverse-verified asset.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
+{"kind":"slide","id":"sl/qevcwu","slide":10,"title":"THE REGISTRATION ASK","textShapes":10}
+{"kind":"textbox","id":"sh/tcfyt8vq","slide":10,"text":"THE REGISTRATION ASK","textPreview":"THE REGISTRATION ASK","textChars":20,"textLines":1,"bbox":[72,62,520,28]}
+{"kind":"textbox","id":"sh/6pozydwz","slide":10,"text":"Approve Continuum to build the\npolicy rail for verified DeFi.","textPreview":"Approve Continuum to build the | policy rail for verified DeFi.","textChars":61,"textLines":2,"bbox":[72,146,920,130]}
+{"kind":"textbox","id":"sh/rqxgridk","slide":10,"text":"What registration enables","textPreview":"What registration enables","textChars":25,"textLines":1,"bbox":[72,336,320,30]}
+{"kind":"shape","id":"sh/4nmxw3e9","slide":10,"bbox":[76,396,12,12]}
+{"kind":"textbox","id":"sh/5ovyp8fe","slide":10,"text":"Sandbox access and confirmation of A-Pass integration interfaces","textPreview":"Sandbox access and confirmation of A-Pass integration interfaces","textChars":64,"textLines":1,"bbox":[104,386,720,44]}
+{"kind":"shape","id":"sh/il4futw3","slide":10,"bbox":[76,454,12,12]}
+{"kind":"textbox","id":"sh/jmdgnyxo","slide":10,"text":"Guidance on native verified-asset issuance and CCP interaction paths","textPreview":"Guidance on native verified-asset issuance and CCP interaction paths","textChars":68,"textLines":1,"bbox":[104,444,720,44]}
+{"kind":"shape","id":"sh/ojqh87ed","slide":10,"bbox":[76,512,12,12]}
+{"kind":"textbox","id":"sh/pkzy1cvy","slide":10,"text":"Introductions to wallets, custodians, and institutional pilot partners","textPreview":"Introductions to wallets, custodians, and institutional pilot partners","textChars":70,"textLines":1,"bbox":[104,502,720,44]}
+{"kind":"shape","id":"sh/lkjex4ny","slide":10,"bbox":[900,340,308,210]}
+{"kind":"textbox","id":"sh/zihwveps","slide":10,"text":"CONTINUUM","textPreview":"CONTINUUM","textChars":9,"textLines":1,"bbox":[930,508,248,24]}
+{"kind":"textbox","id":"sh/yx8vm9o7","slide":10,"text":"Compliance that travels with the token.","textPreview":"Compliance that travels with the token.","textChars":39,"textLines":1,"bbox":[900,578,308,42]}
+{"kind":"shape","id":"sh/dwzet47m","slide":10,"bbox":[72,680,1136,1]}
+{"kind":"textbox","id":"sh/cvqdkz6h","slide":10,"text":"CONTINUUM × CLEANVERSE","textPreview":"CONTINUUM × CLEANVERSE","textChars":22,"textLines":1,"bbox":[72,688,320,18]}
+{"kind":"textbox","id":"sh/buhwrupw","slide":10,"text":"CONFIDENTIAL • REGISTRATION DECK","textPreview":"CONFIDENTIAL • REGISTRATION DECK","textChars":32,"textLines":1,"bbox":[870,688,338,18]}
+{"kind":"image","id":"im/b25wfq18","slide":10,"name":"","alt":"Continuum logo","bbox":[945,362,218,138]}
+{"kind":"notes","id":"nt/qevcwu","slide":10,"text":"CORE MESSAGE: The ask is approval and access: help Continuum move from a validated testnet prototype to a native Cleanverse integration and pilot.\n[Sources]\n- Internal workspace: product specification, demo script, deployment record (2026-08-03).\n- User-provided Continuum logo.\n[/Sources]"}
