@@ -73,6 +73,46 @@ contract RedemptionQueue is Ownable {
         emit RedemptionCancelled(id);
     }
 
+    event RedemptionApproved(uint256 indexed id);
+    event RedemptionRejected(uint256 indexed id);
+    event SettlementDeferred(uint256 indexed id, address receiver);
+    event RedemptionSettled(
+        uint256 indexed id, address indexed requester, address indexed receiver, uint256 assets
+    );
+
+    function approveRedemption(uint256 id) external onlyOwner {
+        Request storage r = requests[id];
+        if (r.status != Status.Pending) revert BadStatus();
+        _requireEligible(r.receiver); // re-check at approval
+        r.status = Status.Approved;
+        emit RedemptionApproved(id);
+    }
+
+    function rejectRedemption(uint256 id) external onlyOwner {
+        Request storage r = requests[id];
+        if (r.status != Status.Pending) revert BadStatus();
+        r.status = Status.Rejected;
+        totalLockedShares -= r.shares;
+        stMON.transfer(r.requester, r.shares);
+        emit RedemptionRejected(id);
+    }
+
+    function settleRedemption(uint256 id) external onlyOwner {
+        Request storage r = requests[id];
+        if (r.status != Status.Approved) revert BadStatus();
+        // Re-check at settlement: if the receiver went ineligible after
+        // approval, the request returns to pending review.
+        if (!identity.isVerified(r.receiver) || identity.isFlagged(r.receiver)) {
+            r.status = Status.Pending;
+            emit SettlementDeferred(id, r.receiver);
+            return;
+        }
+        r.status = Status.Settled;
+        totalLockedShares -= r.shares;
+        uint256 assets = vault.settleRedemption(r.receiver, r.shares);
+        emit RedemptionSettled(id, r.requester, r.receiver, assets);
+    }
+
     function _requireEligible(address account) internal view {
         if (!identity.isVerified(account)) revert NotVerified(account);
         if (identity.isFlagged(account)) revert CredentialRevoked(account);

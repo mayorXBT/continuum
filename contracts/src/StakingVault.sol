@@ -56,6 +56,19 @@ contract StakingVault is Ownable, Pausable {
     }
 
     event RewardsDripped(uint256 amount, uint256 newExchangeRate);
+    event RedemptionSettled(address indexed receiver, uint256 assets, uint256 shares);
+
+    /// @notice Burns queue-locked shares and delivers underlying MON to the
+    /// reviewed, eligible receiver. Only the RedemptionQueue may call.
+    function settleRedemption(address receiver, uint256 shares) external returns (uint256 assets) {
+        if (msg.sender != redemptionQueue) revert NotAuthorized(msg.sender);
+        assets = (shares * totalAssets) / stMON.totalSupply();
+        stMON.burn(redemptionQueue, shares);
+        totalAssets -= assets;
+        (bool ok,) = receiver.call{value: assets}("");
+        if (!ok) revert TransferFailed();
+        emit RedemptionSettled(receiver, assets, shares);
+    }
 
     /// @notice Simulated testnet rewards: deposits raise stMON redemption
     /// value. Labeled "simulated testnet rewards" in all UI copy.
