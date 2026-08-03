@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/* ————— Continuum token system: security-print on cool paper ————— */
+:root {
+  --ink: #0e1b2c; /* engraver's navy */
+  --ink-soft: #3c4a5c;
+  --paper: #f4f6f8; /* cool security paper */
+  --paper-raised: #ffffff;
+  --line: #c9d2dc;
+  --verified: #0e6b4f; /* stamp green */
+  --verified-wash: #e3efe9;
+  --revoked: #b3261e; /* stamp red */
+  --revoked-wash: #f7e6e4;
+  --seal: #5b4fd1; /* monad-nod violet */
+  --seal-wash: #e9e7f9;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-line: var(--line);
+  --color-verified: var(--verified);
+  --color-verified-wash: var(--verified-wash);
+  --color-revoked: var(--revoked);
+  --color-revoked-wash: var(--revoked-wash);
+  --color-seal: var(--seal);
+  --color-seal-wash: var(--seal-wash);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Guilloché-inspired ambient texture: fine concentric arcs, banknote-quiet */
+.guilloche {
+  background-image: repeating-radial-gradient(
+      circle at 15% -10%,
+      transparent 0,
+      transparent 38px,
+      rgba(14, 27, 44, 0.045) 38px,
+      rgba(14, 27, 44, 0.045) 39px
+    ),
+    repeating-radial-gradient(
+      circle at 110% 30%,
+      transparent 0,
+      transparent 46px,
+      rgba(91, 79, 209, 0.05) 46px,
+      rgba(91, 79, 209, 0.05) 47px
+    );
+}
+
+/* ————— Type roles ————— */
+.display {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.02em;
+}
+.data {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ————— Stamps: the attestation mark ————— */
+.stamp {
+  display: inline-block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  transform: rotate(-2deg);
+  text-transform: uppercase;
+}
+.stamp-verified {
+  color: var(--verified);
+  background: var(--verified-wash);
+}
+.stamp-revoked {
+  color: var(--revoked);
+  background: var(--revoked-wash);
+}
+.stamp-pending {
+  color: var(--seal);
+  background: var(--seal-wash);
+}
+.stamp-flat {
+  transform: none;
+}
+
+/* ————— The continuity line: signature element ————— */
+.continuity {
+  position: relative;
+}
+.continuity::before {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--seal) 0%,
+    var(--ink) 55%,
+    var(--verified) 100%
+  );
+}
+.checkpoint {
+  position: relative;
+  padding-left: 3.25rem;
+}
+.checkpoint::before {
+  content: "";
+  position: absolute;
+  left: calc(1.1rem - 7px);
+  top: 0.35rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+.checkpoint-seal::before {
+  border-color: var(--seal);
+}
+.checkpoint-verified::before {
+  border-color: var(--verified);
+  background: var(--verified-wash);
+}
+
+/* ————— Document card: attestation paper ————— */
+.doc {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(14, 27, 44, 0.06);
+}
+.doc-rule {
+  border-top: 1px solid var(--line);
+}
+
+/* ————— Hero transfer strip animation ————— */
+.strip {
+  position: relative;
+}
+.strip-path {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  right: 4%;
+  height: 2px;
+  background: var(--ink);
+  opacity: 0.25;
+}
+.strip-token {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--seal);
+  box-shadow: 0 0 0 4px var(--seal-wash);
+  animation: hop 7s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes hop {
+  0%,
+  8% {
+    left: 4%;
+  }
+  28%,
+  40% {
+    left: 50%;
+  }
+  60%,
+  72% {
+    left: 82%;
+    background: var(--seal);
+    box-shadow: 0 0 0 4px var(--seal-wash);
+  }
+  78%,
+  88% {
+    left: 82%;
+    background: var(--revoked);
+    box-shadow: 0 0 0 4px var(--revoked-wash);
+  }
+  100% {
+    left: 4%;
+    background: var(--seal);
+    box-shadow: 0 0 0 4px var(--seal-wash);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .strip-token {
+    animation: none;
+    left: 50%;
+  }
+}
+
+/* ————— Controls ————— */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 3px;
+  border: 1.5px solid var(--ink);
+  transition: background 120ms ease, color 120ms ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+.btn-primary:hover {
+  background: var(--ink-soft);
+  border-color: var(--ink-soft);
+}
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-quiet:hover {
+  background: var(--paper-raised);
+}
+.btn-danger {
+  border-color: var(--revoked);
+  color: var(--revoked);
+  background: transparent;
+}
+.btn-danger:hover {
+  background: var(--revoked-wash);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.field {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875rem;
+  color: var(--ink);
+  width: 100%;
+}
+.field:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 1px;
+}
