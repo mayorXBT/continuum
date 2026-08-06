@@ -31,10 +31,10 @@ export function EnforcementStrip() {
   const usesValidator = modeIndex !== undefined && modeIndex !== 0;
 
   return (
-    <Card className="border-line bg-paper-raised shadow-sm">
+    <Card className="rounded-2xl border-line bg-surface shadow-soft">
       <CardContent className="flex flex-wrap items-center justify-between gap-4 p-4">
         <div className="space-y-1">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
             Enforcing now
           </p>
           <p className="font-display text-sm font-semibold text-ink">{label}</p>
@@ -46,7 +46,7 @@ export function EnforcementStrip() {
             className={`rounded-sm px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] ${
               usesValidator
                 ? "border-seal/30 bg-seal-wash text-seal"
-                : "border-line bg-paper text-ink-soft"
+                : "border-line bg-paper text-inksoft"
             }`}
           >
             {usesValidator ? "CVI gate on" : "CVI gate off"}
@@ -56,14 +56,14 @@ export function EnforcementStrip() {
             className={`rounded-sm px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] ${
               available
                 ? "border-verified/30 bg-verified-wash text-verified"
-                : "border-line bg-paper text-ink-soft"
+                : "border-line bg-paper text-inksoft"
             }`}
           >
             {available ? "Validator responding" : "Validator unreachable"}
           </Badge>
         </div>
 
-        <p className="w-full font-mono text-[0.7rem] break-all text-ink-soft">
+        <p className="w-full font-mono text-[0.7rem] break-all text-inksoft">
           Cleanverse validator {VALIDATOR}
         </p>
       </CardContent>

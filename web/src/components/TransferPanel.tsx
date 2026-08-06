@@ -24,13 +24,13 @@ export function TransferPanel() {
 
   return (
     <div className="space-y-6">
-      <Card className="border-line bg-paper-raised shadow-sm">
+      <Card className="rounded-2xl border-line bg-surface shadow-soft">
         <CardHeader className="space-y-1">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
             Checkpoint 03 · Move
           </p>
           <CardTitle className="font-display text-xl">Transfer stMON</CardTitle>
-          <CardDescription className="text-ink-soft">
+          <CardDescription className="text-inksoft">
             Every transfer re-checks the recipient&rsquo;s A-Pass at the token layer.
             Unverified or revoked recipients are blocked — the error below is the
             product working.
@@ -55,6 +55,7 @@ export function TransferPanel() {
               onChange={(e) => setAmount(e.target.value)}
             />
             <Button
+              className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
                 writeContract({
@@ -70,14 +71,14 @@ export function TransferPanel() {
         </CardContent>
       </Card>
 
-      <Card className="border-line bg-paper-raised shadow-sm">
+      <Card className="rounded-2xl border-line bg-surface shadow-soft">
         <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
           <div className="space-y-1">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
               Checkpoint 04 · Exit
             </p>
             <CardTitle className="font-display text-xl">Controlled exit</CardTitle>
-            <CardDescription className="text-ink-soft">
+            <CardDescription className="text-inksoft">
               A revoked wallet cannot transfer — but it can request redemption to a
               verified receiver. After officer review, the receipt is burned and the
               underlying MON is delivered. Compliance without confiscation.
@@ -85,7 +86,7 @@ export function TransferPanel() {
           </div>
           <Badge
             variant="outline"
-            className="shrink-0 rounded-sm border-line bg-paper px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft"
+            className="shrink-0 rounded-sm border-line bg-paper px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft"
           >
             For revoked holders
           </Badge>
@@ -116,6 +117,7 @@ export function TransferPanel() {
               1 · Approve queue
             </Button>
             <Button
+              className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
                 writeContract({

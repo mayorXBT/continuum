@@ -41,7 +41,7 @@ function StatusStamp({
   const styles = {
     verified: "border-verified/30 bg-verified-wash text-verified",
     revoked: "border-revoked/30 bg-revoked-wash text-revoked",
-    pending: "border-line bg-paper text-ink-soft",
+    pending: "border-line bg-paper text-inksoft",
   } as const;
   return (
     <Badge
@@ -56,7 +56,7 @@ function StatusStamp({
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div className="space-y-1">
-      <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+      <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
         {label}
       </dt>
       <dd className="font-mono text-sm text-ink">{value}</dd>
@@ -148,10 +148,10 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
   );
 
   return (
-    <Card className="border-line bg-paper-raised shadow-sm">
+    <Card className="rounded-2xl border-line bg-surface shadow-soft">
       <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
         <div className="space-y-1">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
             Cleanverse sandbox · live CVI
           </p>
           <CardTitle className="font-display text-xl">A-Pass record</CardTitle>
@@ -205,16 +205,20 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
             <Separator className="bg-line" />
             <div className="space-y-3">
               <p className="text-sm text-ink">{status.note}</p>
-              <p className="text-xs leading-relaxed text-ink-soft">
+              <p className="text-xs leading-relaxed text-inksoft">
                 Continuum is permissioned, so a wallet needs a verified identity
                 before it can stake. On testnet you can issue yourself a demo
                 credential — one click, about fifteen seconds, written on-chain.
               </p>
-              <Button onClick={getDemoAccess} disabled={joining}>
+              <Button
+                className="bg-navy text-white hover:bg-navy-hover"
+                onClick={getDemoAccess}
+                disabled={joining}
+              >
                 {joining ? "Issuing credential…" : "Get demo access"}
               </Button>
               {joining && (
-                <p className="text-xs text-ink-soft">
+                <p className="text-xs text-inksoft">
                   Registering your A-Pass with Cleanverse, then adding you to the
                   registry. Two transactions — please keep this tab open.
                 </p>
@@ -230,7 +234,7 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
       </CardContent>
 
       <CardFooter>
-        <p className="text-xs leading-relaxed text-ink-soft">
+        <p className="text-xs leading-relaxed text-inksoft">
           Read live from <span className="font-mono">query_apass</span> on Monad via
           the Cleanverse UAT API. Credential data is served through our own route so
           the institution api-id never reaches the browser.
@@ -260,7 +264,7 @@ export function VerifyPanel() {
   if (!address) {
     return (
       <Alert className="border-line bg-paper-raised">
-        <AlertDescription className="text-ink-soft">
+        <AlertDescription className="text-inksoft">
           Connect a wallet to check its A-Pass status.
         </AlertDescription>
       </Alert>
@@ -273,10 +277,10 @@ export function VerifyPanel() {
     <div className="space-y-6">
       <CleanverseRecord address={address} />
 
-      <Card className="border-line bg-paper-raised shadow-sm">
+      <Card className="rounded-2xl border-line bg-surface shadow-soft">
         <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
           <div className="space-y-1">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
               On-chain registry · enforced by contracts
             </p>
             <CardTitle className="font-display text-xl">Wallet credential</CardTitle>
@@ -293,6 +297,7 @@ export function VerifyPanel() {
           <Separator className="bg-line" />
           <div className="flex flex-wrap gap-2">
             <Button
+              className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
                 writeContract({
@@ -333,7 +338,7 @@ export function VerifyPanel() {
         </CardContent>
 
         <CardFooter>
-          <p className="text-xs leading-relaxed text-ink-soft">
+          <p className="text-xs leading-relaxed text-inksoft">
             This registry is what StMON and the vault gate on today — revoking here is
             what freezes a position on the next transaction. Admin actions run from the
             deployer wallet. It implements the same{" "}

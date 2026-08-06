@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Logo } from "./Logo";
+import Navbar from "./landing/Navbar";
+import Footer from "./landing/Footer";
 
 export type DocSection = { id: string; title: string };
 
 /**
- * Docs chrome: sticky sidebar of section links that highlights whichever
- * section is currently on screen.
+ * Docs chrome: shared marketing nav + footer, with a sticky sidebar of section
+ * links that highlights whichever section is currently on screen.
  */
 export function DocsShell({
   sections,
@@ -37,32 +37,15 @@ export function DocsShell({
   }, [sections]);
 
   return (
-    <div className="flex-1">
-      <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-baseline gap-3">
-            <Logo href="/" />
-            <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft sm:inline">
-              Docs
-            </span>
-          </div>
-          <Link
-            href="/app"
-            className="rounded-sm bg-ink px-3.5 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90"
-          >
-            Launch app
-          </Link>
-        </div>
-      </header>
+    <div className="flex min-h-[100dvh] flex-col bg-paper">
+      <Navbar />
 
-      <div className="mx-auto flex max-w-6xl gap-12 px-6 py-12">
+      <div className="mx-auto flex w-full max-w-6xl flex-1 gap-12 px-6 py-14">
         <nav
           aria-label="Documentation sections"
           className="sticky top-24 hidden h-fit w-56 shrink-0 lg:block"
         >
-          <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
-            On this page
-          </p>
+          <p className="eyebrow mb-3 text-inkfaint">On this page</p>
           <ul className="space-y-1 border-l border-line">
             {sections.map((s) => (
               <li key={s.id}>
@@ -70,8 +53,8 @@ export function DocsShell({
                   href={`#${s.id}`}
                   className={`-ml-px block border-l-2 py-1.5 pl-3 text-sm transition-colors ${
                     active === s.id
-                      ? "border-ink font-medium text-ink"
-                      : "border-transparent text-ink-soft hover:border-line hover:text-ink"
+                      ? "border-navy font-medium text-ink"
+                      : "border-transparent text-inksoft hover:border-linestrong hover:text-ink"
                   }`}
                 >
                   {s.title}
@@ -83,6 +66,8 @@ export function DocsShell({
 
         <main className="min-w-0 flex-1">{children}</main>
       </div>
+
+      <Footer />
     </div>
   );
 }
@@ -97,9 +82,14 @@ export function DocSection({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 border-t border-line pt-10 first:border-0 first:pt-0">
-      <h2 className="font-display text-2xl font-semibold tracking-tight">{title}</h2>
-      <div className="docs-prose mt-4 space-y-4 text-sm leading-relaxed text-ink-soft">
+    <section
+      id={id}
+      className="scroll-mt-24 border-t border-line pt-10 first:border-0 first:pt-0"
+    >
+      <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink">
+        {title}
+      </h2>
+      <div className="docs-prose mt-4 space-y-4 text-sm leading-relaxed text-inksoft">
         {children}
       </div>
     </section>

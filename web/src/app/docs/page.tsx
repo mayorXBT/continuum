@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsShell, DocSection, type DocSection as S } from "@/components/DocsShell";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Docs — Continuum",
@@ -42,16 +41,17 @@ function Addr({ children }: { children: string }) {
       href={`${EXPLORER}/address/${children}`}
       target="_blank"
       rel="noreferrer"
-      className="font-mono text-xs break-all text-ink underline decoration-line underline-offset-2 hover:decoration-ink"
+      className="font-mono text-xs break-all text-navy underline decoration-navy/30 underline-offset-2 transition-colors hover:decoration-navy"
     >
       {children}
     </a>
   );
 }
 
+/** Dark premium code panel — matches the developer section's syntax surface. */
 function Code({ children }: { children: React.ReactNode }) {
   return (
-    <pre className="overflow-x-auto rounded-sm border border-line bg-paper-raised p-4 font-mono text-xs leading-relaxed text-ink">
+    <pre className="overflow-x-auto rounded-2xl border border-darkline bg-darksurface p-5 font-mono text-[12.5px] leading-relaxed text-darktext shadow-panel">
       {children}
     </pre>
   );
@@ -60,10 +60,10 @@ function Code({ children }: { children: React.ReactNode }) {
 function Note({ children, tone = "quiet" }: { children: React.ReactNode; tone?: "quiet" | "warn" }) {
   return (
     <div
-      className={`rounded-sm border p-4 text-sm leading-relaxed ${
+      className={`rounded-2xl border p-4 text-sm leading-relaxed ${
         tone === "warn"
           ? "border-revoked/30 bg-revoked-wash text-ink"
-          : "border-line bg-paper-raised text-ink-soft"
+          : "border-line bg-surface text-inksoft shadow-soft"
       }`}
     >
       {children}
@@ -76,13 +76,11 @@ export default function Docs() {
     <>
       <DocsShell sections={sections}>
         <div className="mb-12">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
-            Documentation
-          </p>
+          <p className="eyebrow text-inkfaint">Documentation</p>
           <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight">
             Continuum
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-ink-soft">
+          <p className="mt-4 text-base leading-relaxed text-inksoft">
             Permissioned liquid staking on Monad testnet, where the compliance
             rule lives in the token rather than the interface — and a revoked
             holder exits through review instead of losing their funds.
@@ -148,9 +146,9 @@ export default function Docs() {
                 ["03 · Move", "Transfers re-check the recipient at the token layer. An ineligible recipient causes the transfer to revert on-chain."],
                 ["04 · Exit", "Eligible holders unstake freely. Revoked holders take the controlled exit."],
               ].map(([t, d]) => (
-                <li key={t} className="rounded-sm border border-line bg-paper-raised p-4">
-                  <p className="font-mono text-xs font-semibold tracking-[0.1em] text-seal">{t}</p>
-                  <p className="mt-1.5 text-ink-soft">{d}</p>
+                <li key={t} className="rounded-sm border border-line bg-surface p-4">
+                  <p className="font-mono text-xs font-semibold tracking-[0.1em] text-navy">{t}</p>
+                  <p className="mt-1.5 text-inksoft">{d}</p>
                 </li>
               ))}
             </ol>
@@ -163,7 +161,7 @@ export default function Docs() {
             </p>
             <p>
               <strong>2. Connect your wallet.</strong> Open the{" "}
-              <Link href="/app" className="text-ink underline decoration-line underline-offset-2">
+              <Link href="/app" className="text-navy underline decoration-navy/30 underline-offset-2 transition-colors hover:decoration-navy">
                 app
               </Link>{" "}
               and connect. Add Monad testnet to your wallet if prompted.
@@ -183,7 +181,7 @@ export default function Docs() {
               Demo access issues a <em>sandbox</em> credential under hackathon
               rules where Cleanverse relaxed the KYC requirement. A production
               A-Pass is issued by Cleanverse against real identity verification.
-              See <a href="#limits" className="text-ink underline decoration-line underline-offset-2">Limitations</a>.
+              See <a href="#limits" className="text-navy underline decoration-navy/30 underline-offset-2 transition-colors hover:decoration-navy">Limitations</a>.
             </Note>
           </DocSection>
 
@@ -238,11 +236,11 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
                 ["Under review", "The holder submits a redemption request nominating a verified destination wallet. A compliance officer reviews it."],
                 ["Settled", "Eligibility is re-checked at approval and again at settlement. The receipt is burned and the underlying asset is delivered to the nominated wallet — principal plus earned yield."],
               ].map(([t, d], i) => (
-                <li key={t} className="rounded-sm border border-line bg-paper-raised p-4">
-                  <p className="font-mono text-xs font-semibold tracking-[0.1em] text-ink-soft">
+                <li key={t} className="rounded-sm border border-line bg-surface p-4">
+                  <p className="font-mono text-xs font-semibold tracking-[0.1em] text-inksoft">
                     0{i + 1} · {t}
                   </p>
-                  <p className="mt-1.5 text-ink-soft">{d}</p>
+                  <p className="mt-1.5 text-inksoft">{d}</p>
                 </li>
               ))}
             </ol>
@@ -313,7 +311,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
                     <tr key={addr} className="border-b border-line/60 align-top">
                       <td className="py-3 pr-4 whitespace-nowrap text-ink">{name}</td>
                       <td className="py-3 pr-4"><Addr>{addr}</Addr></td>
-                      <td className="py-3 text-ink-soft">{role}</td>
+                      <td className="py-3 text-inksoft">{role}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -389,7 +387,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
             <p>
               Prefer to trust the chain over our server? Call the validator
               directly — see{" "}
-              <a href="#cleanverse" className="text-ink underline decoration-line underline-offset-2">
+              <a href="#cleanverse" className="text-navy underline decoration-navy/30 underline-offset-2 transition-colors hover:decoration-navy">
                 Cleanverse integration
               </a>
               . Everything the interface asserts is independently checkable.
@@ -445,15 +443,14 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
               ["Can I verify the compliance claims myself?", "Yes. The validator's complianceVerify is a permissionless view function, so you can check any wallet against our pool from your own node without trusting our interface."],
               ["Is my stMON balance supposed to stay flat while earning?", "Yes. Rewards raise what each stMON redeems for rather than minting new units, so the balance is constant while its claim grows. Nothing to claim or compound."],
             ].map(([q, a]) => (
-              <div key={q} className="rounded-sm border border-line bg-paper-raised p-4">
+              <div key={q} className="rounded-sm border border-line bg-surface p-4">
                 <p className="font-medium text-ink">{q}</p>
-                <p className="mt-1.5 text-ink-soft">{a}</p>
+                <p className="mt-1.5 text-inksoft">{a}</p>
               </div>
             ))}
           </DocSection>
         </div>
       </DocsShell>
-      <SiteFooter />
     </>
   );
 }

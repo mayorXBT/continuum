@@ -38,6 +38,7 @@ export function WalletButton() {
     return (
       <Button
         size="sm"
+        className="bg-navy text-white hover:bg-navy-hover"
         disabled={mounted && isConnecting}
         onClick={() => connect({ connector: injected() })}
       >

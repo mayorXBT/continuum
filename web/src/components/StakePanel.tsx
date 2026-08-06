@@ -17,9 +17,9 @@ import { Separator } from "@/components/ui/separator";
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <Card className="border-line bg-paper-raised shadow-sm">
+    <Card className="rounded-2xl border-line bg-surface shadow-soft">
       <CardContent className="space-y-1 p-5 text-center">
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
           {label}
         </p>
         <p className="font-mono text-2xl font-medium tabular-nums text-ink">{value}</p>
@@ -61,9 +61,9 @@ export function StakePanel() {
         <Stat label="Vault assets · MON" value={fmt(totalAssets)} />
       </div>
 
-      <Card className="border-line bg-paper-raised shadow-sm">
+      <Card className="rounded-2xl border-line bg-surface shadow-soft">
         <CardHeader className="space-y-1">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-inksoft">
             Checkpoint 02 · Stake
           </p>
           <CardTitle className="font-display text-xl">Stake MON → stMON</CardTitle>
@@ -80,6 +80,7 @@ export function StakePanel() {
               onChange={(e) => setAmount(e.target.value)}
             />
             <Button
+              className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
                 writeContract({
@@ -107,7 +108,7 @@ export function StakePanel() {
             </Button>
             <Button
               variant="outline"
-              className="border-dashed border-line text-ink-soft"
+              className="border-dashed border-line text-inksoft"
               disabled={isPending}
               title="Owner only — raises the redemption rate"
               onClick={() =>
@@ -130,7 +131,7 @@ export function StakePanel() {
         </CardContent>
 
         <CardFooter>
-          <p className="text-xs leading-relaxed text-ink-soft">
+          <p className="text-xs leading-relaxed text-inksoft">
             Rewards shown are simulated testnet rewards raising stMON redemption value.
             Staking and unstaking both re-check your A-Pass.
           </p>
