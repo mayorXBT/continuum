@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { WalletButton } from "../../components/WalletButton";
+import { EnforcementStrip } from "../../components/EnforcementStrip";
 import { VerifyPanel } from "../../components/VerifyPanel";
 import { StakePanel } from "../../components/StakePanel";
 import { TransferPanel } from "../../components/TransferPanel";
@@ -36,6 +37,7 @@ export default function App() {
             <span className="data">web/.env.local</span> (plan Task 8).
           </div>
         )}
+        <EnforcementStrip />
         <nav className="flex gap-1 border-b border-line" role="tablist">
           {TABS.map((t) => (
             <button

@@ -117,6 +117,30 @@ const queueAbi = [
   },
 ] as const;
 
+const routerAbi = [
+  {
+    type: "function", name: "mode", stateMutability: "view",
+    inputs: [], outputs: [{ type: "uint8" }],
+  },
+  {
+    type: "function", name: "validatorAvailable", stateMutability: "view",
+    inputs: [{ name: "probe", type: "address" }],
+    outputs: [{ type: "bool" }],
+  },
+  {
+    type: "function", name: "validator", stateMutability: "view",
+    inputs: [], outputs: [{ type: "address" }],
+  },
+] as const;
+
+/** Mirrors ComplianceRouter.Mode. */
+export const ROUTER_MODES = [
+  "Local registry only",
+  "Cleanverse validator only",
+  "Local AND Cleanverse",
+  "Local OR Cleanverse",
+] as const;
+
 const ZERO = "0x0000000000000000000000000000000000000000" as const;
 
 const addr = (v: string | undefined) => (v ?? ZERO) as `0x${string}`;
@@ -126,6 +150,7 @@ export const CONTRACTS = {
   stMon: { address: addr(process.env.NEXT_PUBLIC_STMON), abi: stMonAbi },
   vault: { address: addr(process.env.NEXT_PUBLIC_VAULT), abi: vaultAbi },
   queue: { address: addr(process.env.NEXT_PUBLIC_QUEUE), abi: queueAbi },
+  router: { address: addr(process.env.NEXT_PUBLIC_ROUTER), abi: routerAbi },
 } as const;
 
 export const contractsDeployed = CONTRACTS.apass.address !== ZERO;

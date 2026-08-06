@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useBalance, useConnect, useDisconnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { formatEther } from "viem";
@@ -26,14 +26,22 @@ export function WalletButton() {
   const { data: balance } = useBalance({ address, query: { enabled: !!address } });
   const [copied, setCopied] = useState(false);
 
-  if (!isConnected || !address) {
+  // Wallet state only exists in the browser, so the server and the first client
+  // render must agree on the neutral label; anything else is a hydration
+  // mismatch.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isConnected || !address) {
     return (
       <Button
         size="sm"
-        disabled={isConnecting}
+        disabled={mounted && isConnecting}
         onClick={() => connect({ connector: injected() })}
       >
-        {isConnecting ? "Connecting…" : "Connect wallet"}
+        {mounted && isConnecting ? "Connecting…" : "Connect wallet"}
       </Button>
     );
   }
