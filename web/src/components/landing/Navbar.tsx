@@ -1,21 +1,23 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-/** Center nav points at on-page sections (always valid on the landing);
- *  the two buttons go to the real app and docs routes. */
+/** The marketing pages, in nav order. The two buttons go to the real
+ *  app (/app) and technical docs (/docs). */
 const NAV_LINKS = [
-  { href: '#how', label: 'How it works' },
-  { href: '#operate', label: 'Operate' },
-  { href: '#developers', label: 'Developers' },
+  { href: '/product', label: 'Product' },
+  { href: '/developers', label: 'Developers' },
+  { href: '/security', label: 'Security' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const reduce = useReducedMotion()
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -56,15 +58,22 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {NAV_LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-inksoft transition-colors hover:text-ink"
-            >
-              {l.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((l) => {
+            const active = pathname === l.href
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                  'text-sm transition-colors hover:text-ink',
+                  active ? 'font-medium text-ink' : 'text-inksoft',
+                )}
+              >
+                {l.label}
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
