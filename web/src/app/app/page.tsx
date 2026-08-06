@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import { Logo } from "../../components/Logo";
 import { WalletButton } from "../../components/WalletButton";
 import { EnforcementStrip } from "../../components/EnforcementStrip";
 import { VerifyPanel } from "../../components/VerifyPanel";
@@ -19,9 +19,7 @@ export default function App() {
       <header className="border-b border-line bg-paper-raised">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <div className="flex items-baseline gap-3">
-            <Link href="/" className="data text-sm font-medium tracking-[0.22em]">
-              CONTINUUM
-            </Link>
+            <Logo href="/" />
             <span className="eyebrow hidden sm:inline">Monad testnet</span>
           </div>
           <WalletButton />

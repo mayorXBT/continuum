@@ -1,6 +1,7 @@
 # Continuum — 3-minute demo script
 
-Live on Monad testnet. Every beat below was verified on-chain on 2026-08-03.
+Live on Monad testnet. Every beat below was verified on-chain on 2026-08-06, against the
+deployment in `docs/deployment.md`.
 
 ## Before you hit record
 
@@ -9,9 +10,13 @@ Live on Monad testnet. Every beat below was verified on-chain on 2026-08-03.
   and the officer role)
 - Wallet has MON for gas and staking
 - Clean state: credential reinstated, vault empty, stMON supply 0
-- Two addresses ready to paste:
-  - **Receiver (verified):** `0x1111111111111111111111111111111111111111`
-  - **Stranger (never verified):** `0x000000000000000000000000000000000000dEaD`
+- Three addresses ready to paste:
+  - **Receiver (verified, sub-tier 60):** `0x1111111111111111111111111111111111111111`
+  - **Low-tier (valid A-Pass, sub-tier 10):** `0x5C6CCA4C687C60B15bf83EAE5843a77a325EEda9`
+  - **Stranger (no A-Pass at all):** `0x000000000000000000000000000000000000dEaD`
+- Enforcement strip on `/app` reads **Local AND Cleanverse · CVI GATE ON ·
+  VALIDATOR RESPONDING**. If it doesn't, the pool rule or mode is off — fix
+  before recording (see `docs/deployment.md`).
 - Browser zoom ~110% so revert messages are readable on video
 
 **One honesty note to say out loud:** on testnet a single wallet holds both the
@@ -35,7 +40,7 @@ Scroll once so the checkpoint line is visible, then go to the app.
 
 ---
 
-## Beat 2 — Verify (0:20–0:40)
+## Beat 2 — Verify (0:20–0:38)
 
 **Screen:** app, Verify tab.
 
@@ -47,7 +52,7 @@ Scroll once so the checkpoint line is visible, then go to the app.
 
 ---
 
-## Beat 3 — Stake (0:40–1:00)
+## Beat 3 — Stake (0:38–0:55)
 
 **Screen:** Stake tab.
 
@@ -60,7 +65,7 @@ Scroll once so the checkpoint line is visible, then go to the app.
 
 ---
 
-## Beat 4 — Yield (1:00–1:15)
+## Beat 4 — Yield (0:55–1:08)
 
 **Do:** click **Drip simulated testnet rewards (+0.1)**. Rate moves
 `1.0000 → 1.1000`.
@@ -70,7 +75,7 @@ Scroll once so the checkpoint line is visible, then go to the app.
 
 ---
 
-## Beat 5 — A good transfer (1:15–1:30)
+## Beat 5 — A good transfer (1:08–1:22)
 
 **Screen:** Transfer tab.
 
@@ -81,7 +86,7 @@ Scroll once so the checkpoint line is visible, then go to the app.
 
 ---
 
-## Beat 6 — The blocked transfer (1:30–1:50) ★ money shot
+## Beat 6 — Blocked: no credential (1:22–1:40) ★
 
 **Do:** paste the **stranger** address, click **Send**. Wallet simulation
 fails; the red `NotVerified` error appears in the panel.
@@ -94,7 +99,33 @@ fails; the red `NotVerified` error appears in the panel.
 
 ---
 
-## Beat 7 — Revocation (1:50–2:10)
+## Beat 7 — Blocked: real credential, wrong tier (1:40–2:00) ★ the Cleanverse beat
+
+**Screen:** Verify tab, then Transfer tab.
+
+**Do:** paste the **low-tier** address into the Verify panel's lookup — or just
+have it ready — and point at the live A-Pass record: **ACTIVE**, sub-tier
+**10**. This wallet is genuinely verified. Then go to Transfer, paste it, and
+click **Send**. It reverts with `NotVerified`.
+
+> "This one is different. That wallet holds a real, active Cleanverse A-Pass —
+> you can see it right there. It's also verified in our own registry. The only
+> thing wrong with it is its tier: our pool requires sub-tier 30, and this
+> wallet is 10."
+
+> "I didn't write that threshold into my contract. It's a rule registered
+> against our pool on Cleanverse's compliance validator, and their contract is
+> the one saying no. That's the difference between reading an API and actually
+> being governed by it."
+
+**Why this beat earns its 20 seconds:** every other project can show a verified
+and an unverified wallet. Showing two *verified* wallets where one is refused
+on a policy attribute is the clearest possible evidence the integration is
+load-bearing.
+
+---
+
+## Beat 8 — Revocation (2:00–2:15)
 
 **Screen:** Console tab.
 
@@ -108,7 +139,7 @@ from Transfer tab — blocked.
 
 ---
 
-## Beat 8 — Controlled exit (2:10–2:45) ★ the differentiator
+## Beat 9 — Controlled exit (2:15–2:45) ★ the differentiator
 
 **Screen:** Transfer tab, controlled-exit section.
 
@@ -132,7 +163,7 @@ from Transfer tab — blocked.
 
 ---
 
-## Beat 9 — Audit trail + close (2:45–3:00)
+## Beat 10 — Audit trail + close (2:45–3:00)
 
 **Screen:** Monad explorer, the settlement transaction's event log.
 
