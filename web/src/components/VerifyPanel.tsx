@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { useAccount, useReadContract, useSignMessage, useWriteContract } from "wagmi";
 import { CONTRACTS } from "../lib/contracts";
 import { Button } from "@/components/ui/button";
 import {
@@ -76,6 +76,7 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
   const [joining, setJoining] = useState(false);
   const [joinError, setJoinError] = useState<string | null>(null);
   const [nonce, setNonce] = useState(0);
+  const { signMessageAsync } = useSignMessage();
 
   useEffect(() => {
     let cancelled = false;
@@ -98,10 +99,28 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
     setJoining(true);
     setJoinError(null);
     try {
+      // Prove wallet control first — a free signature, no transaction.
+      const challengeRes = await fetch(
+        `/api/cleanverse/challenge?address=${address}`,
+      );
+      const challenge = await challengeRes.json();
+      if (!challengeRes.ok) {
+        setJoinError(challenge.error ?? "Could not start verification.");
+        return;
+      }
+
+      let signature: string;
+      try {
+        signature = await signMessageAsync({ message: challenge.message });
+      } catch {
+        setJoinError("Signature request was rejected.");
+        return;
+      }
+
       const res = await fetch("/api/cleanverse/onboard", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address }),
+        body: JSON.stringify({ address, signature, token: challenge.token }),
       });
       const body = await res.json();
       if (!res.ok) {

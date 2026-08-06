@@ -1,8 +1,9 @@
 import "server-only";
+import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 import { createWalletClient, createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { monadTestnet } from "./wagmi";
-import { encrypt, CHAIN } from "./cleanverse";
+import { encrypt, queryApass, CHAIN } from "./cleanverse";
 
 /**
  * Demo-access onboarding.
@@ -58,6 +59,99 @@ export function rateLimit(key: string): { ok: boolean; retryAfterMins: number } 
   }
   b.count += 1;
   return { ok: true, retryAfterMins: 0 };
+}
+
+// ───────────────────────── issuance cap ─────────────────────────
+// A hard ceiling on credentials issued, so a runaway script bounds out even
+// if it defeats the per-key rate limits. Counts this process's issuance; a
+// restart resets it, which is the trade for not adding a datastore.
+
+let issued = 0;
+
+export function issuanceCap(): { ok: boolean; issued: number; max: number } {
+  const max = Number(process.env.DEMO_ONBOARDING_MAX ?? 250);
+  return { ok: issued < max, issued, max };
+}
+
+function recordIssuance() {
+  issued += 1;
+}
+
+// ───────────────────────── sign-in challenge ─────────────────────────
+// Onboarding used to accept any address, so anyone could mint credentials
+// bound to wallets they did not control — polluting Cleanverse's registry
+// under our institution's name. A wallet must now prove control by signing a
+// one-time nonce.
+
+const CHALLENGE_TTL_MS = 5 * 60 * 1000;
+
+/**
+ * The challenge is a signed token rather than server-side state.
+ *
+ * Holding it in a Map only works on a single long-lived process: on a
+ * serverless host the request that issues the challenge and the request that
+ * redeems it routinely land on different instances, and the second one would
+ * never find it. An HMAC token carries its own proof, so any instance can
+ * verify one issued by any other.
+ */
+function challengeSecret(): string {
+  // Falls back to the operator key so the route still works without extra
+  // configuration; a dedicated secret is preferable.
+  const s = process.env.CHALLENGE_SECRET ?? process.env.OPERATOR_PRIVATE_KEY;
+  if (!s) throw new Error("No CHALLENGE_SECRET or OPERATOR_PRIVATE_KEY set");
+  return s;
+}
+
+function sign(payload: string): string {
+  return createHmac("sha256", challengeSecret()).update(payload).digest("base64url");
+}
+
+export function issueChallenge(address: string): { message: string; token: string } {
+  const payload = JSON.stringify({
+    a: address.toLowerCase(),
+    n: randomUUID(),
+    e: Date.now() + CHALLENGE_TTL_MS,
+  });
+  const body = Buffer.from(payload).toString("base64url");
+  const token = `${body}.${sign(body)}`;
+  const { n } = JSON.parse(payload);
+  return { message: challengeMessage(address, n), token };
+}
+
+export function challengeMessage(address: string, nonce: string): string {
+  return [
+    "Continuum — testnet demo access",
+    "",
+    "Sign this message to prove you control this wallet.",
+    "This is free and does not authorise any transaction.",
+    "",
+    `Wallet: ${address}`,
+    `Nonce: ${nonce}`,
+  ].join("\n");
+}
+
+/**
+ * Verify a token belongs to `address`, is unexpired, and was issued by us.
+ * Returns the nonce so the caller can rebuild the exact signed message.
+ */
+export function readChallenge(address: string, token: string): string | null {
+  const [body, mac] = token.split(".");
+  if (!body || !mac) return null;
+
+  // Constant-time compare, so a wrong MAC leaks nothing through timing.
+  const expected = sign(body);
+  const a = Buffer.from(mac);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+
+  try {
+    const { a: addr, n, e } = JSON.parse(Buffer.from(body, "base64url").toString());
+    if (addr !== address.toLowerCase()) return null;
+    if (Date.now() > e) return null;
+    return n as string;
+  } catch {
+    return null;
+  }
 }
 
 // ───────────────────────── steps ─────────────────────────
@@ -154,6 +248,17 @@ export type OnboardResult = {
 };
 
 export async function grantDemoAccess(address: string): Promise<OnboardResult> {
+  // Idempotent at the resource, not the request. A stateless challenge token
+  // is replayable inside its short TTL, and making it single-use would need
+  // shared state we deliberately avoided — so instead, re-running this for a
+  // wallet that already holds a credential costs nothing: no API quota, no
+  // gas. That makes a replay a genuine no-op rather than a way to burn quota.
+  const existing = await queryApass(address);
+  if (existing.registered && existing.verified) {
+    const local = await verifyLocally(address);
+    return { apass: { ok: true, detail: "already holds an A-Pass" }, local };
+  }
+
   // Cleanverse first: it's the gate we don't control, so if it fails there is
   // no point spending gas on the local half.
   const apass = await issueApass(address);
@@ -161,5 +266,6 @@ export async function grantDemoAccess(address: string): Promise<OnboardResult> {
     return { apass, local: { ok: false, detail: "skipped" } };
   }
   const local = await verifyLocally(address);
+  if (local.ok) recordIssuance();
   return { apass, local };
 }

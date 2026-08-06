@@ -15,13 +15,41 @@ contract MockAPass is ICleanverseIdentity, Ownable {
 
     mapping(address => Record) internal _records;
 
+    /// @notice May call `verify` and nothing else.
+    ///
+    /// The self-serve onboarding route signs from a web server, so its key is
+    /// the most exposed one we hold. Giving it a role that can only admit
+    /// wallets — never revoke, never change the compliance mode, never touch
+    /// the vault — means a leak of that key costs us a polluted registry
+    /// rather than the protocol.
+    address public operator;
+
     event Verified(address indexed account, uint8 tier, bytes2 jurisdiction);
     event Revoked(address indexed account);
     event Reinstated(address indexed account);
+    event OperatorChanged(address indexed operator);
+
+    error NotOwnerOrOperator(address caller);
 
     constructor() Ownable(msg.sender) {}
 
-    function verify(address account, uint8 tier, bytes2 jurisdiction) external onlyOwner {
+    modifier onlyOwnerOrOperator() {
+        if (msg.sender != owner() && msg.sender != operator) {
+            revert NotOwnerOrOperator(msg.sender);
+        }
+        _;
+    }
+
+    /// @notice Set (or clear, with address(0)) the verify-only operator.
+    function setOperator(address operator_) external onlyOwner {
+        operator = operator_;
+        emit OperatorChanged(operator_);
+    }
+
+    function verify(address account, uint8 tier, bytes2 jurisdiction)
+        external
+        onlyOwnerOrOperator
+    {
         _records[account] = Record(true, tier, jurisdiction, false);
         emit Verified(account, tier, jurisdiction);
     }

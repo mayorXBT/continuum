@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import { verifyMessage } from "viem";
 import {
+  challengeMessage,
   grantDemoAccess,
+  issuanceCap,
   onboardingEnabled,
   rateLimit,
+  readChallenge,
 } from "../../../../lib/onboarding";
 
 /**
@@ -21,8 +25,10 @@ export async function POST(request: Request) {
   }
 
   let address: unknown;
+  let signature: unknown;
+  let token: unknown;
   try {
-    ({ address } = await request.json());
+    ({ address, signature, token } = await request.json());
   } catch {
     return NextResponse.json({ error: "Expected a JSON body." }, { status: 400 });
   }
@@ -31,6 +37,57 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "A valid 0x wallet address is required." },
       { status: 400 },
+    );
+  }
+
+  if (typeof signature !== "string" || !/^0x[a-fA-F0-9]+$/.test(signature)) {
+    return NextResponse.json(
+      { error: "A wallet signature is required. Request a challenge first." },
+      { status: 400 },
+    );
+  }
+
+  // Prove control of the wallet. The token is HMAC-signed by us and carries a
+  // short expiry, so it can be verified by any instance without shared state.
+  if (typeof token !== "string") {
+    return NextResponse.json(
+      { error: "A challenge token is required. Request a challenge first." },
+      { status: 400 },
+    );
+  }
+  const nonce = readChallenge(address, token);
+  if (!nonce) {
+    return NextResponse.json(
+      { error: "Challenge is invalid or expired. Please try again." },
+      { status: 400 },
+    );
+  }
+
+  let signerOk = false;
+  try {
+    signerOk = await verifyMessage({
+      address: address as `0x${string}`,
+      message: challengeMessage(address, nonce),
+      signature: signature as `0x${string}`,
+    });
+  } catch {
+    signerOk = false;
+  }
+  if (!signerOk) {
+    return NextResponse.json(
+      { error: "Signature does not match this wallet." },
+      { status: 401 },
+    );
+  }
+
+  // Hard ceiling, independent of the per-key limits.
+  const cap = issuanceCap();
+  if (!cap.ok) {
+    return NextResponse.json(
+      {
+        error: `Demo access has reached its limit of ${cap.max} credentials for this deployment.`,
+      },
+      { status: 429 },
     );
   }
 

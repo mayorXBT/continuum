@@ -47,4 +47,52 @@ contract MockAPassTest is Test {
         apass.revoke(alice);
         vm.stopPrank();
     }
+
+    // ───────────── verify-only operator ─────────────
+
+    function test_operator_can_verify_but_not_revoke() public {
+        address op = makeAddr("operator");
+        apass.setOperator(op);
+        assertEq(apass.operator(), op);
+
+        vm.startPrank(op);
+        apass.verify(alice, 60, "SG");
+        assertTrue(apass.isVerified(alice));
+
+        // The whole point: an exposed onboarding key must not be able to
+        // revoke, only admit.
+        vm.expectRevert();
+        apass.revoke(alice);
+        vm.expectRevert();
+        apass.reinstate(alice);
+        vm.expectRevert();
+        apass.setOperator(address(0xBEEF));
+        vm.stopPrank();
+    }
+
+    function test_owner_still_has_full_control() public {
+        apass.setOperator(makeAddr("operator"));
+        apass.verify(alice, 1, "SG");
+        apass.revoke(alice);
+        assertTrue(apass.isFlagged(alice));
+        apass.reinstate(alice);
+        assertFalse(apass.isFlagged(alice));
+    }
+
+    function test_non_operator_cannot_verify() public {
+        address stranger = makeAddr("stranger");
+        vm.prank(stranger);
+        vm.expectRevert();
+        apass.verify(alice, 1, "SG");
+    }
+
+    function test_clearing_operator_revokes_its_access() public {
+        address op = makeAddr("operator");
+        apass.setOperator(op);
+        apass.setOperator(address(0));
+
+        vm.prank(op);
+        vm.expectRevert();
+        apass.verify(alice, 1, "SG");
+    }
 }
