@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { injected } from "wagmi/connectors";
+import { WalletButton } from "../../components/WalletButton";
 import { VerifyPanel } from "../../components/VerifyPanel";
 import { StakePanel } from "../../components/StakePanel";
 import { TransferPanel } from "../../components/TransferPanel";
@@ -13,9 +12,6 @@ const TABS = ["Verify", "Stake", "Transfer", "Console"] as const;
 
 export default function App() {
   const [tab, setTab] = useState<(typeof TABS)[number]>("Verify");
-  const { address, isConnected } = useAccount();
-  const { connect } = useConnect();
-  const { disconnect } = useDisconnect();
 
   return (
     <div className="flex-1">
@@ -27,18 +23,7 @@ export default function App() {
             </Link>
             <span className="eyebrow hidden sm:inline">Monad testnet</span>
           </div>
-          {isConnected ? (
-            <button className="btn btn-quiet data text-xs" onClick={() => disconnect()}>
-              {address?.slice(0, 6)}…{address?.slice(-4)} · disconnect
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary text-sm"
-              onClick={() => connect({ connector: injected() })}
-            >
-              Connect wallet
-            </button>
-          )}
+          <WalletButton />
         </div>
       </header>
 

@@ -155,7 +155,20 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
         )}
 
         {status && !status.registered && (
-          <p className="text-sm text-ink-soft">{status.note}</p>
+          <>
+            <Separator className="bg-line" />
+            <div className="space-y-2">
+              <p className="text-sm text-ink">{status.note}</p>
+              <p className="text-xs leading-relaxed text-ink-soft">
+                Issue one for this wallet with{" "}
+                <span className="font-mono">
+                  node scripts/generate-apass.mjs --address {address.slice(0, 6)}…
+                </span>
+                . Registration is written on-chain and shows up here within a few
+                seconds.
+              </p>
+            </div>
+          </>
         )}
       </CardContent>
 

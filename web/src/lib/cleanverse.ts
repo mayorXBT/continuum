@@ -158,9 +158,18 @@ export async function queryApass(address: string): Promise<ApassStatus> {
   });
 
   // A wallet with no A-Pass comes back as a business failure (0002) rather
-  // than an HTTP error, and `data` may be an empty string.
+  // than an HTTP error, and `data` may be an empty string. Cleanverse's raw
+  // message is operator-facing ("[CN_001]get apass err: ..."), so translate
+  // the known cases rather than showing it to a user.
   if (res.code !== "0000" || !res.data || typeof res.data === "string") {
-    return { ...NOT_REGISTERED, note: res.message || NOT_REGISTERED.note };
+    const raw = res.message ?? "";
+    const notFound = /not found|CN_001/i.test(raw);
+    return {
+      ...NOT_REGISTERED,
+      note: notFound
+        ? "This wallet has no A-Pass on Monad yet."
+        : "Cleanverse could not return a credential for this wallet.",
+    };
   }
 
   const r = res.data;
