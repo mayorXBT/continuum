@@ -83,7 +83,7 @@ export function StakePanel() {
               className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.vault,
                   functionName: "stake",
                   value: parseEther(amount),
@@ -97,7 +97,7 @@ export function StakePanel() {
               className="border-line"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.vault,
                   functionName: "unstake",
                   args: [parseEther(amount)],
@@ -112,7 +112,7 @@ export function StakePanel() {
               disabled={isPending}
               title="Owner only — raises the redemption rate"
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.vault,
                   functionName: "dripRewards",
                   value: parseEther("0.1"),

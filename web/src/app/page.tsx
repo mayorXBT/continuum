@@ -81,6 +81,21 @@ function Hero() {
           </div>
         </Reveal>
 
+        <Reveal delay={350}>
+          <p className="mt-5 text-center text-sm text-inksoft">
+            Bringing a verified identity?{" "}
+            <a
+              href="https://cleanverse.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:decoration-navy"
+            >
+              Get a real Cleanverse A-Pass
+              <span aria-hidden> ↗</span>
+            </a>
+          </p>
+        </Reveal>
+
         <Reveal delay={400}>
           <div className="mx-auto mt-14 max-w-[960px] border-t border-line">
             <div className="grid grid-cols-2 divide-line sm:grid-cols-4 sm:divide-x">

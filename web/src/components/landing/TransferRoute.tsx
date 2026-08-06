@@ -1,32 +1,31 @@
 'use client'
-import { useReducedMotion } from 'framer-motion'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import StatusChip from './StatusChip'
 import { useInViewOnce } from '@/hooks/useInViewOnce'
-import { useEffect, useState } from 'react'
 
 /**
  * Horizontal SVG route: wallet A → wallet B → wallet C.
- * A navy token dot travels the line, pauses at A and B, and is refused
- * 16px short of C, where a red × appears and a mono caption types in.
- * Reduced motion: static final state.
+ * On reveal, a navy token travels A → B and is refused short of C, where a red
+ * × appears and the refusal caption fades in. One-shot framer motion that
+ * settles to a stable final state — no looping SMIL, so no cross-browser ghost
+ * artifacts. Reduced motion: the same final state, rendered statically.
  */
 export default function TransferRoute() {
   const reduce = useReducedMotion()
   const { ref, inView } = useInViewOnce<HTMLDivElement>(0.4)
-  const [typed, setTyped] = useState(false)
-
-  useEffect(() => {
-    if (!inView || reduce) return
-    const t = setTimeout(() => setTyped(true), 4200) // types in near first refusal
-    return () => clearTimeout(t)
-  }, [inView, reduce])
+  const show = inView || reduce
 
   const nodes = [
     { x: 90, label: 'wallet A', short: 'A', chip: 'A-PASS ✓', tone: 'verified' as const },
     { x: 500, label: 'wallet B', short: 'B', chip: 'A-PASS ✓', tone: 'verified' as const },
     { x: 910, label: 'wallet C', short: 'C', chip: 'BLOCKED', tone: 'blocked' as const },
   ]
+
+  // token travel path A → B → halted short of C (stops at 840)
+  const travel = reduce
+    ? { cx: 840 }
+    : { cx: [90, 90, 500, 500, 840, 840] }
+  const travelTiming = { duration: 2.4, ease: 'linear' as const, times: [0, 0.1, 0.45, 0.6, 0.9, 1] }
 
   return (
     <div ref={ref}>
@@ -41,7 +40,7 @@ export default function TransferRoute() {
             stroke="var(--line-strong)"
             strokeWidth="1.5"
             initial={reduce ? false : { pathLength: 0 }}
-            animate={inView ? { pathLength: 1 } : undefined}
+            animate={show ? { pathLength: 1 } : undefined}
             transition={{ duration: 0.9, ease: 'easeOut' }}
           />
           {/* nodes */}
@@ -60,44 +59,27 @@ export default function TransferRoute() {
               </text>
             </g>
           ))}
-          {/* traveling token dot */}
-          {inView && !reduce && (
-            <circle r="7" fill="var(--cv-accent)">
-              <animateMotion
-                dur="5s"
-                repeatCount="indefinite"
-                calcMode="linear"
-                keyPoints="0;0;0.519;0.519;1;1;0"
-                keyTimes="0;0.3;0.46;0.6;0.78;0.95;1"
-                path="M 90 60 H 880"
-              />
-              <animate
-                attributeName="opacity"
-                values="0;1;1;0;0"
-                keyTimes="0;0.05;0.9;0.95;1"
-                dur="5s"
-                repeatCount="indefinite"
-              />
-            </circle>
-          )}
-          {reduce && <circle cx="880" cy="60" r="7" fill="var(--cv-accent)" />}
-          {/* refusal mark at C */}
-          {inView && !reduce && (
-            <g stroke="var(--bad)" strokeWidth="2.5" strokeLinecap="round">
-              <line x1="885" y1="49" x2="897" y2="71">
-                <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.76;0.8;0.92;0.96;1" dur="5s" repeatCount="indefinite" />
-              </line>
-              <line x1="897" y1="49" x2="885" y2="71">
-                <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.76;0.8;0.92;0.96;1" dur="5s" repeatCount="indefinite" />
-              </line>
-            </g>
-          )}
-          {reduce && (
-            <g stroke="var(--bad)" strokeWidth="2.5" strokeLinecap="round">
-              <line x1="885" y1="49" x2="897" y2="71" />
-              <line x1="897" y1="49" x2="885" y2="71" />
-            </g>
-          )}
+          {/* traveling token — one-shot, settles at 840 */}
+          <motion.circle
+            r="7"
+            cy="60"
+            fill="var(--cv-accent)"
+            initial={reduce ? false : { cx: 90, opacity: 0 }}
+            animate={show ? { ...travel, opacity: 1 } : undefined}
+            transition={reduce ? undefined : travelTiming}
+          />
+          {/* refusal × at C — fades in after the token halts */}
+          <motion.g
+            stroke="var(--bad)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={show ? { opacity: 1 } : undefined}
+            transition={{ duration: 0.3, delay: reduce ? 0 : 2.3 }}
+          >
+            <line x1="885" y1="49" x2="897" y2="71" />
+            <line x1="897" y1="49" x2="885" y2="71" />
+          </motion.g>
           {/* node captions */}
           {nodes.map((n) => (
             <text
@@ -127,14 +109,16 @@ export default function TransferRoute() {
         </div>
       </div>
 
-      {/* refusal caption */}
-      <p className="mt-5 min-h-[1.25rem] text-center font-mono text-xs text-bad" aria-live="polite">
-        {(typed || (reduce && inView) || reduce) && (
-          <span className={typed && !reduce ? 'typewriter-inline' : undefined}>
-            transfer refused — recipient not verified (validator: 0xaC7e…1792)
-          </span>
-        )}
-      </p>
+      {/* refusal caption — plain fade, no width animation */}
+      <motion.p
+        className="mt-5 min-h-[1.25rem] text-center font-mono text-xs text-bad"
+        aria-live="polite"
+        initial={reduce ? false : { opacity: 0 }}
+        animate={show ? { opacity: 1 } : undefined}
+        transition={{ duration: 0.3, delay: reduce ? 0 : 2.5 }}
+      >
+        transfer refused — recipient not verified (validator: 0xaC7e…1792)
+      </motion.p>
       {/* screen-reader description */}
       <p className="sr-only">
         A token travels from wallet A to wallet B and passes both A-Pass checks. At wallet C the transfer is refused

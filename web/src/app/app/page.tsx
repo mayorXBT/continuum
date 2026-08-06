@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Logo } from "../../components/Logo";
 import { WalletButton } from "../../components/WalletButton";
 import { EnforcementStrip } from "../../components/EnforcementStrip";
+import { NetworkGuard } from "../../components/NetworkGuard";
 import { VerifyPanel } from "../../components/VerifyPanel";
 import { StakePanel } from "../../components/StakePanel";
 import { TransferPanel } from "../../components/TransferPanel";
@@ -53,6 +54,8 @@ export default function App() {
             </p>
           </div>
         )}
+
+        <NetworkGuard />
 
         <Reveal>
           <EnforcementStrip />

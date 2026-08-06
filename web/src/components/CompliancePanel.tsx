@@ -78,7 +78,7 @@ function RequestRow({ id }: { id: bigint }) {
             className="h-7 border-linestrong px-2.5 text-xs"
             disabled={isPending}
             onClick={() =>
-              writeContract({ ...CONTRACTS.queue, functionName: "approveRedemption", args: [id] })
+              writeContract({ chainId: 10143, ...CONTRACTS.queue, functionName: "approveRedemption", args: [id] })
             }
           >
             Approve
@@ -89,7 +89,7 @@ function RequestRow({ id }: { id: bigint }) {
             className="h-7 border-linestrong px-2.5 text-xs"
             disabled={isPending}
             onClick={() =>
-              writeContract({ ...CONTRACTS.queue, functionName: "settleRedemption", args: [id] })
+              writeContract({ chainId: 10143, ...CONTRACTS.queue, functionName: "settleRedemption", args: [id] })
             }
           >
             Settle
@@ -100,7 +100,7 @@ function RequestRow({ id }: { id: bigint }) {
             className="h-7 px-2.5 text-xs"
             disabled={isPending}
             onClick={() =>
-              writeContract({ ...CONTRACTS.queue, functionName: "rejectRedemption", args: [id] })
+              writeContract({ chainId: 10143, ...CONTRACTS.queue, functionName: "rejectRedemption", args: [id] })
             }
           >
             Reject
@@ -147,7 +147,7 @@ export function CompliancePanel() {
               className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.apass,
                   functionName: "verify",
                   args: [target as `0x${string}`, 1, "0x5347"],
@@ -160,7 +160,7 @@ export function CompliancePanel() {
               variant="destructive"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.apass,
                   functionName: "revoke",
                   args: [target as `0x${string}`],

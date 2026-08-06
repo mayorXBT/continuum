@@ -300,7 +300,7 @@ export function VerifyPanel() {
               className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.apass,
                   functionName: "verify",
                   args: [address, 1, "0x5347"], // tier 1, jurisdiction "SG"
@@ -313,7 +313,7 @@ export function VerifyPanel() {
               variant="destructive"
               disabled={isPending}
               onClick={() =>
-                writeContract({ ...CONTRACTS.apass, functionName: "revoke", args: [address] })
+                writeContract({ chainId: 10143, ...CONTRACTS.apass, functionName: "revoke", args: [address] })
               }
             >
               Revoke credential
@@ -323,7 +323,7 @@ export function VerifyPanel() {
               className="border-line"
               disabled={isPending}
               onClick={() =>
-                writeContract({ ...CONTRACTS.apass, functionName: "reinstate", args: [address] })
+                writeContract({ chainId: 10143, ...CONTRACTS.apass, functionName: "reinstate", args: [address] })
               }
             >
               Reinstate

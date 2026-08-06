@@ -58,7 +58,7 @@ export function TransferPanel() {
               className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.stMon,
                   functionName: "transfer",
                   args: [to as `0x${string}`, parseEther(amount)],
@@ -107,7 +107,7 @@ export function TransferPanel() {
               className="border-line"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.stMon,
                   functionName: "approve",
                   args: [CONTRACTS.queue.address, parseEther(amount)],
@@ -120,7 +120,7 @@ export function TransferPanel() {
               className="bg-navy text-white hover:bg-navy-hover"
               disabled={isPending}
               onClick={() =>
-                writeContract({
+                writeContract({ chainId: 10143,
                   ...CONTRACTS.queue,
                   functionName: "requestRedemption",
                   args: [parseEther(amount), receiver as `0x${string}`],
