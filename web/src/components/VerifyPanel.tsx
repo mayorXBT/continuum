@@ -73,6 +73,9 @@ function Field({ label, value }: { label: string; value: string }) {
 function CleanverseRecord({ address }: { address: `0x${string}` }) {
   const [status, setStatus] = useState<ApassStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [joining, setJoining] = useState(false);
+  const [joinError, setJoinError] = useState<string | null>(null);
+  const [nonce, setNonce] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -89,7 +92,31 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
     return () => {
       cancelled = true;
     };
-  }, [address]);
+  }, [address, nonce]);
+
+  async function getDemoAccess() {
+    setJoining(true);
+    setJoinError(null);
+    try {
+      const res = await fetch("/api/cleanverse/onboard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address }),
+      });
+      const body = await res.json();
+      if (!res.ok) {
+        setJoinError(body.error ?? "Could not grant access.");
+        return;
+      }
+      // On-chain registration lands a beat after the API returns; wait before
+      // re-reading so the panel doesn't flash "not registered" again.
+      setTimeout(() => setNonce((n) => n + 1), 3000);
+    } catch {
+      setJoinError("Could not reach the server.");
+    } finally {
+      setJoining(false);
+    }
+  }
 
   const stamp = !status ? null : !status.registered ? (
     <StatusStamp tone="pending">Not registered</StatusStamp>
@@ -157,16 +184,27 @@ function CleanverseRecord({ address }: { address: `0x${string}` }) {
         {status && !status.registered && (
           <>
             <Separator className="bg-line" />
-            <div className="space-y-2">
+            <div className="space-y-3">
               <p className="text-sm text-ink">{status.note}</p>
               <p className="text-xs leading-relaxed text-ink-soft">
-                Issue one for this wallet with{" "}
-                <span className="font-mono">
-                  node scripts/generate-apass.mjs --address {address.slice(0, 6)}…
-                </span>
-                . Registration is written on-chain and shows up here within a few
-                seconds.
+                Continuum is permissioned, so a wallet needs a verified identity
+                before it can stake. On testnet you can issue yourself a demo
+                credential — one click, about fifteen seconds, written on-chain.
               </p>
+              <Button onClick={getDemoAccess} disabled={joining}>
+                {joining ? "Issuing credential…" : "Get demo access"}
+              </Button>
+              {joining && (
+                <p className="text-xs text-ink-soft">
+                  Registering your A-Pass with Cleanverse, then adding you to the
+                  registry. Two transactions — please keep this tab open.
+                </p>
+              )}
+              {joinError && (
+                <Alert variant="destructive">
+                  <AlertDescription>{joinError}</AlertDescription>
+                </Alert>
+              )}
             </div>
           </>
         )}
