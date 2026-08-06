@@ -86,12 +86,28 @@ export default function Landing() {
                 Launch app
               </Link>
               <a
+                href="https://cleanverse.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-paper-raised px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-paper"
+              >
+                Get a real A-Pass
+                <span aria-hidden className="text-ink-soft">
+                  ↗
+                </span>
+              </a>
+              <a
                 href="#how"
-                className="rounded-sm border border-line bg-paper-raised px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-paper"
+                className="px-2 py-3 text-sm text-ink-soft transition-colors hover:text-ink"
               >
                 See how it works
               </a>
             </div>
+            <p className="mt-4 max-w-xl text-xs leading-relaxed text-ink-soft">
+              Testnet access issues you a sandbox credential in one click. A
+              production A-Pass is issued by Cleanverse against real identity
+              verification — that&rsquo;s the path a regulated user takes.
+            </p>
           </Reveal>
 
           {/* Animated transfer strip */}
