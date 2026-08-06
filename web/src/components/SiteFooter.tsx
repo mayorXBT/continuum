@@ -3,9 +3,9 @@ import { Logo } from "./Logo";
 
 const PRODUCT = [
   { label: "Launch app", href: "/app" },
-  { label: "How it works", href: "/#how" },
-  { label: "Controlled exit", href: "/#exit" },
-  { label: "Cleanverse integration", href: "/#trust" },
+  { label: "Docs", href: "/docs" },
+  { label: "How it works", href: "/docs#how" },
+  { label: "Controlled exit", href: "/docs#exit" },
 ];
 
 const LEGAL = [

@@ -28,15 +28,12 @@ export default function Landing() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Logo href="/" />
           <nav className="flex items-center gap-5">
-            <a href="#why" className="hidden text-sm text-ink-soft transition-colors hover:text-ink sm:inline">
-              Why Continuum
-            </a>
-            <a href="#how" className="hidden text-sm text-ink-soft transition-colors hover:text-ink sm:inline">
-              How it works
-            </a>
-            <a href="#exit" className="hidden text-sm text-ink-soft transition-colors hover:text-ink sm:inline">
-              Controlled exit
-            </a>
+            <Link
+              href="/docs"
+              className="text-sm text-ink-soft transition-colors hover:text-ink"
+            >
+              Docs
+            </Link>
             <Link
               href="/app"
               className="rounded-sm bg-ink px-3.5 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90"
