@@ -3,6 +3,30 @@ import { useState } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { parseEther, formatEther } from "viem";
 import { CONTRACTS } from "../lib/contracts";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Separator } from "@/components/ui/separator";
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <Card className="border-line bg-paper-raised shadow-sm">
+      <CardContent className="space-y-1 p-5 text-center">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+          {label}
+        </p>
+        <p className="font-mono text-2xl font-medium tabular-nums text-ink">{value}</p>
+      </CardContent>
+    </Card>
+  );
+}
 
 export function StakePanel() {
   const { address } = useAccount();
@@ -30,77 +54,88 @@ export function StakePanel() {
     v !== undefined ? Number(formatEther(v as bigint)).toFixed(4) : "—";
 
   return (
-    <section className="space-y-4">
-      <div className="grid gap-3 sm:grid-cols-3">
-        <div className="doc p-4 text-center">
-          <p className="eyebrow">Your stMON</p>
-          <p className="data mt-1 text-2xl font-medium">{fmt(balance)}</p>
-        </div>
-        <div className="doc p-4 text-center">
-          <p className="eyebrow">Rate · MON per stMON</p>
-          <p className="data mt-1 text-2xl font-medium">{fmt(rate)}</p>
-        </div>
-        <div className="doc p-4 text-center">
-          <p className="eyebrow">Vault assets · MON</p>
-          <p className="data mt-1 text-2xl font-medium">{fmt(totalAssets)}</p>
-        </div>
+    <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Stat label="Your stMON" value={fmt(balance)} />
+        <Stat label="Rate · MON per stMON" value={fmt(rate)} />
+        <Stat label="Vault assets · MON" value={fmt(totalAssets)} />
       </div>
-      <div className="doc space-y-4 p-6">
-        <h2 className="display text-xl font-semibold">Stake MON → stMON</h2>
-        <div className="flex flex-wrap items-center gap-2">
-          <input
-            className="field w-32"
-            value={amount}
-            aria-label="Amount in MON"
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <button
-            className="btn btn-primary text-sm"
-            disabled={isPending}
-            onClick={() =>
-              writeContract({
-                ...CONTRACTS.vault,
-                functionName: "stake",
-                value: parseEther(amount),
-              })
-            }
-          >
-            Stake
-          </button>
-          <button
-            className="btn btn-quiet text-sm"
-            disabled={isPending}
-            onClick={() =>
-              writeContract({
-                ...CONTRACTS.vault,
-                functionName: "unstake",
-                args: [parseEther(amount)],
-              })
-            }
-          >
-            Unstake
-          </button>
-          <button
-            className="btn btn-quiet text-sm border-dashed"
-            disabled={isPending}
-            title="Owner only"
-            onClick={() =>
-              writeContract({
-                ...CONTRACTS.vault,
-                functionName: "dripRewards",
-                value: parseEther("0.1"),
-              })
-            }
-          >
-            Drip simulated testnet rewards (+0.1)
-          </button>
-        </div>
-        {error && <p className="text-sm text-revoked">{error.message}</p>}
-        <p className="text-xs text-ink-soft">
-          Rewards shown are simulated testnet rewards raising stMON redemption
-          value. Staking and unstaking both re-check your A-Pass.
-        </p>
-      </div>
-    </section>
+
+      <Card className="border-line bg-paper-raised shadow-sm">
+        <CardHeader className="space-y-1">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+            Checkpoint 02 · Stake
+          </p>
+          <CardTitle className="font-display text-xl">Stake MON → stMON</CardTitle>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <Separator className="bg-line" />
+          <div className="flex flex-wrap items-center gap-2">
+            <Input
+              className="w-32 border-line bg-paper font-mono tabular-nums"
+              value={amount}
+              aria-label="Amount in MON"
+              inputMode="decimal"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <Button
+              disabled={isPending}
+              onClick={() =>
+                writeContract({
+                  ...CONTRACTS.vault,
+                  functionName: "stake",
+                  value: parseEther(amount),
+                })
+              }
+            >
+              Stake
+            </Button>
+            <Button
+              variant="outline"
+              className="border-line"
+              disabled={isPending}
+              onClick={() =>
+                writeContract({
+                  ...CONTRACTS.vault,
+                  functionName: "unstake",
+                  args: [parseEther(amount)],
+                })
+              }
+            >
+              Unstake
+            </Button>
+            <Button
+              variant="outline"
+              className="border-dashed border-line text-ink-soft"
+              disabled={isPending}
+              title="Owner only — raises the redemption rate"
+              onClick={() =>
+                writeContract({
+                  ...CONTRACTS.vault,
+                  functionName: "dripRewards",
+                  value: parseEther("0.1"),
+                })
+              }
+            >
+              Drip simulated rewards (+0.1)
+            </Button>
+          </div>
+
+          {error && (
+            <Alert variant="destructive">
+              <AlertDescription className="break-all">{error.message}</AlertDescription>
+            </Alert>
+          )}
+        </CardContent>
+
+        <CardFooter>
+          <p className="text-xs leading-relaxed text-ink-soft">
+            Rewards shown are simulated testnet rewards raising stMON redemption value.
+            Staking and unstaking both re-check your A-Pass.
+          </p>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
