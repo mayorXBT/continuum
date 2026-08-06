@@ -38,12 +38,26 @@ function apiId(): string {
  * section of the cooperate API docs. Used by the write endpoints
  * (generate_apass, validator grant/register/rules, atoken/*).
  */
+/** Key width follows the decoded api-key: Cleanverse issues 32 bytes (AES-256). */
+function cipherFor(key: Buffer): string {
+  const alg: Record<number, string> = {
+    16: "aes-128-cbc",
+    24: "aes-192-cbc",
+    32: "aes-256-cbc",
+  };
+  const chosen = alg[key.length];
+  if (!chosen) {
+    throw new Error(`api-key decodes to ${key.length} bytes; expected 16, 24, or 32`);
+  }
+  return chosen;
+}
+
 export function encrypt(payload: unknown): { data: string } {
   const raw = process.env.CLEANVERSE_API_KEY;
   if (!raw) throw new Error("CLEANVERSE_API_KEY is not set");
   const key = Buffer.from(raw, "base64");
   const iv = Buffer.alloc(16, 0);
-  const cipher = createCipheriv("aes-128-cbc", key, iv);
+  const cipher = createCipheriv(cipherFor(key), key, iv);
   const out = Buffer.concat([
     cipher.update(JSON.stringify(payload), "utf8"),
     cipher.final(),
@@ -56,7 +70,7 @@ export function decrypt(ciphertext: string): unknown {
   if (!raw) throw new Error("CLEANVERSE_API_KEY is not set");
   const key = Buffer.from(raw, "base64");
   const iv = Buffer.alloc(16, 0);
-  const decipher = createDecipheriv("aes-128-cbc", key, iv);
+  const decipher = createDecipheriv(cipherFor(key), key, iv);
   const out = Buffer.concat([
     decipher.update(Buffer.from(ciphertext, "base64")),
     decipher.final(),
