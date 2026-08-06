@@ -19,8 +19,21 @@ Owner / deployer: `0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a`
 | --- | --- |
 | IAPassComplianceValidator | `0xaC7e5179C2C7f03f209136886c172eb34F161792` |
 | Pool registered | `ComplianceRouter`, tx `0x8115fe99a63c3e030f1cbf36e4b48e37881498760a78e8a2e5c47bfe30913975` |
-| Rule | `min_tier 0`, `min_sub_tier 0` — any valid A-Pass |
+| Rule | `min_sub_tier 30` — tx `0xae15603ddbe173f2e9652264c640c1c918dc9828e8092e9b1b23eb329687b30d` |
 | Router mode | `2` = RequireBoth (local registry **AND** Cleanverse) |
+
+### Rule management goes through the API, not the contract
+
+`ComplianceRouter.setRuleV2` (which forwards to `setRuleV2FromContract`)
+reverts with empty data for a pool registered through `/validator/register` —
+that on-chain path appears to need a registrar/factory role we do not hold.
+Use `scripts/set-rule.mjs`, which calls `/validator/set_rule`:
+
+```bash
+node scripts/set-rule.mjs --show
+node scripts/set-rule.mjs --min-sub-tier 30
+node scripts/set-rule.mjs --min-sub-tier 30 --add   # append; rules are OR'd
+```
 
 The validator lives at the same address on every chain in the hackathon set.
 
@@ -52,10 +65,29 @@ rather than calling it directly.
 
 ## Sandbox A-Passes issued
 
-| Wallet | Note |
-| --- | --- |
-| `0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a` | deployer, sub-tier 60, record 996 |
-| `0xAE0EbFa13882160d19Ef4fC747564e7f9eDFC958` | **superseded MockAPass contract address, not a wallet** — issued in error, harmless |
+| Wallet | Sub-tier | Note |
+| --- | --- | --- |
+| `0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a` | 60 | deployer, record 996 — **passes** the rule |
+| `0x5C6CCA4C687C60B15bf83EAE5843a77a325EEda9` | 10 | demo wallet, record 999 — **fails** the rule |
+| `0xAE0EbFa13882160d19Ef4fC747564e7f9eDFC958` | 60 | superseded MockAPass contract address, not a wallet — issued in error, harmless |
+
+## The tier demo
+
+The low-tier wallet is deliberately **verified in the local registry**, so the
+only thing that can refuse it is the Cleanverse rule. That makes the block
+unambiguous on camera:
+
+```
+local isVerified(low-tier)            true      # local registry is happy
+cleanverse verify(deployer,  st 60)   true      # 60 >= 30
+cleanverse verify(low-tier,  st 10)   false     # 10 <  30
+router isVerified(deployer)           true
+router isVerified(low-tier)           false     # refused on tier alone
+transfer stMON -> low-tier            reverted  NotVerified
+```
+
+Both wallets hold a valid, active, unexpired A-Pass. The difference is
+entirely the sub-tier, and the rule lives on Cleanverse — not in our code.
 
 ## Rerun
 
