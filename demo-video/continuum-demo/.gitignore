@@ -3,3 +3,6 @@ node_modules/
 renders/
 render.log
 *.log
+
+assets/shots/
+node_modules/
