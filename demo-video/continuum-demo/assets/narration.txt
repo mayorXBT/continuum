@@ -1,0 +1,15 @@
+Compliant crypto checks who you are once — at the door. After that, nothing ever looks again.
+
+So you get two bad options. Lock your money away to earn, or stay liquid and risk it. And the day something changes about your status, most protocols just freeze your funds. Your money, stuck behind a wall. That gap is why real capital stays off-chain.
+
+Continuum is permissioned liquid staking, built so the rule travels with the token, not the app.
+
+Stake MON, get stMON — a receipt that keeps earning while you hold it, and stays usable from the very first block. No lockup. Send it to anyone verified, and the token itself checks them, every single time.
+
+Here's the part that matters. Both of these wallets are verified. But our pool requires tier thirty, and this one is ten. So the transfer reverts, on-chain. We didn't write that limit into our contract. Cleanverse's validator did. We can't wave anyone through.
+
+And if your credential is ever revoked? You're frozen from circulating, but never confiscated. You request an exit to a verified wallet, an officer reviews it, eligibility is re-checked, and your money comes back. In our live test, a revoked holder walked away with one point one MON — everything they put in, plus what it earned. Compliance without confiscation.
+
+Under the hood, every stake, transfer, and exit asks the same on-chain validator, the one Cleanverse deployed on Monad. Continuum registers as a compliance pool, and if the validator can't answer, the transaction is refused. Fail-closed, by default.
+
+Continuum is live on Monad testnet, gated by Cleanverse from the first block to the last. Stake. Stay liquid. Stay verified. Compliance that travels with the token.

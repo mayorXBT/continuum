@@ -19,23 +19,25 @@ Open the printed URL and scrub the timeline. Fix anything that looks off, then r
 npm run check
 ```
 
-## 2. Add the voiceover (optional — the video renders silent without it)
+## 2. Voiceover — already generated and wired
 
-Generate narration from the script in `../../docs/demo-video-prompt.md` (FULL VOICEOVER
-SCRIPT section):
+`assets/narration.wav` (Kokoro `af_nova`, 81.5s) is committed and already referenced by the
+`<audio id="narration">` element in `index.html`. The scene cuts and captions are snapped to
+this file's real word timestamps, so the current render is fully voiced and in sync.
+
+To regenerate (e.g. different voice, or you edit `assets/narration.txt`): HyperFrames' TTS
+and transcription run through a Python venv. What worked here:
 
 ```bash
-npx hyperframes tts "PASTE THE FULL SCRIPT HERE" --voice af_nova --speed 1.02 --out assets/narration.wav
+python -m venv .ttsvenv
+./.ttsvenv/Scripts/python -m pip install kokoro-onnx soundfile faster-whisper
+# point HyperFrames at that venv (use a Windows-style path on Windows):
+HYPERFRAMES_PYTHON='C:\...\.ttsvenv\Scripts\python.exe' \
+  npx hyperframes tts assets/narration.txt --voice af_nova --speed 1.02 --output assets/narration.wav
 ```
 
-Then add one line just before `</div>` closes the root composition in `index.html`:
-
-```html
-<audio data-audio-track src="assets/narration.wav" data-start="0"></audio>
-```
-
-(Captions are currently placed on an ~85s manual grid. For frame-accurate sync, transcribe
-the narration and nudge each `.cap` `data-start` to the word timestamps.)
+If you change the narration length, re-align the scene/caption `data-start` values to the new
+word timestamps (transcribe with word timestamps and remap) before re-rendering.
 
 ## 3. Swap in the real $MON coin
 
