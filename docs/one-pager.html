@@ -29,7 +29,7 @@
 
       /* ── Header band ── */
       .head {
-        background: var(--dark); color: #eef2f7; padding: 0.32in 0.55in 0.28in;
+        background: var(--dark); color: #eef2f7; padding: 0.26in 0.55in 0.22in;
         position: relative; overflow: hidden;
       }
       .head .grid {
@@ -53,12 +53,15 @@
         color: #bfe9d6; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
       }
       .pill .dot { width: 7px; height: 7px; border-radius: 999px; background: #24d68a; box-shadow: 0 0 0 3px rgba(36,214,138,.2); }
-      .tagline { position: relative; z-index: 2; margin-top: 13px; font-size: 25px; font-weight: 600; letter-spacing: -0.02em; color: #fff; }
+      .monad { height: 50px; width: auto; filter: drop-shadow(0 7px 18px rgba(91,79,209,.55)); }
+      .head-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 9px; position: relative; z-index: 2; }
+      .head-foot .event { margin-top: 0; }
+      .tagline { position: relative; z-index: 2; margin-top: 10px; font-size: 25px; font-weight: 600; letter-spacing: -0.02em; color: #fff; }
       .lede { position: relative; z-index: 2; margin-top: 7px; font-size: 12.5px; line-height: 1.5; color: #c4cfdd; max-width: 6.6in; }
       .event { position: relative; z-index: 2; margin-top: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .03em; color: #8fa3bd; }
 
       /* ── Body ── */
-      .body { padding: 0.24in 0.55in 0.1in; flex: 1; }
+      .body { padding: 0.16in 0.55in 0.08in; flex: 1; }
       .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.42in; }
       h2 {
         font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
@@ -110,7 +113,7 @@
       .proof .cap b { color: var(--ink); font-weight: 600; }
 
       /* ── Footer band ── */
-      .foot { background: var(--surface); border-top: 1.5px solid var(--line); padding: 0.18in 0.55in 0.22in; }
+      .foot { background: var(--surface); border-top: 1.5px solid var(--line); padding: 0.13in 0.55in 0.16in; }
       .foot-cols { display: grid; grid-template-columns: 1.55fr 1fr; gap: 0.42in; align-items: start; }
       table.addr { width: 100%; border-collapse: collapse; }
       table.addr td { padding: 4.5px 0; font-size: 10px; vertical-align: middle; border-bottom: 1px solid #eef1f5; }
@@ -151,13 +154,16 @@
               <div class="kicker">A Summary</div>
             </div>
           </div>
-          <span class="pill"><span class="dot"></span>Live on Monad testnet · DeFi track</span>
+          <img class="monad" src="assets/monad-coin.png" alt="Monad" />
         </div>
         <div class="tagline">Compliance that travels with the token.</div>
         <div class="lede">
           Staking you can stay in, that still follows the rules every time your money moves.
         </div>
-        <div class="event">Cleanverse Build: Trusted Assets Hackathon</div>
+        <div class="head-foot">
+          <span class="pill"><span class="dot"></span>Live on Monad testnet · DeFi track</span>
+          <span class="event">Cleanverse Build: Trusted Assets Hackathon</span>
+        </div>
       </header>
 
       <!-- BODY -->
