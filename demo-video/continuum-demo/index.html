@@ -12,273 +12,300 @@
     />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0a0f16; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0a1522; }
       :root {
-        --paper: #f4f6f8; --surface: #ffffff; --dark: #0a0f16; --ink: #0e1b2c;
-        --inksoft: #4c545f; --inkfaint: #5b636e; --navy: #0e3a6b; --navy-wash: #ebf1f8;
-        --line: #c9d2dc; --linestrong: #c4cdd8; --verified: #0e6b4f; --verified-wash: #e3efe9;
-        --revoked: #b3261e; --revoked-wash: #f7e6e4; --darksurface: #101823;
-        --darkline: #22303f; --darktext: #e9eef4; --darkmuted: #94a3b4; --seal: #5b4fd1;
-        --disp: "Space Grotesk", "Bricolage Grotesque", system-ui, sans-serif;
-        --mono: "IBM Plex Mono", "JetBrains Mono", monospace;
+        --paper: #f4f6f8; --surface: #ffffff; --dark: #0a1522; --ink: #0e1b2c;
+        --inksoft: #4c545f; --inkfaint: #5b636e; --navy: #0e3a6b; --navy-wash: #eef3f9;
+        --line: #dbe1e9; --ok: #0e6b4f; --ok-wash: #e4efe9;
+        --bad: #b3261e; --bad-wash: #f7e6e4; --monad: #6E54FF;
+        --darksurface: #101c2b; --darkline: #22303f; --darktext: #eef2f7; --darkmuted: #9aa9bc;
+        --disp: "Space Grotesk", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", monospace;
       }
       body { font-family: var(--disp); }
 
-      .scene {
-        position: absolute; inset: 0; display: flex; flex-direction: column;
-        align-items: center; justify-content: center; padding: 120px 160px; text-align: center;
-      }
+      .scene { position: absolute; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; padding: 80px 110px; }
       .scene.dark { background: var(--dark); color: var(--darktext); }
       .scene.paper { background: var(--paper); color: var(--ink); }
 
-      .grid-field {
-        position: absolute; inset: 0; pointer-events: none;
+      .field { position: absolute; inset: 0; pointer-events: none; }
+      .dark .field {
         background-image:
-          repeating-radial-gradient(circle at 20% -10%, transparent 0 46px, rgba(233,238,244,0.04) 46px 47px),
-          repeating-radial-gradient(circle at 85% 20%, transparent 0 52px, rgba(91,79,209,0.05) 52px 53px);
+          repeating-radial-gradient(circle at 10% -15%, transparent 0 44px, rgba(120,150,200,.045) 44px 45px),
+          repeating-radial-gradient(circle at 92% 115%, transparent 0 50px, rgba(110,84,255,.06) 50px 51px);
       }
-      .paper .grid-field {
+      .paper .field {
         background-image:
-          linear-gradient(to right, rgba(14,27,44,0.045) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(14,27,44,0.045) 1px, transparent 1px);
-        background-size: 60px 60px;
-        -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 40%, transparent 100%);
-        mask-image: radial-gradient(70% 60% at 50% 40%, #000 40%, transparent 100%);
+          linear-gradient(to right, rgba(14,27,44,.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(14,27,44,.04) 1px, transparent 1px);
+        background-size: 64px 64px;
+        -webkit-mask-image: radial-gradient(75% 65% at 50% 45%, #000 35%, transparent 100%);
+        mask-image: radial-gradient(75% 65% at 50% 45%, #000 35%, transparent 100%);
       }
+      .z { position: relative; z-index: 2; width: 100%; display: flex;
+        flex-direction: column; align-items: center; }
 
-      .eyebrow {
-        font-family: var(--mono); font-size: 20px; font-weight: 600; letter-spacing: 0.14em;
-        text-transform: uppercase; color: var(--inkfaint);
-      }
+      .eyebrow { font-family: var(--mono); font-size: 21px; font-weight: 600;
+        letter-spacing: .18em; text-transform: uppercase; color: var(--inkfaint); }
       .dark .eyebrow { color: var(--darkmuted); }
-      h1.h { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; }
-      .hero { font-size: 96px; }
-      .head { font-size: 68px; }
-      .sub { font-size: 30px; line-height: 1.5; color: var(--inksoft); max-width: 1100px; margin-top: 28px; font-weight: 400; }
-      .dark .sub { color: var(--darkmuted); }
+      h1 { font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+      .hero { font-size: 88px; }
+      .head { font-size: 54px; }
       .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-      .accent { color: var(--navy); }
-      .relz { position: relative; z-index: 2; }
 
-      .stamp {
-        display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono);
-        font-size: 22px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-        padding: 12px 22px; border-radius: 10px; border: 2px solid currentColor; transform: rotate(-2deg);
-      }
-      .stamp .dot { width: 12px; height: 12px; border-radius: 999px; background: currentColor; }
-      .stamp.verified { color: var(--verified); background: var(--verified-wash); }
-      .stamp.revoked { color: var(--revoked); background: var(--revoked-wash); }
-      .stamp.big { font-size: 40px; padding: 18px 34px; border-radius: 14px; }
+      /* browser frame around the real product */
+      .win { border-radius: 16px; overflow: hidden; background: #fff; position: relative;
+        box-shadow: 0 40px 90px -30px rgba(5,12,22,.55), 0 0 0 1px rgba(12,20,32,.10); }
+      .win-bar { height: 46px; background: #e9edf2; border-bottom: 1px solid #d6dce4;
+        display: flex; align-items: center; gap: 9px; padding: 0 18px; }
+      .win-bar i { width: 12px; height: 12px; border-radius: 999px; background: #c3ccd6; }
+      .win-url { margin-left: 14px; flex: 1; height: 26px; border-radius: 999px; background: #f7f9fb;
+        border: 1px solid #dfe5ec; display: flex; align-items: center; padding: 0 14px;
+        font-family: var(--mono); font-size: 13px; color: #6c7786; }
+      .vp { overflow: hidden; position: relative; background: #fff; }
+      .vp img { position: absolute; left: 0; width: 100%; display: block; }
 
-      .card {
-        background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
-        box-shadow: 0 1px 2px rgba(12,17,22,.04), 0 24px 64px -32px rgba(12,17,22,.18);
-        padding: 40px; text-align: left;
-      }
+      .callout { position: absolute; z-index: 6; }
+      .callout .bub { font-family: var(--mono); font-size: 19px; font-weight: 600; color: #fff;
+        background: var(--navy); padding: 9px 15px; border-radius: 9px; white-space: nowrap;
+        box-shadow: 0 12px 28px -12px rgba(14,58,107,.8); display: inline-block; }
+      .callout .bub.ok { background: var(--ok); }
+      .ring { position: absolute; border: 3px solid var(--navy); border-radius: 12px; z-index: 5; }
+      .ring.ok { border-color: var(--ok); }
+
+      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+        padding: 32px; box-shadow: 0 24px 60px -34px rgba(12,17,22,.3); }
       .card.dark { background: var(--darksurface); border-color: var(--darkline); color: var(--darktext); }
-      .row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-      .figure { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; }
 
-      .coin-fallback {
-        width: 132px; height: 132px; border-radius: 999px;
-        background: radial-gradient(circle at 38% 32%, #edebff, #6c5ce7 45%, #4b3fbf 100%);
-        display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 50px -20px rgba(91,79,209,.6);
-      }
-      .coin-fallback span { color: #fff; font-family: var(--mono); font-weight: 600; font-size: 30px; letter-spacing: 0.06em; }
+      .stamp { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono);
+        font-size: 19px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+        padding: 8px 16px; border-radius: 9px; border: 2px solid currentColor; }
+      .stamp.ok { color: var(--ok); background: var(--ok-wash); }
+      .stamp.bad { color: var(--bad); background: var(--bad-wash); }
 
-      .caption {
-        position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%);
-        font-family: var(--mono); font-size: 30px; font-weight: 500; letter-spacing: 0.01em;
-        color: #ffffff; background: rgba(10,15,22,0.72); padding: 12px 24px; border-radius: 10px;
-        white-space: nowrap;
-      }
-      .caption .k { color: #00e6a8; }
-      .caption .r { color: #ff8a80; }
-      .caption .b { color: #9bc1ff; }
+      .cap { position: absolute; left: 50%; bottom: 70px; transform: translateX(-50%);
+        font-family: var(--mono); font-size: 28px; font-weight: 500; color: #fff;
+        background: rgba(8,14,22,.82); padding: 12px 24px; border-radius: 10px;
+        white-space: nowrap; z-index: 20; }
+      .cap .g { color: #34e0a1; } .cap .r { color: #ff9a90; } .cap .b { color: #9dc4ff; }
 
-      .stack > * + * { margin-top: 22px; }
-      .flex { display: flex; }
-      .center { align-items: center; justify-content: center; }
-      .gap40 { gap: 40px; }
-      .gap24 { gap: 24px; }
+      .badge { display: inline-flex; align-items: center; gap: 11px; font-family: var(--mono);
+        font-size: 20px; letter-spacing: .04em; padding: 9px 18px; border-radius: 999px;
+        border: 1px solid rgba(150,175,210,.35); color: var(--darkmuted); }
+      .badge img { width: 24px; height: 24px; border-radius: 6px; }
+      .row { display: flex; align-items: center; }
+      .between { justify-content: space-between; }
+      .gap28 { gap: 28px; } .gap40 { gap: 40px; }
     </style>
   </head>
   <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="84"
-      data-width="1920"
-      data-height="1080"
-    >
-      <!-- ─────────── SCENE 1 · HOOK (0–3.9) ─────────── -->
-      <div id="scene-1" class="scene dark s1clip clip" data-start="0" data-duration="3.9" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz stack">
-          <p class="eyebrow s1-eye">Compliant crypto · the door problem</p>
-          <h1 class="h head s1-l1" style="max-width:1300px">Compliant crypto checks you <span style="color:var(--seal)">once</span>.</h1>
-          <h1 class="h head s1-l2" style="color:var(--darkmuted)">At the door.</h1>
-          <h1 class="h hero s1-l3" style="margin-top:10px">Then never looks again.</h1>
-        </div>
-      </div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="66.5"
+         data-width="1920" data-height="1080">
 
-      <!-- ─────────── SCENE 2 · CONSEQUENCE (3.9–15.4) ─────────── -->
-      <div id="scene-2" class="scene dark s2clip clip" data-start="3.9" data-duration="11.5" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz stack" style="width:100%">
-          <p class="eyebrow s2-eye">The consequence</p>
-          <h1 class="h head s2-head" style="max-width:1300px">Two bad options for your money.</h1>
-          <div class="flex center gap40" style="margin-top:40px; width:100%; justify-content:center">
-            <div class="card dark s2-a" style="width:560px; height:260px; display:flex; flex-direction:column; justify-content:center">
-              <p class="eyebrow">Option one</p>
-              <p class="figure" style="font-size:44px; margin-top:14px">Lock it away to earn.</p>
-              <p class="mono" style="color:var(--darkmuted); font-size:22px; margin-top:14px">illiquid · you can't touch it</p>
+      <!-- ── S1 · THE PROBLEM (0 – 8.6) ── -->
+      <div id="s1" class="scene dark clip" data-start="0" data-duration="8.6" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <p class="eyebrow s1-eye">What I kept seeing on-chain</p>
+          <h1 class="head s1-l1" style="margin-top:18px; text-align:center; max-width:1200px">
+            The apps traders use check your ID
+          </h1>
+          <h1 class="hero s1-l2" style="margin-top:6px; color:#fff">once, at the door.</h1>
+          <div class="row gap40 s1-door" style="margin-top:52px; align-items:stretch">
+            <div class="card dark" style="width:320px; text-align:center; padding:24px">
+              <p class="eyebrow" style="font-size:16px">Wallet</p>
+              <div style="margin-top:12px"><span class="stamp ok" style="font-size:16px">A-Pass ✓</span></div>
+              <p class="mono" style="color:var(--darkmuted); font-size:16px; margin-top:12px">checked one time</p>
             </div>
-            <div class="card dark s2-b" style="width:560px; height:260px; display:flex; flex-direction:column; justify-content:center; position:relative">
-              <p class="eyebrow">Option two</p>
-              <p class="figure" style="font-size:44px; margin-top:14px">Stay liquid — and risk it.</p>
-              <div class="s2-seize" style="position:absolute; top:34px; right:34px"><span class="stamp revoked">Frozen</span></div>
+            <div class="s1-gate" style="width:4px; background:linear-gradient(#22303f,#4a5c72,#22303f); border-radius:9px"></div>
+            <div class="card dark s1-after" style="width:540px; padding:24px; display:flex; flex-direction:column; justify-content:center">
+              <p class="eyebrow" style="font-size:16px">Every move after that</p>
+              <p class="mono s1-never" style="font-size:30px; color:#ff9a90; margin-top:10px">nobody is looking</p>
             </div>
-          </div>
-          <p class="sub s2-note" style="color:var(--darkmuted)">A credential lapses, and most protocols just freeze your funds. That gap is why real capital stays off-chain.</p>
-        </div>
-      </div>
-
-      <!-- ─────────── SCENE 3 · INTRODUCE (15.4–19.8) ─────────── -->
-      <div id="scene-3" class="scene paper s3clip clip" data-start="15.4" data-duration="4.4" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz stack">
-          <div class="coin-fallback s3-coin" style="margin:0 auto"><span>MON</span></div>
-          <h1 class="h hero s3-title" style="margin-top:20px">Continuum</h1>
-          <p class="eyebrow s3-eye accent">Compliance that travels with the token</p>
-          <div class="flex center gap40 s3-tags" style="margin-top:20px">
-            <span class="stamp verified" style="font-size:20px">Stay liquid</span>
-            <span class="stamp verified" style="font-size:20px">Stay verified</span>
-            <span class="stamp verified" style="font-size:20px">Never seized</span>
           </div>
         </div>
       </div>
 
-      <!-- ─────────── SCENE 4 · HOW IT WORKS (19.8–30.1) ─────────── -->
-      <div id="scene-4" class="scene paper s4clip clip" data-start="19.8" data-duration="10.3" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz" style="width:100%; display:flex; flex-direction:column; align-items:center">
-          <p class="eyebrow s4-eye">Stake · liquid from the first block</p>
-          <h1 class="h head s4-head" style="margin-top:14px">Stake MON. Get stMON.</h1>
-          <div class="card s4-card" style="width:760px; margin-top:44px">
-            <div class="row">
-              <span class="mono" style="font-size:34px; color:var(--ink)">10.00 <span style="color:var(--inkfaint); font-size:24px">MON</span></span>
-              <div class="coin-fallback" style="width:72px;height:72px"><span style="font-size:18px">MON</span></div>
+      <!-- ── S2 · TWO BAD CHOICES (8.6 – 19.7) ── -->
+      <div id="s2" class="scene dark clip" data-start="8.6" data-duration="11.1" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <p class="eyebrow s2-eye">So you get two bad choices</p>
+          <div class="row gap40" style="margin-top:40px">
+            <div class="card dark s2-a" style="width:580px; height:300px; display:flex; flex-direction:column; justify-content:center">
+              <p class="eyebrow" style="font-size:17px">Choice one</p>
+              <p style="font-size:40px; font-weight:700; margin-top:14px; letter-spacing:-.02em">Lock it up to earn.</p>
+              <p class="mono" style="color:var(--darkmuted); font-size:22px; margin-top:14px">and lose access to it</p>
             </div>
-            <div style="text-align:center; margin:16px 0; color:var(--inkfaint)">↓</div>
-            <div class="row" style="background:var(--navy-wash); border:1px solid rgba(14,58,107,.25); border-radius:14px; padding:20px 24px">
-              <span class="mono" style="font-size:34px; color:var(--ink)">10.00 <span class="accent" style="font-size:24px">stMON</span></span>
-              <span class="mono s4-rate" style="font-size:22px; color:var(--inksoft)">rate 1.0000 → 1.0421</span>
-            </div>
-            <p class="mono" style="font-size:19px; color:var(--inkfaint); margin-top:18px">rewards simulated on testnet · no lockup · usable immediately</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────── SCENE 5 · MONEY SHOT (30.1–41.5) ─────────── -->
-      <div id="scene-5" class="scene paper s5clip clip" data-start="30.1" data-duration="11.4" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz" style="width:100%; display:flex; flex-direction:column; align-items:center">
-          <p class="eyebrow s5-eye">Both verified. One refused.</p>
-          <h1 class="h head s5-head" style="margin-top:12px">The rule isn&rsquo;t ours to bend.</h1>
-          <div class="flex center gap40" style="margin-top:44px">
-            <div class="card s5-a" style="width:460px">
-              <div class="row"><span class="mono" style="font-size:22px">wallet A</span><span class="stamp verified" style="font-size:17px">A-Pass ✓</span></div>
-              <p class="figure accent" style="font-size:40px; margin-top:18px">sub-tier 60</p>
-              <p class="mono s5-a-res" style="color:var(--verified); font-size:24px; margin-top:14px">transfer settled ✓</p>
-            </div>
-            <div class="card s5-c" style="width:460px">
-              <div class="row"><span class="mono" style="font-size:22px">wallet C</span><span class="stamp verified" style="font-size:17px">A-Pass ✓</span></div>
-              <p class="figure" style="font-size:40px; margin-top:18px; color:var(--revoked)">sub-tier 10</p>
-              <p class="mono s5-c-res" style="color:var(--revoked); font-size:24px; margin-top:14px">reverted · NotVerified</p>
+            <div class="card dark s2-b" style="width:580px; height:300px; position:relative; display:flex; flex-direction:column; justify-content:center">
+              <p class="eyebrow" style="font-size:17px">Choice two</p>
+              <p style="font-size:40px; font-weight:700; margin-top:14px; letter-spacing:-.02em">Stay liquid.</p>
+              <p class="mono" style="color:var(--darkmuted); font-size:22px; margin-top:14px">until your status changes</p>
+              <div class="s2-frozen" style="position:absolute; top:28px; right:28px">
+                <span class="stamp bad">Frozen &amp; kept</span>
+              </div>
             </div>
           </div>
-          <p class="mono s5-foot" style="font-size:21px; color:var(--inkfaint); margin-top:34px">
-            pool rule: min sub-tier 30 · enforced by Cleanverse validator <span class="accent">0xaC7e…1792</span>
+          <p class="s2-out" style="margin-top:44px; font-size:36px; font-weight:600; letter-spacing:-.02em; color:#fff">
+            So the people with real money to put in <span style="color:#ff9a90">stay out.</span>
           </p>
         </div>
       </div>
 
-      <!-- ─────────── SCENE 6 · CONTROLLED EXIT (41.5–58.9) ─────────── -->
-      <div id="scene-6" class="scene paper s6clip clip" data-start="41.5" data-duration="17.4" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz" style="width:100%; display:flex; flex-direction:column; align-items:center">
-          <p class="eyebrow s6-eye">Compliance without confiscation</p>
-          <h1 class="h head s6-head" style="margin-top:12px">Frozen for circulation. Never confiscated.</h1>
-          <div class="flex center gap24 s6-timeline" style="margin-top:44px">
-            <span class="stamp revoked" style="font-size:18px">Revoked</span>
-            <span style="color:var(--inkfaint)">→</span>
-            <span class="mono" style="color:var(--inksoft); font-size:20px">Requested</span>
-            <span style="color:var(--inkfaint)">→</span>
-            <span class="mono" style="color:var(--inksoft); font-size:20px">Officer review</span>
-            <span style="color:var(--inkfaint)">→</span>
-            <span class="stamp verified" style="font-size:18px">Settled</span>
-          </div>
-          <div class="card s6-payout" style="width:640px; margin-top:44px; text-align:center">
-            <p class="eyebrow">Returned to the holder</p>
-            <p class="figure accent" style="font-size:92px; margin-top:8px">1.1 MON</p>
-            <p class="mono" style="color:var(--inksoft); font-size:22px">principal + earned yield · verified on-chain</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────── SCENE 7 · TECH & CLEANVERSE (58.9–72.2) ─────────── -->
-      <div id="scene-7" class="scene dark s7clip clip" data-start="58.9" data-duration="13.3" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz" style="width:100%; display:flex; flex-direction:column; align-items:center">
-          <p class="eyebrow s7-eye">The tech · fail-closed by default</p>
-          <h1 class="h head s7-head" style="margin-top:12px; max-width:1300px">Every action asks the same validator.</h1>
-          <div class="flex center gap40 s7-diagram" style="margin-top:48px">
-            <div class="card dark" style="width:420px; text-align:center">
-              <p class="eyebrow">Continuum</p>
-              <p class="figure" style="font-size:30px; margin-top:12px">stMON · ComplianceRouter</p>
-              <p class="mono" style="color:var(--darkmuted); font-size:19px; margin-top:12px">stake · transfer · exit</p>
-            </div>
-            <div class="mono s7-arrow" style="font-size:30px; color:var(--seal)">asks →</div>
-            <div class="card dark" style="width:460px; text-align:center; border-color:var(--seal)">
-              <p class="eyebrow" style="color:#b9b2f2">Cleanverse validator</p>
-              <p class="figure" style="font-size:26px; margin-top:12px">IAPassComplianceValidator</p>
-              <p class="mono" style="color:var(--darkmuted); font-size:18px; margin-top:12px">0xaC7e…1792 · on Monad</p>
+      <!-- ── S3 · CONTINUUM (19.7 – 25.0) ── -->
+      <div id="s3" class="scene paper clip" data-start="19.7" data-duration="5.3" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <div class="row gap28 s3-brand">
+            <img src="assets/continuum-mark.png" style="width:70px;height:70px" alt="" />
+            <div style="text-align:left">
+              <p style="font-size:50px; font-weight:700; letter-spacing:-.03em; line-height:1">Continuum</p>
+              <p class="eyebrow" style="color:var(--navy); margin-top:6px">The rule lives inside the token</p>
             </div>
           </div>
-          <p class="mono s7-foot" style="font-size:22px; color:#00e6a8; margin-top:40px">CVI GATE ON · VALIDATOR RESPONDING · can&rsquo;t answer? refused.</p>
+          <div class="win s3-win" style="width:1150px; margin-top:30px">
+            <div class="win-bar"><i></i><i></i><i></i><div class="win-url">usecontinuum.cc</div></div>
+            <div class="vp" style="height:420px"><img src="assets/shots/landing.png" style="top:-30px" alt="" /></div>
+          </div>
         </div>
       </div>
 
-      <!-- ─────────── SCENE 8 · CLOSE (72.2–84) ─────────── -->
-      <div id="scene-8" class="scene paper s8clip clip" data-start="72.2" data-duration="11.8" data-track-index="1">
-        <div class="grid-field"></div>
-        <div class="relz stack">
-          <div class="coin-fallback s8-coin" style="margin:0 auto; width:96px; height:96px"><span style="font-size:22px">MON</span></div>
-          <h1 class="h head s8-title" style="margin-top:16px; max-width:1300px">Compliance that travels with the token.</h1>
-          <p class="mono s8-foot" style="font-size:22px; color:var(--inksoft)">Live on Monad testnet · Rewards simulated · Cleanverse Build: Trusted Assets</p>
+      <!-- ── S4 · STAKE (25.0 – 32.2) ── -->
+      <div id="s4" class="scene paper clip" data-start="25.0" data-duration="7.2" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <h1 class="head s4-head">Put in MON, get stMON back.</h1>
+          <div style="position:relative; width:1210px; margin-top:24px">
+            <div class="win s4-win">
+              <div class="win-bar"><i></i><i></i><i></i><div class="win-url">usecontinuum.cc/app</div></div>
+              <div class="vp" style="height:330px"><img src="assets/shots/app-stake.png" style="top:-252px" alt="" /></div>
+            </div>
+            <div class="ring s4-r1" style="left:490px; top:57px; width:230px; height:103px"></div>
+            <div class="callout s4-c1" style="left:436px; top:176px"><span class="bub">rises as it earns</span></div>
+            <div class="ring s4-r2 ok" style="left:732px; top:57px; width:230px; height:103px"></div>
+            <div class="callout s4-c2" style="left:716px; top:176px"><span class="bub ok">real vault, on-chain</span></div>
+          </div>
+          <p class="mono s4-foot" style="margin-top:20px; font-size:23px; color:var(--inksoft)">
+            usable from the first block &middot; nothing is locked
+          </p>
         </div>
       </div>
 
-      <!-- ─────────── CAPTIONS (track 2, audio-aligned) ─────────── -->
-      <div id="cap-1" class="caption cap clip" data-start="0.4" data-duration="1.6" data-track-index="2">checked <span class="b">once</span> — at the door</div>
-      <div id="cap-2" class="caption cap clip" data-start="2.6" data-duration="1.2" data-track-index="2">then <span class="r">never looks again</span></div>
-      <div id="cap-3" class="caption cap clip" data-start="4.3" data-duration="3.0" data-track-index="2">lock it away, or risk it</div>
-      <div id="cap-4" class="caption cap clip" data-start="9.6" data-duration="2.8" data-track-index="2">a flag <span class="r">freezes your funds</span></div>
-      <div id="cap-5" class="caption cap clip" data-start="15.7" data-duration="3.6" data-track-index="2">permissioned <span class="k">liquid</span> staking</div>
-      <div id="cap-6" class="caption cap clip" data-start="20.1" data-duration="3.0" data-track-index="2">stake MON → <span class="k">stMON</span></div>
-      <div id="cap-7" class="caption cap clip" data-start="23.6" data-duration="2.0" data-track-index="2">usable from block one</div>
-      <div id="cap-8" class="caption cap clip" data-start="30.4" data-duration="2.4" data-track-index="2">both wallets <span class="k">verified</span></div>
-      <div id="cap-9" class="caption cap clip" data-start="33.2" data-duration="3.0" data-track-index="2">one <span class="r">refused</span> — tier 10 &lt; 30</div>
-      <div id="cap-10" class="caption cap clip" data-start="43.6" data-duration="2.6" data-track-index="2"><span class="r">frozen</span>, never confiscated</div>
-      <div id="cap-11" class="caption cap clip" data-start="52.6" data-duration="2.8" data-track-index="2"><span class="k">1.1 MON</span> returned</div>
-      <div id="cap-12" class="caption cap clip" data-start="59.1" data-duration="3.4" data-track-index="2">every action asks the <span class="b">validator</span></div>
-      <div id="cap-13" class="caption cap clip" data-start="71.0" data-duration="1.4" data-track-index="2"><span class="k">fail-closed</span> by default</div>
-      <div id="cap-14" class="caption cap clip" data-start="72.5" data-duration="3.2" data-track-index="2">stake · stay liquid · stay verified</div>
+      <!-- ── S5 · IT ASKS CLEANVERSE (32.2 – 36.6) ── -->
+      <div id="s5" class="scene dark clip" data-start="32.2" data-duration="4.4" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <h1 class="head s5-head" style="text-align:center; max-width:1300px">
+            Every send asks Cleanverse first.
+          </h1>
+          <div class="win s5-win" style="width:1400px; margin-top:34px">
+            <div class="win-bar"><i></i><i></i><i></i><div class="win-url">usecontinuum.cc/app</div></div>
+            <div class="vp" style="height:180px"><img src="assets/shots/app-verify.png" style="top:-122px; width:140%; left:-20%" alt="" /></div>
+          </div>
+          <p class="mono s5-foot" style="margin-top:26px; font-size:24px; color:var(--darkmuted)">
+            if the validator can&rsquo;t answer, the token says no
+          </p>
+        </div>
+      </div>
 
-      <!-- ─────────── NARRATION ─────────── -->
-      <audio id="narration" data-audio-track src="assets/narration.wav" data-start="0"></audio>
+      <!-- ── S6 · THE PROOF (36.6 – 48.7) ── -->
+      <div id="s6" class="scene paper clip" data-start="36.6" data-duration="12.1" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <p class="eyebrow s6-eye">The moment that proves it</p>
+          <h1 class="head s6-head" style="margin-top:12px">Both hold a valid ID. One is refused.</h1>
+          <div class="row gap40" style="margin-top:36px">
+            <div class="card s6-a" style="width:510px">
+              <div class="row between">
+                <span class="mono" style="font-size:23px; font-weight:600">Wallet A</span>
+                <span class="stamp ok" style="font-size:15px">A-Pass ✓</span>
+              </div>
+              <p class="s6-a-t" style="font-size:44px; font-weight:700; color:var(--navy); margin-top:16px; letter-spacing:-.02em">trust level 60</p>
+              <p class="mono s6-a-r" style="font-size:25px; color:var(--ok); margin-top:12px">the money moves ✓</p>
+            </div>
+            <div class="card s6-c" style="width:510px">
+              <div class="row between">
+                <span class="mono" style="font-size:23px; font-weight:600">Wallet C</span>
+                <span class="stamp ok" style="font-size:15px">A-Pass ✓</span>
+              </div>
+              <p class="s6-c-t" style="font-size:44px; font-weight:700; color:var(--bad); margin-top:16px; letter-spacing:-.02em">trust level 10</p>
+              <p class="mono s6-c-r" style="font-size:25px; color:var(--bad); margin-top:12px">refused, on-chain</p>
+            </div>
+          </div>
+          <div class="card s6-rule" style="margin-top:32px; width:1060px; text-align:center; padding:22px; background:var(--navy-wash); border-color:#cddcec">
+            <p style="font-size:29px; font-weight:600; letter-spacing:-.01em">
+              That rule lives on <span style="color:var(--navy)">Cleanverse&rsquo;s</span> side, not ours.
+            </p>
+            <p class="mono" style="font-size:23px; color:var(--inksoft); margin-top:8px">
+              We couldn&rsquo;t wave them through even if we wanted to.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── S7 · FREEZE AND REFUND (48.7 – 61.4) ── -->
+      <div id="s7" class="scene paper clip" data-start="48.7" data-duration="12.7" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <h1 class="head s7-head">Revoked does not mean stolen.</h1>
+          <div class="row gap40" style="margin-top:32px; align-items:center">
+            <div class="win s7-win" style="width:1000px">
+              <div class="win-bar"><i></i><i></i><i></i><div class="win-url">usecontinuum.cc/app</div></div>
+              <div class="vp" style="height:175px"><img src="assets/shots/app-transfer.png" style="top:-481px; width:130%; left:-15%" alt="" /></div>
+            </div>
+            <div class="card s7-pay" style="width:390px; text-align:center">
+              <p class="eyebrow">Comes back to you</p>
+              <p class="s7-num" style="font-size:76px; font-weight:700; color:var(--navy); letter-spacing:-.03em; margin-top:4px">1.1 MON</p>
+              <p class="mono" style="font-size:19px; color:var(--inksoft)">everything you put in,<br />plus what it earned</p>
+            </div>
+          </div>
+          <div class="row gap28 s7-steps" style="margin-top:28px">
+            <span class="stamp bad" style="font-size:16px">Revoked</span>
+            <span style="color:var(--inkfaint)">&rarr;</span>
+            <span class="mono" style="font-size:19px; color:var(--inksoft)">you request an exit</span>
+            <span style="color:var(--inkfaint)">&rarr;</span>
+            <span class="mono" style="font-size:19px; color:var(--inksoft)">a reviewer checks it</span>
+            <span style="color:var(--inkfaint)">&rarr;</span>
+            <span class="stamp ok" style="font-size:16px">Paid out</span>
+          </div>
+          <p class="s7-line" style="margin-top:26px; font-size:34px; font-weight:600; letter-spacing:-.02em">
+            Most designs freeze and confiscate. <span style="color:var(--ok)">Continuum freezes and refunds.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- ── S8 · CLOSE (61.4 – 66.5) ── -->
+      <div id="s8" class="scene dark clip" data-start="61.4" data-duration="5.1" data-track-index="1">
+        <div class="field"></div>
+        <div class="z">
+          <img class="s8-mark" src="assets/continuum-mark-light.png" style="width:88px; height:88px" alt="" />
+          <h1 class="hero s8-name" style="margin-top:20px; font-size:70px">Continuum</h1>
+          <p class="s8-tag" style="margin-top:12px; font-size:31px; color:var(--darkmuted)">Compliance that travels with the token.</p>
+          <div class="row gap28 s8-foot" style="margin-top:28px">
+            <span class="badge"><img src="assets/monad-logo-real.jpg" alt="" />Live on Monad testnet</span>
+            <span class="mono" style="font-size:27px; color:#34e0a1; font-weight:600">usecontinuum.cc</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CAPTIONS (audio-aligned) ── -->
+      <div id="c1"  class="cap clip" data-start="5.0"  data-duration="3.0" data-track-index="2">checked <span class="b">once</span>, at the door</div>
+      <div id="c2"  class="cap clip" data-start="8.8"  data-duration="3.2" data-track-index="2">lock it up, or risk it</div>
+      <div id="c3"  class="cap clip" data-start="13.5" data-duration="3.0" data-track-index="2">a status change <span class="r">freezes your funds</span></div>
+      <div id="c4"  class="cap clip" data-start="17.1" data-duration="2.4" data-track-index="2">so real money <span class="r">stays out</span></div>
+      <div id="c5"  class="cap clip" data-start="20.0" data-duration="4.4" data-track-index="2">the rule lives <span class="g">inside the token</span></div>
+      <div id="c6"  class="cap clip" data-start="25.2" data-duration="3.2" data-track-index="2">MON in &rarr; <span class="g">stMON</span> back</div>
+      <div id="c7"  class="cap clip" data-start="28.9" data-duration="2.8" data-track-index="2">earns, and stays usable</div>
+      <div id="c8"  class="cap clip" data-start="33.4" data-duration="3.0" data-track-index="2">the token asks <span class="b">Cleanverse</span></div>
+      <div id="c9"  class="cap clip" data-start="38.3" data-duration="3.0" data-track-index="2">both wallets are <span class="g">verified</span></div>
+      <div id="c10" class="cap clip" data-start="42.9" data-duration="1.9" data-track-index="2">one is <span class="r">refused</span></div>
+      <div id="c11" class="cap clip" data-start="45.0" data-duration="3.4" data-track-index="2"><span class="b">Cleanverse</span> owns that rule</div>
+      <div id="c12" class="cap clip" data-start="49.8" data-duration="3.0" data-track-index="2">revoked, but <span class="g">not stolen</span></div>
+      <div id="c13" class="cap clip" data-start="54.2" data-duration="3.0" data-track-index="2"><span class="g">1.1 MON</span> came back</div>
+      <div id="c14" class="cap clip" data-start="59.6" data-duration="2.6" data-track-index="2">freeze and <span class="g">refund</span></div>
+
+      <audio id="narration" data-audio-track src="assets/narration-v2.wav" data-start="0"></audio>
     </div>
 
     <script>
@@ -286,77 +313,85 @@
       const tl = gsap.timeline({ paused: true });
       const E = "power3.out";
 
-      // Scene 1 · hook (base 0.0)
+      // S1 — checked once, at the door
       (function (S) {
-        tl.from(".s1-eye", { opacity: 0, y: 12, duration: 0.4, ease: E }, S + 0.1)
-          .from(".s1-l1", { opacity: 0, y: 18, duration: 0.5, ease: E }, S + 0.5)
-          .from(".s1-l2", { opacity: 0, y: 18, duration: 0.5, ease: E }, S + 2.0)
-          .from(".s1-l3", { opacity: 0, y: 20, scale: 0.98, duration: 0.5, ease: E }, S + 3.0);
-      })(0.0);
+        tl.from("#s1 .s1-eye", { opacity: 0, y: 14, duration: .5, ease: E }, S + .1)
+          .from("#s1 .s1-l1", { opacity: 0, y: 20, duration: .55, ease: E }, S + 4.9)
+          .from("#s1 .s1-l2", { opacity: 0, y: 22, scale: .98, duration: .55, ease: E }, S + 6.3)
+          .from("#s1 .s1-door", { opacity: 0, y: 24, duration: .55, ease: E }, S + 1.0)
+          .from("#s1 .s1-gate", { scaleY: 0, transformOrigin: "50% 50%", duration: .5, ease: E }, S + 1.5)
+          .from("#s1 .s1-never", { opacity: 0, x: -16, duration: .5, ease: E }, S + 7.5)
+          .to("#s1 .s1-after", { opacity: .5, duration: .9, ease: "power2.inOut" }, S + 7.7);
+      })(0);
 
-      // Scene 2 · consequence (base 3.9)
+      // S2 — two bad choices
       (function (S) {
-        tl.from(".s2-eye", { opacity: 0, y: 12, duration: 0.4, ease: E }, S + 0.1)
-          .from(".s2-head", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.4)
-          .from(".s2-a", { opacity: 0, x: -30, duration: 0.5, ease: E }, S + 1.6)
-          .from(".s2-b", { opacity: 0, x: 30, duration: 0.5, ease: E }, S + 3.0)
-          .from(".s2-seize", { opacity: 0, scale: 1.3, rotate: -8, duration: 0.35, ease: "back.out(2)" }, S + 5.9)
-          .from(".s2-note", { opacity: 0, y: 12, duration: 0.5, ease: E }, S + 9.4);
-      })(3.9);
+        tl.from("#s2 .s2-eye", { opacity: 0, y: 12, duration: .45, ease: E }, S + .1)
+          .from("#s2 .s2-a", { opacity: 0, x: -32, duration: .55, ease: E }, S + 1.7)   // "lock your money up"
+          .from("#s2 .s2-b", { opacity: 0, x: 32, duration: .55, ease: E }, S + 3.7)    // "or keep it liquid"
+          .from("#s2 .s2-frozen", { opacity: 0, scale: 1.35, rotate: -9, duration: .4, ease: "back.out(2.2)" }, S + 6.5)
+          .from("#s2 .s2-out", { opacity: 0, y: 16, duration: .55, ease: E }, S + 8.3); // "so the people..."
+      })(8.6);
 
-      // Scene 3 · introduce (base 15.4)
+      // S3 — Continuum + real landing page
       (function (S) {
-        tl.from(".s3-coin", { opacity: 0, scale: 0.8, duration: 0.5, ease: "back.out(1.6)" }, S + 0.0)
-          .from(".s3-title", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.25)
-          .from(".s3-eye", { opacity: 0, y: 10, duration: 0.4, ease: E }, S + 0.7)
-          .from(".s3-tags > *", { opacity: 0, y: 12, duration: 0.4, stagger: 0.1, ease: E }, S + 1.2);
-      })(15.4);
+        tl.from("#s3 .s3-brand", { opacity: 0, y: 18, duration: .55, ease: E }, S + .05)
+          .from("#s3 .s3-win", { opacity: 0, y: 52, scale: .96, duration: .8, ease: E }, S + .5)
+          .fromTo("#s3 .s3-win .vp img", { y: 0 }, { y: -140, duration: 3.6, ease: "none" }, S + 1.3);
+      })(19.7);
 
-      // Scene 4 · stake (base 19.8)
+      // S4 — real stake screen, callouts on the live numbers
       (function (S) {
-        tl.from(".s4-eye", { opacity: 0, y: 10, duration: 0.4, ease: E }, S + 0.0)
-          .from(".s4-head", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.3)
-          .from(".s4-card", { opacity: 0, y: 24, duration: 0.6, ease: E }, S + 0.9)
-          .from(".s4-rate", { opacity: 0, duration: 0.5, ease: E }, S + 4.8);
-      })(19.8);
+        tl.from("#s4 .s4-head", { opacity: 0, y: 18, duration: .5, ease: E }, S + .05)
+          .from("#s4 .s4-win", { opacity: 0, y: 38, scale: .97, duration: .65, ease: E }, S + .35)
+          .from("#s4 .s4-r1", { opacity: 0, scale: 1.16, duration: .4, ease: "back.out(2)" }, S + 3.5)
+          .from("#s4 .s4-c1", { opacity: 0, y: -10, duration: .35, ease: E }, S + 3.75)
+          .from("#s4 .s4-r2", { opacity: 0, scale: 1.16, duration: .4, ease: "back.out(2)" }, S + 4.5)
+          .from("#s4 .s4-c2", { opacity: 0, y: -10, duration: .35, ease: E }, S + 4.75)
+          .from("#s4 .s4-foot", { opacity: 0, y: 12, duration: .5, ease: E }, S + 6.2);
+      })(25.0);
 
-      // Scene 5 · money shot (base 30.1)
+      // S5 — it asks Cleanverse
       (function (S) {
-        tl.from(".s5-eye", { opacity: 0, y: 10, duration: 0.4, ease: E }, S + 0.0)
-          .from(".s5-head", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.3)
-          .from(".s5-a", { opacity: 0, x: -30, duration: 0.5, ease: E }, S + 0.9)
-          .from(".s5-c", { opacity: 0, x: 30, duration: 0.5, ease: E }, S + 1.3)
-          .from(".s5-c-res", { opacity: 0, scale: 1.15, duration: 0.4, ease: "back.out(2)" }, S + 5.4)
-          .from(".s5-foot", { opacity: 0, y: 10, duration: 0.5, ease: E }, S + 7.9);
-      })(30.1);
+        tl.from("#s5 .s5-head", { opacity: 0, y: 16, duration: .5, ease: E }, S + .05)
+          .from("#s5 .s5-win", { opacity: 0, y: 28, scale: .97, duration: .6, ease: E }, S + .5)
+          .from("#s5 .s5-foot", { opacity: 0, y: 12, duration: .5, ease: E }, S + 2.6);
+      })(32.2);
 
-      // Scene 6 · controlled exit (base 41.5)
+      // S6 — the proof
       (function (S) {
-        tl.from(".s6-eye", { opacity: 0, y: 10, duration: 0.4, ease: E }, S + 0.0)
-          .from(".s6-head", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.3)
-          .from(".s6-timeline > *", { opacity: 0, y: 12, duration: 0.4, stagger: 0.35, ease: E }, S + 5.0)
-          .from(".s6-payout", { opacity: 0, y: 22, scale: 0.97, duration: 0.6, ease: E }, S + 12.0);
-      })(41.5);
+        tl.from("#s6 .s6-eye", { opacity: 0, y: 12, duration: .45, ease: E }, S + .05)
+          .from("#s6 .s6-head", { opacity: 0, y: 18, duration: .55, ease: E }, S + .3)
+          .from("#s6 .s6-a", { opacity: 0, x: -30, duration: .55, ease: E }, S + 1.5)   // "both of these wallets"
+          .from("#s6 .s6-c", { opacity: 0, x: 30, duration: .55, ease: E }, S + 1.9)
+          .from("#s6 .s6-a-t", { opacity: 0, y: 12, duration: .4, ease: E }, S + 3.4)
+          .from("#s6 .s6-c-t", { opacity: 0, y: 12, duration: .4, ease: E }, S + 4.0)   // "below the trust level"
+          .from("#s6 .s6-a-r", { opacity: 0, duration: .35, ease: E }, S + 5.4)
+          .from("#s6 .s6-c-r", { opacity: 0, scale: 1.2, duration: .45, ease: "back.out(2.2)" }, S + 6.5) // "refuses to move"
+          .from("#s6 .s6-rule", { opacity: 0, y: 18, duration: .55, ease: E }, S + 8.3); // "that rule lives"
+      })(36.6);
 
-      // Scene 7 · tech & Cleanverse (base 58.9)
+      // S7 — freeze and refund
       (function (S) {
-        tl.from(".s7-eye", { opacity: 0, y: 10, duration: 0.4, ease: E }, S + 0.0)
-          .from(".s7-head", { opacity: 0, y: 16, duration: 0.5, ease: E }, S + 0.3)
-          .from(".s7-diagram > *", { opacity: 0, y: 18, duration: 0.5, stagger: 0.5, ease: E }, S + 2.1)
-          .from(".s7-foot", { opacity: 0, y: 10, duration: 0.5, ease: E }, S + 12.1);
-      })(58.9);
+        tl.from("#s7 .s7-head", { opacity: 0, y: 18, duration: .55, ease: E }, S + .05)
+          .from("#s7 .s7-win", { opacity: 0, x: -30, duration: .6, ease: E }, S + 2.6)  // "you ask to cash out"
+          .from("#s7 .s7-steps > *", { opacity: 0, y: 12, duration: .4, stagger: .18, ease: E }, S + 3.2)
+          .from("#s7 .s7-pay", { opacity: 0, x: 30, duration: .6, ease: E }, S + 5.2)   // "your money comes back"
+          .from("#s7 .s7-num", { opacity: 0, scale: .9, duration: .5, ease: "back.out(1.8)" }, S + 5.6)
+          .from("#s7 .s7-line", { opacity: 0, y: 16, duration: .55, ease: E }, S + 8.6); // "most designs freeze"
+      })(48.7);
 
-      // Scene 8 · close (base 72.2)
+      // S8 — close
       (function (S) {
-        tl.from(".s8-coin", { opacity: 0, scale: 0.8, duration: 0.5, ease: "back.out(1.6)" }, S + 0.0)
-          .from(".s8-title", { opacity: 0, y: 16, duration: 0.6, ease: E }, S + 0.4)
-          .from(".s8-foot", { opacity: 0, y: 10, duration: 0.5, ease: E }, S + 1.2);
-      })(72.2);
+        tl.from("#s8 .s8-mark", { opacity: 0, scale: .8, duration: .5, ease: "back.out(1.7)" }, S + .05)
+          .from("#s8 .s8-name", { opacity: 0, y: 16, duration: .5, ease: E }, S + .3)
+          .from("#s8 .s8-tag", { opacity: 0, y: 12, duration: .5, ease: E }, S + .6)
+          .from("#s8 .s8-foot", { opacity: 0, y: 12, duration: .5, ease: E }, S + .9);
+      })(61.4);
 
-      // Captions: quick fade/rise each
       gsap.utils.toArray(".cap").forEach((el) => {
-        const st = parseFloat(el.getAttribute("data-start"));
-        tl.from(el, { opacity: 0, y: 10, duration: 0.3, ease: E }, st);
+        tl.from(el, { opacity: 0, y: 10, duration: .28, ease: E },
+          parseFloat(el.getAttribute("data-start")));
       });
 
       window.__timelines["main"] = tl;
