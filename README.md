@@ -71,13 +71,9 @@ display.
   docs, and legal pages.
 - `contracts/`, Foundry sources, tests, deploy script, and broadcast records.
 - `demo-video/`, the rendered demo and its thumbnail.
-- `docs/`, everything written down:
+- `docs/`, project documentation:
   - `Continuum-One-Pager.pdf` and `one-pager.html`, the submission summary.
   - `one-page-summary.md`, the same summary in plain text.
-  - `deployment.md`, live addresses, rule state, and demo wallets.
-  - `vercel-env.md`, deployment settings and which env vars are secret.
-  - `demo-script.md`, the recording script, beat by beat.
-  - `specs/`, the approved design spec and implementation plan.
 
 ## Running it
 
