@@ -1,8 +1,11 @@
 import Link from 'next/link'
 
-type FooterLink = { label: string; to: string; file?: boolean }
+export type FooterLink = { label: string; to: string; file?: boolean }
 
-const COLUMNS: { heading: string; links: FooterLink[] }[] = [
+export const FOOTER_TAGLINE =
+  'Permissioned liquid staking for verified wallets. Compliance that travels with the token.'
+
+export const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: 'Product',
     links: [
@@ -50,7 +53,7 @@ export default function Footer() {
               <span className="font-mono text-[13px] font-medium tracking-[0.22em]">CONTINUUM</span>
             </div>
             <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-darkmuted">
-              Permissioned liquid staking for verified wallets. Compliance that travels with the token.
+              {FOOTER_TAGLINE}
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">

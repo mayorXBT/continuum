@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DocsShell, DocSection, type DocSection as S } from "@/components/DocsShell";
 
 export const metadata: Metadata = {
-  title: "Docs — Continuum",
+  title: "Continuum Docs",
   description:
     "How Continuum works: permissioned liquid staking on Monad, gated by the Cleanverse CVI compliance validator, with a controlled exit instead of confiscation.",
 };
@@ -25,6 +25,7 @@ const sections: S[] = [
   { id: "problem", title: "The problem" },
   { id: "how", title: "How it works" },
   { id: "start", title: "Getting started" },
+  { id: "cleanverse-basics", title: "What Cleanverse is" },
   { id: "cleanverse", title: "Cleanverse integration" },
   { id: "exit", title: "The controlled exit" },
   { id: "architecture", title: "Architecture" },
@@ -82,7 +83,7 @@ export default function Docs() {
           </h1>
           <p className="mt-4 text-base leading-relaxed text-inksoft">
             Permissioned liquid staking on Monad testnet, where the compliance
-            rule lives in the token rather than the interface — and a revoked
+            rule lives in the token rather than the interface, and a revoked
             holder exits through review instead of losing their funds.
           </p>
         </div>
@@ -105,7 +106,7 @@ export default function Docs() {
               </li>
               <li>
                 <strong>Continuously checked.</strong> Eligibility is evaluated at
-                every stake, transfer, and exit — not once at signup.
+                every stake, transfer, and exit, not once at signup.
               </li>
               <li>
                 <strong>Non-confiscatory.</strong> A revoked holder stops
@@ -123,8 +124,8 @@ export default function Docs() {
             <p>
               Most compliant DeFi checks identity <em>once</em>, at the door. After
               that, nothing that happens to the credential matters. A certificate
-              lapses, a holder is sanctioned, a credential is revoked outright —
-              and the position keeps trading as though nothing changed.
+              lapses, a holder is sanctioned, a credential is revoked outright, and
+              the position keeps trading as though nothing changed.
             </p>
             <p>
               Where a check does exist, it usually lives in the application: an
@@ -185,6 +186,60 @@ export default function Docs() {
             </Note>
           </DocSection>
 
+          <DocSection id="cleanverse-basics" title="What Cleanverse is">
+            <p>
+              Cleanverse is a trust network for on-chain finance. It exists so
+              that verified identities and verified digital value can interact
+              under one common framework anchored by regulated financial
+              institutions, turning an open blockchain from a pool of anonymous
+              wallets into infrastructure that can carry regulated activity.
+            </p>
+            <p>
+              The framework rests on the same foundation as traditional finance,
+              meaning known counterparties and a verified source of funds. It
+              delivers that through three interlocking assurances.
+            </p>
+            <ul className="list-disc space-y-2 pl-5">
+              <li>
+                <strong>Cleanverse Verified Identity (CVI).</strong> Every
+                transacting wallet is bound to an individual or legal entity
+                holding a verified financial identity, established through a
+                licensed institution. This is the assurance Continuum depends on.
+              </li>
+              <li>
+                <strong>Cleanverse Verified Asset (CVA).</strong> Every digital
+                asset has entered the network through an approved trust pathway
+                and carries evidenced provenance rather than an unknown history.
+              </li>
+              <li>
+                <strong>Programmed Governance.</strong> Before value moves,
+                eligibility is checked against rules the asset issuer sets over
+                the combination of CVI and CVA. Transfers stay continuously
+                traceable, with auditable records in real time.
+              </li>
+            </ul>
+            <p>
+              These assurances are operationalised by the{" "}
+              <strong>Cleanverse Compliance Protocol (CCP)</strong>, the
+              programmable layer that executes trust policies consistently across
+              participating institutions, blockchain networks and applications. A
+              policy can govern participant eligibility, trusted counterparties,
+              asset permissions and transfer restrictions.
+            </p>
+            <p>
+              The defining idea is ordering. Trust is established <em>before</em>{" "}
+              value moves, rather than reconstructed after a transaction has
+              already settled.
+            </p>
+            <Note>
+              <strong>Where Continuum sits.</strong> Continuum uses CVI as a live
+              control on every state change, and the pool rule described in the
+              next section is Programmed Governance in practice. stMON is a
+              policy-gated receipt and not yet a CVA, which is the honest limit of
+              this build. Issuing it as a CVA is the documented upgrade path.
+            </Note>
+          </DocSection>
+
           <DocSection id="cleanverse" title="Cleanverse integration">
             <p>
               Remove Cleanverse and there is no product. The integration is
@@ -199,14 +254,14 @@ export default function Docs() {
             <p>
               <strong>A rule we cannot bend.</strong> The pool carries a RuleV2 of{" "}
               <code className="font-mono text-ink">min_sub_tier 30</code>. A wallet
-              holding a valid, active A-Pass at sub-tier 10 is refused — the
+              holding a valid, active A-Pass at sub-tier 10 is refused. The
               threshold lives on Cleanverse&rsquo;s contract, so Continuum cannot
               quietly wave anyone through.
             </p>
             <p>
               <strong>On-chain, on every state change.</strong> Gated paths call{" "}
               <code className="font-mono text-ink">complianceVerify(pool, user)</code>{" "}
-              on the validator. That call is a view function and permissionless —
+              on the validator. That call is a view function and permissionless, so
               anyone can independently verify any wallet against our pool.
             </p>
             <Code>{`# Check any wallet against the Continuum pool
@@ -216,7 +271,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
   <WALLET> --rpc-url <MONAD_TESTNET_RPC>`}</Code>
             <p>
               <strong>Live credential reads.</strong> The Verify panel shows the
-              real A-Pass record — tier, sub-tier, group, countries, expiry — read
+              real A-Pass record, covering tier, sub-tier, group, countries and expiry, read
               through Cleanverse&rsquo;s <code className="font-mono text-ink">query_apass</code>{" "}
               endpoint, proxied server-side so institutional credentials never
               reach the browser.
@@ -234,7 +289,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
               {[
                 ["Revoked", "The position freezes for circulation on the next transaction. Transfers revert. Nothing is taken."],
                 ["Under review", "The holder submits a redemption request nominating a verified destination wallet. A compliance officer reviews it."],
-                ["Settled", "Eligibility is re-checked at approval and again at settlement. The receipt is burned and the underlying asset is delivered to the nominated wallet — principal plus earned yield."],
+                ["Settled", "Eligibility is re-checked at approval and again at settlement. The receipt is burned and the underlying asset is delivered to the nominated wallet, principal plus earned yield."],
               ].map(([t, d], i) => (
                 <li key={t} className="rounded-sm border border-line bg-surface p-4">
                   <p className="font-mono text-xs font-semibold tracking-[0.1em] text-inksoft">
@@ -274,10 +329,10 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
               and combines them according to a mode:
             </p>
             <ul className="list-disc space-y-2 pl-5">
-              <li><code className="font-mono text-ink">LocalOnly</code> — registry only, validator ignored</li>
-              <li><code className="font-mono text-ink">ValidatorOnly</code> — Cleanverse is authoritative</li>
-              <li><code className="font-mono text-ink">RequireBoth</code> — both must pass <em>(current setting)</em></li>
-              <li><code className="font-mono text-ink">EitherPasses</code> — either suffices</li>
+              <li><code className="font-mono text-ink">LocalOnly</code>, registry only, validator ignored</li>
+              <li><code className="font-mono text-ink">ValidatorOnly</code>, Cleanverse is authoritative</li>
+              <li><code className="font-mono text-ink">RequireBoth</code>, both must pass <em>(current setting)</em></li>
+              <li><code className="font-mono text-ink">EitherPasses</code>, either suffices</li>
             </ul>
             <p>
               The validator call is wrapped, because{" "}
@@ -289,7 +344,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
             </p>
             <p>
               Revocation deliberately stays local. The validator answers pass or
-              fail only; it has no notion of a known-but-revoked holder — and that
+              fail only, and it has no notion of a known-but-revoked holder. That
               distinction is exactly what makes a controlled exit possible rather
               than indistinguishable from a stranger being refused.
             </p>
@@ -325,7 +380,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
               <li>
                 Eligibility is enforced <em>in the contracts</em>. The interface
                 cannot grant access the chain would refuse, and refusing in the UI
-                would not stop a direct contract call — so the check lives where it
+                would not stop a direct contract call, so the check lives where it
                 cannot be bypassed.
               </li>
               <li>
@@ -340,12 +395,12 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
             <p><strong>Privileged roles:</strong></p>
             <ul className="list-disc space-y-2 pl-5">
               <li>
-                <strong>Owner</strong> — can set the router mode, pause the vault,
+                <strong>Owner.</strong> Can set the router mode, pause the vault,
                 revoke credentials in the local registry, and act as compliance
                 officer on redemption requests.
               </li>
               <li>
-                <strong>Operator</strong> — a deliberately narrow role used by the
+                <strong>Operator.</strong> A deliberately narrow role used by the
                 demo-access endpoint. It can admit a wallet to the local registry
                 and nothing else: it cannot revoke, cannot change the compliance
                 mode, and cannot touch the vault.
@@ -386,7 +441,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
 }`}</Code>
             <p>
               Prefer to trust the chain over our server? Call the validator
-              directly — see{" "}
+              directly. See{" "}
               <a href="#cleanverse" className="text-navy underline decoration-navy/30 underline-offset-2 transition-colors hover:decoration-navy">
                 Cleanverse integration
               </a>
@@ -405,7 +460,7 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
               reason one-click demo access can work. In production, an A-Pass is an
               institutional attestation: a licensed member asserts it verified the
               person and cites the provider and reference. Issuing one for an
-              anonymous wallet would be a false attestation — precisely what the
+              anonymous wallet would be a false attestation, precisely what the
               credential exists to prevent. The real path is Cleanverse KYC
               registration, or becoming a Gateway Member with genuine KYC
               references.
@@ -436,10 +491,10 @@ cast call 0xaC7e5179C2C7f03f209136886c172eb34F161792 \\
 
           <DocSection id="faq" title="FAQ">
             {[
-              ["Does Continuum see my identity documents?", "No. Verification is performed by Cleanverse and its partners. Continuum reads pseudonymous credential attributes attached to a wallet address — tier, group, country codes, expiry, status — and nothing else."],
+              ["Does Continuum see my identity documents?", "No. Verification is performed by Cleanverse and its partners. Continuum reads pseudonymous credential attributes attached to a wallet address, covering tier, group, country codes, expiry and status, and nothing else."],
               ["Why did my transfer revert?", "The recipient did not satisfy the pool rule at that moment. Either they hold no A-Pass, their credential is frozen or expired, or their sub-tier is below the pool minimum of 30. The revert is the product working."],
-              ["My wallet is verified but still refused — why?", "Check the sub-tier. A valid, active credential below the pool's minimum is still refused. This is deliberate: it demonstrates that the tier rule is enforced by Cleanverse rather than by us."],
-              ["What happens to my funds if my credential is revoked?", "Nothing is taken. Your position freezes for circulation, and you can request an exit to a verified destination wallet. After review, the receipt is burned and the underlying asset — principal plus yield — is delivered there."],
+              ["My wallet is verified but still refused. Why?", "Check the sub-tier. A valid, active credential below the pool's minimum is still refused. This is deliberate: it demonstrates that the tier rule is enforced by Cleanverse rather than by us."],
+              ["What happens to my funds if my credential is revoked?", "Nothing is taken. Your position freezes for circulation, and you can request an exit to a verified destination wallet. After review, the receipt is burned and the underlying asset, principal plus yield, is delivered there."],
               ["Can I verify the compliance claims myself?", "Yes. The validator's complianceVerify is a permissionless view function, so you can check any wallet against our pool from your own node without trusting our interface."],
               ["Is my stMON balance supposed to stay flat while earning?", "Yes. Rewards raise what each stMON redeems for rather than minting new units, so the balance is constant while its claim grows. Nothing to claim or compound."],
             ].map(([q, a]) => (

@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import Navbar from "./landing/Navbar";
-import Footer from "./landing/Footer";
+import DocsFooter from "./landing/DocsFooter";
 
 export type DocSection = { id: string; title: string };
 
 /**
- * Docs chrome: shared marketing nav + footer, with a sticky sidebar of section
- * links that highlights whichever section is currently on screen.
+ * Docs chrome: shared marketing nav plus a sticky sidebar of section links that
+ * highlights whichever section is currently on screen. The footer here is the
+ * collapsed docs variant, so it stays out of the way of the section nav.
  */
 export function DocsShell({
   sections,
@@ -67,7 +68,7 @@ export function DocsShell({
         <main className="min-w-0 flex-1">{children}</main>
       </div>
 
-      <Footer />
+      <DocsFooter />
     </div>
   );
 }
