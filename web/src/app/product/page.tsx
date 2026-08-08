@@ -28,7 +28,7 @@ function PageHero() {
         <Reveal delay={200}>
           <p className="mx-auto mt-6 max-w-[56ch] text-[1.125rem] leading-relaxed text-inksoft sm:text-[1.2rem]">
             Verify once. Stake. Move freely among the verified. Exit on your terms. Every gated action asks the same
-            on-chain validator — and refuses when it can't get an answer.
+            on-chain validator, and refuses when it can't get an answer.
           </p>
         </Reveal>
       </div>
@@ -344,13 +344,13 @@ const LIFECYCLE_STEPS = [
   {
     num: '02',
     name: 'Stake',
-    copy: 'MON in, stMON out at the current redemption value. No lockup, no unbonding queue — the receipt is transferable from the first block.',
+    copy: 'MON in, stMON out at the current redemption value. No lockup, no unbonding queue, and the receipt is transferable from the first block.',
     demo: <StakeDemo />,
   },
   {
     num: '03',
     name: 'Move',
-    copy: 'Send stMON to any verified counterparty. The token re-checks the recipient with the validator on every transfer — a lapsed or missing credential is refused on-chain.',
+    copy: 'Send stMON to any verified counterparty. The token re-checks the recipient with the validator on every transfer. A lapsed or missing credential is refused on-chain.',
     demo: <MoveDemo />,
   },
   {
@@ -460,9 +460,9 @@ function Lifecycle() {
                   </p>
                   <h3 className="mt-4 max-w-[22ch] font-display text-[1.375rem] font-semibold leading-[1.2] tracking-[-0.02em] text-ink sm:text-[1.625rem]">
                     {s.name === 'Verify' && 'One credential, bound to your wallet.'}
-                    {s.name === 'Stake' && 'MON in, stMON out — liquid from the first block.'}
+                    {s.name === 'Stake' && 'MON in, stMON out, liquid from the first block.'}
                     {s.name === 'Move' && 'Send to anyone verified. Refused to anyone else.'}
-                    {s.name === 'Exit' && 'Unstake on demand — or exit through review.'}
+                    {s.name === 'Exit' && 'Unstake on demand, or exit through review.'}
                   </h3>
                   <p className="mt-4 max-w-[60ch] leading-relaxed text-inksoft">{s.copy}</p>
                   <div className="mt-8 max-w-[480px]">{s.demo}</div>
@@ -666,7 +666,7 @@ function RedemptionSection() {
                 redemption value starts at 1.0000 MON and climbs as validator rewards land in the pool.
               </p>
               <p>
-                Your balance stays constant while its claim grows — which makes accounting, reporting, and integrations
+                Your balance stays constant while its claim grows, which makes accounting, reporting, and integrations
                 simpler. No harvest transactions, no compounding step, no reward token to track.
               </p>
             </div>
@@ -860,7 +860,7 @@ function PolicyRules() {
           <RuleCard
             delay={90}
             label="Tier-gated"
-            copy="A valid credential isn't enough — the pool sets a minimum tier."
+            copy="A valid credential isn't enough. The pool sets a minimum tier."
           >
             {(active) => <TierGateDevice active={active} />}
           </RuleCard>

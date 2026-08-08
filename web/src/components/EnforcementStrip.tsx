@@ -27,7 +27,9 @@ export function EnforcementStrip() {
   });
 
   const modeIndex = typeof mode === "number" ? mode : undefined;
-  const label = modeIndex !== undefined ? ROUTER_MODES[modeIndex] : "—";
+  // Shown until the mode read resolves, and if it fails. Deliberately neutral
+  // rather than reassuring: an unread mode is not a known-good one.
+  const label = modeIndex !== undefined ? ROUTER_MODES[modeIndex] : "Unknown";
   const usesValidator = modeIndex !== undefined && modeIndex !== 0;
 
   return (

@@ -30,7 +30,7 @@ function Hero() {
         <Reveal y={20} delay={200}>
           <p className="mx-auto mt-6 max-w-[56ch] text-[1.125rem] leading-relaxed text-inksoft sm:text-[1.25rem]">
             Continuum's safety model in two sentences: if the validator can't confirm eligibility, the action is
-            refused. And if your credential lapses, your assets are returned through review — never seized.
+            refused. And if your credential lapses, your assets are returned through review, never seized.
           </p>
         </Reveal>
       </div>
@@ -250,7 +250,7 @@ function TrustModel() {
             <PrincipleCard
               label="On-chain"
               title="Re-checked every time"
-              copy="Eligibility is re-checked on every stake, transfer, and exit — never cached, never assumed."
+              copy="Eligibility is re-checked on every stake, transfer, and exit. Never cached, never assumed."
               device="onchain"
             />
           </Reveal>
@@ -383,8 +383,7 @@ function GuaranteeCell({
         {suffix}
       </p>
       <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-inksoft">
-        {label}
-        {note && <span className="text-inkfaint"> {note}</span>}
+        {label}{note && <span className="text-inkfaint">, {note}</span>}
       </p>
     </div>
   )
@@ -399,7 +398,7 @@ function GuaranteeStrip() {
     >
       <GuaranteeCell label="principal returned" target={100} suffix="%" delay={0} start={inView} />
       <GuaranteeCell label="accrued yield returned" target={100} suffix="%" delay={0.15} start={inView} />
-      <GuaranteeCell label="seizure events" note="— by design" target={0} delay={0.3} start={inView} />
+      <GuaranteeCell label="seizure events" note="by design" target={0} delay={0.3} start={inView} />
     </div>
   )
 }
@@ -411,7 +410,7 @@ function ControlledExit() {
         <SectionHeader
           eyebrow="When credentials lapse"
           title="Freezing is easy. Giving it back is the hard part."
-          sub="Most compliant protocols stop at blocking a revoked wallet, quietly stranding the money. Continuum treats revocation as a reason to review an exit — not a reason to keep assets."
+          sub="Most compliant protocols stop at blocking a revoked wallet, quietly stranding the money. Continuum treats revocation as a reason to review an exit, not a reason to keep assets."
         />
         <Reveal delay={100} className="mx-auto mt-14 max-w-[960px]">
           <div className="rounded-2xl border border-line bg-surface p-5 shadow-soft sm:p-8">
@@ -449,7 +448,7 @@ function TrustAssumptions() {
   return (
     <section className="section-pad bg-tint">
       <div className="container-cv max-w-[880px]">
-        <SectionHeader eyebrow="Assumptions" title="What you have to trust — stated plainly." />
+        <SectionHeader eyebrow="Assumptions" title="What you have to trust, stated plainly." />
         <div className="mt-12">
           {ASSUMPTIONS.map((a, i) => (
             <Reveal key={a.who} delay={i * 60} y={12}>

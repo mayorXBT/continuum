@@ -75,7 +75,7 @@ const SAMPLES: Record<string, Line[]> = {
     [['  if ', 'kw'], ['(', 'pun'], ['reason', 'plain'], ['.', 'pun'], ['name', 'plain'], [' === ', 'pun'], ['"NotEligible"', 'str'], [') {', 'pun']],
     [['    // receiver failed the Cleanverse eligibility check', 'com']],
     [['    console', 'plain'], ['.', 'pun'], ['warn', 'fn'], ['(', 'pun'], ['`blocked: ${', 'str'], ['reason', 'plain'], ['.', 'pun'], ['args', 'plain'], ['.', 'pun'], ['receiver', 'plain'], ['}`', 'str'], [');', 'pun']],
-    [['    // route them to verification — do not retry blindly', 'com']],
+    [['    // route them to verification, do not retry blindly', 'com']],
     [['    await ', 'kw'], ['continuum', 'plain'], ['.', 'pun'], ['verify', 'plain'], ['.', 'pun'], ['request', 'fn'], ['(', 'pun'], ['reason', 'plain'], ['.', 'pun'], ['args', 'plain'], ['.', 'pun'], ['receiver', 'plain'], [');', 'pun']],
     [['  }', 'pun']],
     [['}', 'pun']],
@@ -83,7 +83,7 @@ const SAMPLES: Record<string, Line[]> = {
   Exit: [
     [['import ', 'kw'], ['{ continuum }', 'pun'], [' from ', 'kw'], ['"@continuum/sdk"', 'str'], [';', 'pun']],
     [],
-    [['// reviewed settlement — principal + yield, never seized', 'com']],
+    [['// reviewed settlement returns principal + yield, never seized', 'com']],
     [['const ', 'kw'], ['exit', 'plain'], [' = ', 'pun'], ['await ', 'kw'], ['continuum', 'plain'], ['.', 'pun'], ['exits', 'plain'], ['.', 'pun'], ['request', 'fn'], ['({', 'pun']],
     [['  to', 'plain'], [': ', 'pun'], ['nominatedWallet', 'plain'], [',', 'pun'], ['           ', 'plain'], ['// must hold a valid A-Pass', 'com']],
     [['});', 'pun']],
@@ -329,7 +329,7 @@ function DevelopersBody() {
                 </h1>
                 <p className="mt-5 max-w-[56ch] text-[1.0625rem] leading-relaxed text-darkmuted">
                   A typed SDK over a minimal contract surface. Eligibility is enforced by the
-                  Cleanverse validator on every gated action — your integration can't bypass it, and
+                  Cleanverse validator on every gated action, so your integration can't bypass it, and
                   neither can we.
                 </p>
                 <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-[#5B6B7E]">
