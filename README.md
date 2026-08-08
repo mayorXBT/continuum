@@ -4,10 +4,10 @@
 Monad testnet, built for the Cleanverse Build: Trusted Assets Hackathon
 (DeFi track, deadline 2026-08-09).
 
-Stake as a Cleanverse-verified user (A-Pass / CVI) and receive **stMON** — a
+Stake as a Cleanverse-verified user (A-Pass / CVI) and receive **stMON**, a
 policy-gated liquid staking receipt whose every transfer re-checks the
 counterparty's credential at the token layer. When a credential is revoked,
-the position freezes for circulation but is never trapped: a controlled exit
+the position freezes for circulation but is never trapped. A controlled exit
 delivers the underlying value to a verified receiver after compliance review.
 **Compliance without confiscation.**
 
@@ -15,14 +15,14 @@ delivers the underlying value to a verified receiver after compliance review.
 
 [![Watch the Continuum demo](demo-video/poster.png)](https://github.com/mayorXBT/continuum/blob/main/demo-video/continuum-demo.mp4)
 
-**[▶ Watch the demo](https://github.com/mayorXBT/continuum/blob/main/demo-video/continuum-demo.mp4)** — 73 seconds, narrated. The
+**[▶ Watch the demo](https://github.com/mayorXBT/continuum/blob/main/demo-video/continuum-demo.mp4)**. 73 seconds, narrated. The
 problem, the stake flow, the tier refusal that Cleanverse enforces, and the
 controlled exit that returns 1.1 MON to a revoked holder.
 
 - **One-page summary:** [`docs/Continuum-One-Pager.pdf`](docs/Continuum-One-Pager.pdf)
 - **Live site:** [usecontinuum.cc](https://usecontinuum.cc)
 
-## Status — live on Monad testnet (chain 10143)
+## Status: live on Monad testnet (chain 10143)
 
 | Contract | Address |
 | --- | --- |
@@ -38,13 +38,13 @@ controlled exit that returns 1.1 MON to a revoked holder.
 ## Why this lane
 
 The DeFi track brief names three themes: gated lending pools (~10 competing
-teams), identity-based lending (~4 teams), and **permissioned staking — zero
+teams), identity-based lending (~4 teams), and **permissioned staking, with zero
 registered teams**. Continuum occupies the named, empty lane.
 
 ## How Cleanverse is wired in
 
 Remove Cleanverse and there is no product. The integration is enforcement, not
-display:
+display.
 
 - **Registered compliance pool.** `ComplianceRouter` is registered with the
   Cleanverse CVI validator at `0xaC7e5179C2C7f03f209136886c172eb34F161792`
@@ -52,14 +52,14 @@ display:
   owner via EIP-191.
 - **A tier rule enforced by Cleanverse, not by us.** The pool carries
   `min_sub_tier 30` (tx `0xae15603d…`). A wallet holding a valid, active
-  A-Pass at sub-tier 10 is refused — the threshold lives on Cleanverse's
+  A-Pass at sub-tier 10 is refused. The threshold lives on Cleanverse's
   contract, so we cannot quietly wave anyone through.
 - **On-chain, on every state change.** Gated paths call
   `complianceVerify(pool, user)` on the validator. `ComplianceRouter` runs in
   `RequireBoth`, so a wallet must satisfy both the local registry and
   Cleanverse.
 - **Fail-closed.** `complianceVerify` reverts for an unregistered pool, so the
-  call is wrapped: if the validator cannot answer, strict modes refuse rather
+  call is wrapped. If the validator cannot answer, strict modes refuse rather
   than permit.
 - **Live credential reads.** The Verify panel shows the real A-Pass record
   (tier, sub-tier, group, countries, expiry) read through `query_apass`,
@@ -67,11 +67,17 @@ display:
 
 ## Repository layout
 
-- `web/` — Next.js + wagmi frontend (landing page, dApp, legal pages).
-- `contracts/` — Foundry contracts, tests, and deploy script.
-- `docs/deployment.md` — live addresses, rule state, demo wallets.
-- `docs/demo-script.md` — 3-minute recording script, beat by beat.
-- `docs/specs/` — approved design spec and implementation plan.
+- `web/`, the Next.js and wagmi frontend: landing page, the dApp at `/app`,
+  docs, and legal pages.
+- `contracts/`, Foundry sources, tests, deploy script, and broadcast records.
+- `demo-video/`, the rendered demo and its thumbnail.
+- `docs/`, everything written down:
+  - `Continuum-One-Pager.pdf` and `one-pager.html`, the submission summary.
+  - `one-page-summary.md`, the same summary in plain text.
+  - `deployment.md`, live addresses, rule state, and demo wallets.
+  - `vercel-env.md`, deployment settings and which env vars are secret.
+  - `demo-script.md`, the recording script, beat by beat.
+  - `specs/`, the approved design spec and implementation plan.
 
 ## Running it
 
@@ -87,11 +93,11 @@ Continuum works end to end on Monad testnet. It is **not** production software,
 and the reasons are worth stating plainly.
 
 **1. We attest to identities we have not verified.** `generate_apass` is an
-institutional attestation endpoint: `kycSource` / `kycId` are where a licensed
+institutional attestation endpoint. `kycSource` and `kycId` are where a licensed
 member names the KYC provider and reference for a check it already performed.
 Cleanverse relaxed that requirement for the hackathon, which is the only reason
 our one-click testnet access can work. In production, issuing an A-Pass for an
-anonymous wallet would be a false attestation — precisely what the credential
+anonymous wallet would be a false attestation, precisely what the credential
 exists to prevent. The real path is Cleanverse KYC registration, or becoming a
 Gateway Member and supplying genuine KYC references.
 
@@ -103,18 +109,18 @@ and a shared store. Demo access is off unless `DEMO_ONBOARDING` is set.
 
 **3. The local registry is scaffolding.** `MockAPass` exists so the demo can
 show revocation on command, and because it gives us a known-but-revoked state
-that the validator's pass/fail answer cannot express — which is what makes the
+that the validator's pass/fail answer cannot express, and that is what makes the
 controlled exit possible. In production Cleanverse should be the sole
-authority: switch `ComplianceRouter` to `ValidatorOnly` and retire the mock.
+authority. Switch `ComplianceRouter` to `ValidatorOnly` and retire the mock.
 
 ## Claims discipline
 
 - stMON is a Cleanverse **policy-gated liquid staking receipt**, not a
   CVA/A-Token. CVA issuance is an approval-gated flow (`PENDING → APPROVED →
-  ISSUED`) we did not complete; the CCP guide's Method B contract template is
+  ISSUED`) we did not complete. The CCP guide's Method B contract template is
   the documented upgrade path.
-- Staking rewards on testnet are **simulated** — a deterministic drip that
-  raises redemption value — and every surface says so.
+- Staking rewards on testnet are **simulated**, a deterministic drip that
+  raises redemption value, and every surface says so.
 - Audit exports are **audit attribution**, not Travel Rule reporting, unless
   and until a reporting path is confirmed.
 - Testnet tokens have no monetary value.
