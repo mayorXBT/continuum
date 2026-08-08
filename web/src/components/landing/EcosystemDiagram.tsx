@@ -5,7 +5,7 @@ import { useInViewOnce } from '@/hooks/useInViewOnce'
 
 const MODULES = [
   { tag: 'binds', title: 'A-Pass credential', desc: 'Cleanverse-issued identity bound to your wallet.' },
-  { tag: 'asks', title: 'Compliance validator', desc: 'On-chain eligibility oracle; answers or the action fails.', addr: '0xaC7e…1792' },
+  { tag: 'asks', title: 'Compliance validator', desc: 'On-chain eligibility oracle that answers, or the action fails.', addr: '0xaC7e…1792' },
   { tag: 'mints/burns', title: 'Staking pool', desc: 'MON ↔ stMON at the current redemption value.' },
   { tag: 'settles', title: 'Exit review desk', desc: 'Reviewed withdrawal to a nominated verified wallet.' },
 ]

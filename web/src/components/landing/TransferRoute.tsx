@@ -117,7 +117,7 @@ export default function TransferRoute() {
         animate={show ? { opacity: 1 } : undefined}
         transition={{ duration: 0.3, delay: reduce ? 0 : 2.5 }}
       >
-        transfer refused — recipient not verified (validator: 0xaC7e…1792)
+        transfer refused, recipient not verified by validator 0xaC7e…1792
       </motion.p>
       {/* screen-reader description */}
       <p className="sr-only">

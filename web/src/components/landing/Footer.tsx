@@ -50,7 +50,7 @@ export default function Footer() {
               <span className="font-mono text-[13px] font-medium tracking-[0.22em]">CONTINUUM</span>
             </div>
             <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-darkmuted">
-              Permissioned liquid staking for verified wallets — compliance that travels with the token.
+              Permissioned liquid staking for verified wallets. Compliance that travels with the token.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">

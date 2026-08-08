@@ -56,7 +56,7 @@ function Hero() {
 
         <Reveal delay={200}>
           <p className="mx-auto mt-6 max-w-[52ch] text-[1.125rem] leading-relaxed text-inksoft sm:text-[1.2rem]">
-            Verify once, stake, and hold stMON — a liquid receipt that keeps earning while you hold it and re-checks
+            Verify once, stake, and hold stMON, a liquid receipt that keeps earning while you hold it and re-checks
             every counterparty before it moves. If your credential ever lapses, you exit through review. Funds are
             never seized.
           </p>
@@ -113,7 +113,7 @@ function Hero() {
 
         <Reveal delay={500} y={24}>
           <div className="mx-auto mt-14 max-w-[1040px] text-left">
-            <ProductDemoCard caption="Every transfer re-checks the recipient at the token layer. Unverified wallets are refused on-chain — not hidden by a frontend.">
+            <ProductDemoCard caption="Every transfer re-checks the recipient at the token layer. Unverified wallets are refused on-chain, not hidden by a frontend.">
               <TransferRoute />
             </ProductDemoCard>
           </div>
@@ -155,7 +155,7 @@ function ProofWall() {
             <MetricCard
               label="Redemption value (simulated, testnet)"
               numeral="1.0000 → 1.0421"
-              copy="Rewards raise what each stMON redeems for — your balance stays put while its claim grows."
+              copy="Rewards raise what each stMON redeems for. Your balance stays put while its claim grows."
               device="area-chart"
             />
           </Reveal>
@@ -163,7 +163,7 @@ function ProofWall() {
             <MetricCard
               label="Of principal + yield returned via reviewed exit"
               count={{ to: 100, format: (v) => `${Math.round(v)}%` }}
-              copy="A lapsed credential freezes circulation — never ownership. Exit is reviewed, not confiscated."
+              copy="A lapsed credential freezes circulation, never ownership. Exit is reviewed, not confiscated."
               device="exit-row"
             />
           </Reveal>
@@ -343,7 +343,7 @@ function FeatureModules() {
         id="credential"
         eyebrow="Credential"
         headline="One credential, bound to your wallet."
-        copy="A Cleanverse A-Pass binds a verified identity to your address. Your documents go to Cleanverse — never to Continuum."
+        copy="A Cleanverse A-Pass binds a verified identity to your address. Your documents go to Cleanverse, never to Continuum."
         linkText="How credentials work"
         linkTo="/docs#cleanverse"
         demo={<CredentialDemo />}
@@ -351,7 +351,7 @@ function FeatureModules() {
       <FeatureShowcase
         id="stake"
         eyebrow="Stake"
-        headline="MON in, stMON out — liquid from the first block."
+        headline="MON in, stMON out, liquid from the first block."
         copy="Stake at the current rate and rewards accrue to the redemption value from that moment. Nothing to harvest, nothing to compound."
         linkText="See the mechanics"
         linkTo="/docs#how"
@@ -363,7 +363,7 @@ function FeatureModules() {
         id="move"
         eyebrow="Circulate & Exit"
         headline="Send to anyone verified. Leave whenever you like."
-        copy="The token itself checks the recipient on every transfer. Unstake on demand — or, if your credential is revoked, request a reviewed exit to a wallet you nominate."
+        copy="The token itself checks the recipient on every transfer. Unstake on demand, or, if your credential is revoked, request a reviewed exit to a wallet you nominate."
         linkText="The controlled exit, step by step"
         linkTo="/docs#exit"
         demo={<TransferTableDemo />}
@@ -381,7 +381,7 @@ function Ecosystem() {
         <SectionHeader
           eyebrow="How it works"
           title="Four checkpoints, one unbroken line."
-          sub="Every module hangs off the same token layer. The rule isn't ours to bend — it lives in the validator."
+          sub="Every module hangs off the same token layer. The rule isn't ours to bend. It lives in the validator."
         />
         <div className="mt-14">
           <EcosystemDiagram />
@@ -473,7 +473,7 @@ function ConfigureCard() {
           </span>
         </div>
       </div>
-      <p className="mt-4 font-mono text-[11px] leading-relaxed text-inkfaint">enforced by the validator — cannot be switched off</p>
+      <p className="mt-4 font-mono text-[11px] leading-relaxed text-inkfaint">enforced by the validator, cannot be switched off</p>
     </ProductDemoCard>
   )
 }
@@ -539,7 +539,7 @@ function DashboardSequence() {
         <SectionHeader
           eyebrow="Operate"
           title="Watch every position, policy, and exit in one place."
-          sub="The Continuum app is an operations surface, not a black box — monitor outcomes, manage configuration, and troubleshoot with real states."
+          sub="The Continuum app is an operations surface, not a black box. Monitor outcomes, manage configuration, and troubleshoot with real states."
         />
         <div ref={ref} className="mt-14 grid gap-5 lg:grid-cols-3">
           <Reveal delay={0} y={20} className="h-full">
@@ -572,7 +572,7 @@ function DashboardSequence() {
 
 const RESOURCES = [
   { title: 'Quickstart', desc: 'Connect a testnet wallet and run the full lifecycle in ~2 minutes.', href: '/docs#start' },
-  { title: 'Contract surface', desc: 'Staking pool, stMON token, exit queue — addresses and ABIs.', href: '/docs#addresses' },
+  { title: 'Contract surface', desc: 'Staking pool, stMON token, exit queue, with addresses and ABIs.', href: '/docs#addresses' },
   { title: 'Compliance model', desc: 'How tier rules and the validator gate every action.', href: '/docs#cleanverse' },
 ]
 
@@ -589,7 +589,7 @@ function DeveloperSection() {
               </h2>
               <p className="mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-darkmuted">
                 Stake, transfer, and exit through a minimal surface. Eligibility is enforced by the Cleanverse
-                validator on every gated action — if it can't answer, the transaction is refused.
+                validator on every gated action. If it can&rsquo;t answer, the transaction is refused.
               </p>
               <ul className="mt-7 space-y-2.5 font-mono text-[13px] text-darktext">
                 {['fail-closed by default', 'no custodial keys', 'typed SDK + ABI'].map((b) => (
@@ -685,7 +685,7 @@ function SocialProof() {
 
         <div className="mt-24">
           <Testimonial
-            quote="Freezing is easy. Giving it back is the hard part. Continuum treats revocation as a reason to review an exit — not a reason to keep your assets."
+            quote="Freezing is easy. Giving it back is the hard part. Continuum treats revocation as a reason to review an exit, not a reason to keep your assets."
             attribution="Continuum protocol thesis · Design principle 04"
           />
         </div>

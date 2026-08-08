@@ -38,7 +38,7 @@ const SAMPLES: Record<string, Line[]> = {
     [['// reverts if recipient fails the validator check', 'com']],
   ],
   Exit: [
-    [['// reviewed settlement — principal + yield, never seized', 'com']],
+    [['// reviewed settlement returns principal + yield, never seized', 'com']],
     [['const ', 'kw'], ['exit', 'plain'], [' = ', 'pun'], ['await ', 'kw'], ['continuum', 'plain'], ['.', 'pun'], ['exits', 'plain'], ['.', 'pun'], ['request', 'fn'], ['({', 'pun']],
     [['  to', 'plain'], [': ', 'pun'], ['nominatedWallet', 'plain'], [',', 'pun'], [' ', 'plain'], ['// must be verified', 'com']],
     [['});', 'pun']],
