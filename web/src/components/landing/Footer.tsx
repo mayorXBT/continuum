@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
-const COLUMNS: { heading: string; links: { label: string; to: string }[] }[] = [
+type FooterLink = { label: string; to: string; file?: boolean }
+
+const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: 'Product',
     links: [
@@ -8,6 +10,7 @@ const COLUMNS: { heading: string; links: { label: string; to: string }[] }[] = [
       { label: 'How it works', to: '/docs#how' },
       { label: 'Controlled exit', to: '/docs#exit' },
       { label: 'Getting started', to: '/docs#start' },
+      { label: 'One-page summary (PDF)', to: '/Continuum-One-Pager.pdf', file: true },
     ],
   },
   {
@@ -57,9 +60,20 @@ export default function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <Link href={l.to} className="text-sm text-darkmuted transition-colors hover:text-darktext">
-                        {l.label}
-                      </Link>
+                      {l.file ? (
+                        <a
+                          href={l.to}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-darkmuted transition-colors hover:text-darktext"
+                        >
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link href={l.to} className="text-sm text-darkmuted transition-colors hover:text-darktext">
+                          {l.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
