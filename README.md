@@ -30,7 +30,7 @@ controlled exit that returns 1.1 MON to a revoked holder.
 | StMON | `0x940d14C41d6F8E47549e51402219898398C8b31a` |
 | StakingVault | `0x75dC8959c906679f477F9c8720A0656589B4A37a` |
 | RedemptionQueue | `0x1819cA49E22e143025eCb5689873D2155E7647Db` |
-| MockAPass (local registry) | `0x5cFcF818a46d483C400E3Ebd7B82e97e5B612897` |
+| MockAPass (local registry) | `0xfC15b21eAD5D556455F562376a2D92EccBFeB677` |
 
 49 Foundry tests passing. Full deployment and demo-wallet detail in
 [`docs/deployment.md`](docs/deployment.md).

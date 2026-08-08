@@ -5,13 +5,20 @@ superseded; these are the live addresses.
 
 | Contract | Address |
 | --- | --- |
-| MockAPass | `0x5cFcF818a46d483C400E3Ebd7B82e97e5B612897` |
+| MockAPass | `0xfC15b21eAD5D556455F562376a2D92EccBFeB677` |
 | **ComplianceRouter** | `0x4c0316B790a6a7E194abd06E69e42fdf8c67c5F6` |
 | StMON | `0x940d14C41d6F8E47549e51402219898398C8b31a` |
 | StakingVault | `0x75dC8959c906679f477F9c8720A0656589B4A37a` |
 | RedemptionQueue | `0x1819cA49E22e143025eCb5689873D2155E7647Db` |
 
 Owner / deployer: `0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a`
+
+> **Note on MockAPass.** `Deploy.s.sol` originally deployed the registry at
+> `0x5cFcF818a46d483C400E3Ebd7B82e97e5B612897` (still recorded in
+> `contracts/broadcast/`). It was later replaced by a hardened build with an
+> `operator` role for self-serve onboarding, and pointed in via
+> `ComplianceRouter.setLocal`. The address above is the live one. Verify with
+> `ComplianceRouter.local()`, which currently returns it.
 
 ## Cleanverse
 

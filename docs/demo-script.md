@@ -193,5 +193,5 @@ from Transfer tab — blocked.
 ## Reset between takes
 
 ```bash
-cd C:/Users/hp/Downloads/Continuum/contracts && export PATH="$HOME/.foundry/bin:$PATH" && set -a && source .env && set +a && cast send 0x5cFcF818a46d483C400E3Ebd7B82e97e5B612897 'reinstate(address)' 0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a --rpc-url $MONAD_RPC --private-key $PRIVATE_KEY
+cd C:/Users/hp/Downloads/Continuum/contracts && export PATH="$HOME/.foundry/bin:$PATH" && set -a && source .env && set +a && cast send 0xfC15b21eAD5D556455F562376a2D92EccBFeB677 'reinstate(address)' 0xe6D52f0dF2ce8698a5DAa33c2Cac1058125B8d6a --rpc-url $MONAD_RPC --private-key $PRIVATE_KEY
 ```
