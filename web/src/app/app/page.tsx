@@ -46,11 +46,14 @@ export default function App() {
       <main className="mx-auto w-full max-w-4xl flex-1 space-y-6 px-6 py-8">
         {!contractsDeployed && (
           <div className="rounded-2xl border border-line bg-surface p-5 shadow-soft">
-            <p className="eyebrow text-inkfaint">Pre-deploy</p>
+            <p className="eyebrow text-inkfaint">Configuration</p>
             <p className="mt-2 text-sm text-inksoft">
-              Contracts aren&rsquo;t on Monad testnet yet. The interface is live;
-              transactions will work once addresses land in{" "}
-              <span className="font-mono text-ink">web/.env.local</span>.
+              This build has no contract addresses, so transactions are turned
+              off. Continuum&rsquo;s contracts are live on Monad testnet. This
+              deployment needs its{" "}
+              <span className="font-mono text-ink">NEXT_PUBLIC_</span> address
+              variables set, then a rebuild, because they are baked in at build
+              time.
             </p>
           </div>
         )}

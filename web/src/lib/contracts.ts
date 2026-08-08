@@ -1,9 +1,14 @@
 /**
- * Contract bindings. Addresses come from env; until the contracts are deployed
- * (plan Task 8) they fall back to the zero address and the app shows a
- * "not deployed" notice. ABIs are hand-written minimal surfaces matching
- * docs/specs/2026-08-03-continuum-plan.md — replace with `forge inspect`
- * output after the contracts land.
+ * Contract bindings. The contracts are live on Monad testnet (see
+ * docs/deployment.md); addresses come from NEXT_PUBLIC_* env vars and fall back
+ * to the zero address when a build is missing them, which disables writes and
+ * shows a configuration notice in /app.
+ *
+ * Note these are inlined at BUILD time, so a deploy that sets them afterwards
+ * still needs a rebuild to pick them up.
+ *
+ * ABIs are hand-written minimal surfaces matching
+ * docs/specs/2026-08-03-continuum-plan.md.
  */
 
 const apassAbi = [
