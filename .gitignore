@@ -1,3 +1,14 @@
 
 # Other tools scratch space (not ours to commit)
 .codex-tmp/
+
+# Business/pitch decks — not part of the public submission
+*.pptx
+*.pptx.inspect.ndjson
+
+# Demo-video render project (source assets, ~12MB of audio/screenshots).
+# The finished video and its thumbnail are committed in demo-video/.
+demo-video/continuum-demo/
+demo-video/BRIEF.md
+demo-video/DESIGN.md
+demo-video/RECORDING.md
