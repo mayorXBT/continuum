@@ -11,6 +11,17 @@ the position freezes for circulation but is never trapped: a controlled exit
 delivers the underlying value to a verified receiver after compliance review.
 **Compliance without confiscation.**
 
+## Demo
+
+[![Watch the Continuum demo](demo-video/poster.png)](https://github.com/0xWeb3Mayor/continuum/blob/main/demo-video/continuum-demo.mp4)
+
+**[▶ Watch the demo](https://github.com/0xWeb3Mayor/continuum/blob/main/demo-video/continuum-demo.mp4)** — 73 seconds, narrated. The
+problem, the stake flow, the tier refusal that Cleanverse enforces, and the
+controlled exit that returns 1.1 MON to a revoked holder.
+
+- **One-page summary:** [`docs/Continuum-One-Pager.pdf`](docs/Continuum-One-Pager.pdf)
+- **Live site:** [usecontinuum.cc](https://usecontinuum.cc)
+
 ## Status — live on Monad testnet (chain 10143)
 
 | Contract | Address |
