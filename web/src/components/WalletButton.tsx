@@ -8,7 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -80,16 +79,25 @@ export function WalletButton() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-64 border-line bg-paper-raised">
-        <DropdownMenuLabel className="space-y-1">
+        {/* A plain header, not a Base UI group label. `Menu.GroupLabel` throws
+            "MenuGroupContext is missing" unless it sits inside a `Menu.Group`,
+            and that uncaught error took the whole page down when a connected
+            wallet opened this menu. It labels nothing here, so it should not be
+            a group part. */}
+        <div className="space-y-1 px-1.5 py-1">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
             Connected · Monad testnet
           </p>
           <p className="font-mono text-xs break-all font-normal text-ink">{address}</p>
-        </DropdownMenuLabel>
+        </div>
 
         <DropdownMenuSeparator className="bg-line" />
 
-        <DropdownMenuItem onSelect={(e) => { e.preventDefault(); copy(); }}>
+        {/* Base UI menu items fire `onClick`. `onSelect` is the Radix API and
+            never runs here, which is what left disconnect doing nothing.
+            `closeOnClick={false}` keeps the menu open so the Copied state is
+            actually visible. */}
+        <DropdownMenuItem closeOnClick={false} onClick={copy}>
           {copied ? "Copied" : "Copy address"}
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -104,7 +112,7 @@ export function WalletButton() {
 
         <DropdownMenuItem
           className="text-revoked focus:text-revoked"
-          onSelect={() => disconnect()}
+          onClick={() => disconnect()}
         >
           Disconnect
         </DropdownMenuItem>

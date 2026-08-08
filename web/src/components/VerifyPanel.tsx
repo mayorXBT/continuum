@@ -248,6 +248,17 @@ export function VerifyPanel() {
   const { address } = useAccount();
   const { writeContract, isPending, error } = useWriteContract();
 
+  // A connected wallet only exists in the browser, and it reconnects on the
+  // first client render. Branching straight off `address` therefore renders a
+  // different tree than the server sent, which React reports as a hydration
+  // failure and recovers from by throwing the tree away. Hold the neutral
+  // "connect a wallet" state until after mount so both renders agree. Same
+  // pattern as WalletButton.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { data: verified } = useReadContract({
     ...CONTRACTS.apass,
     functionName: "isVerified",
@@ -261,7 +272,7 @@ export function VerifyPanel() {
     query: { enabled: !!address, refetchInterval: 4000 },
   });
 
-  if (!address) {
+  if (!mounted || !address) {
     return (
       <Alert className="border-line bg-paper-raised">
         <AlertDescription className="text-inksoft">
