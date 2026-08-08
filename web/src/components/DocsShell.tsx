@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Navbar from "./landing/Navbar";
-import DocsFooter from "./landing/DocsFooter";
+import CollapsibleFooter from "./landing/CollapsibleFooter";
 
 export type DocSection = { id: string; title: string };
 
@@ -68,7 +68,7 @@ export function DocsShell({
         <main className="min-w-0 flex-1">{children}</main>
       </div>
 
-      <DocsFooter />
+      <CollapsibleFooter />
     </div>
   );
 }

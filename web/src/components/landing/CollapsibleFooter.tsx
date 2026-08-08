@@ -4,11 +4,13 @@ import Link from "next/link";
 import { COLUMNS, FOOTER_TAGLINE } from "./Footer";
 
 /**
- * Footer for /docs. Collapsed to a single quiet bar by default so it does not
- * compete with the section navigation, and expandable to the full column set
- * for anyone who wants it. The marketing pages keep the full Footer.
+ * Footer for the reading pages (docs, product, developers, security).
+ * Collapsed to a single quiet bar by default so it does not compete with long
+ * page content, and expandable to the full column set for anyone who wants it.
+ * The landing page keeps the full Footer, since that is where the sitemap
+ * earns its space.
  */
-export default function DocsFooter() {
+export default function CollapsibleFooter() {
   const [open, setOpen] = useState(false);
   const panelId = useId();
 
