@@ -11,7 +11,6 @@ import { StakePanel } from "../../components/StakePanel";
 import { TransferPanel } from "../../components/TransferPanel";
 import { CompliancePanel } from "../../components/CompliancePanel";
 import Reveal from "../../components/landing/Reveal";
-import Footer from "../../components/landing/Footer";
 import { contractsDeployed } from "../../lib/contracts";
 
 const TABS = ["Verify", "Stake", "Transfer", "Console"] as const;
@@ -98,8 +97,6 @@ export default function App() {
           {tab === "Console" && <CompliancePanel />}
         </Reveal>
       </main>
-
-      <Footer />
     </div>
   );
 }
