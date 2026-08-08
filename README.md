@@ -13,9 +13,9 @@ delivers the underlying value to a verified receiver after compliance review.
 
 ## Demo
 
-[![Watch the Continuum demo](demo-video/poster.png)](https://github.com/0xWeb3Mayor/continuum/blob/main/demo-video/continuum-demo.mp4)
+[![Watch the Continuum demo](demo-video/poster.png)](https://github.com/mayorXBT/continuum/blob/main/demo-video/continuum-demo.mp4)
 
-**[▶ Watch the demo](https://github.com/0xWeb3Mayor/continuum/blob/main/demo-video/continuum-demo.mp4)** — 73 seconds, narrated. The
+**[▶ Watch the demo](https://github.com/mayorXBT/continuum/blob/main/demo-video/continuum-demo.mp4)** — 73 seconds, narrated. The
 problem, the stake flow, the tier refusal that Cleanverse enforces, and the
 controlled exit that returns 1.1 MON to a revoked holder.
 
