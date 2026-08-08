@@ -25,7 +25,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Continuum, compliance that travels with the token",
+  title: "Continuum",
   description:
     "Permissioned liquid staking on Monad testnet. Stake as a Cleanverse-verified user, receive a policy-gated receipt checked at every transfer, with a controlled exit instead of confiscation.",
 };
